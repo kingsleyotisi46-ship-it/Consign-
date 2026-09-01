@@ -24,36 +24,33 @@ def register(request):
         first_name = request.POST.get('first_name', '').strip()
         last_name = request.POST.get('last_name', '').strip()
         phone = request.POST.get('phone', '').strip()
-        
+
         errors = []
-        
+
         if not username or not email or not password:
             errors.append('All required fields must be filled')
-        
+
         if password != password2:
             errors.append('Passwords do not match')
-        
-        if len(password) < 8:
+
+        if password and len(password) < 8:
             errors.append('Password must be at least 8 characters')
 
-        # Email format validation (#15)
-        try:
-            validate_email(email)
-        except ValidationError:
-            errors.append('Please enter a valid email address')
+        if email:
+            try:
+                validate_email(email)
+            except ValidationError:
+                errors.append('Please enter a valid email address')
 
-        # Phone format validation (#17)
         if phone and not UK_PHONE_RE.match(phone.replace(' ', '')):
             errors.append('Please enter a valid UK phone number (e.g. 07700900000 or +447700900000)')
 
-        # Use a single generic message to prevent user enumeration (#5)
-        if not errors:
-            if User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists():
-                errors.append('An account with that username or email already exists')
-        
+        if not errors and (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+            errors.append('An account with that username or email already exists')
+
         if errors:
             return render(request, 'register.html', {'errors': errors})
-        
+
         user = User.objects.create_user(
             username=username,
             email=email,
@@ -66,9 +63,8 @@ def register(request):
         login(request, user)
         messages.success(request, 'Account created successfully!')
         return redirect('dashboard')
-    
-    return render(request, 'register.html')
 
+    return render(request, 'register.html')
 
 @login_required
 def profile(request):
