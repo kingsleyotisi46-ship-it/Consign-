@@ -1,325 +1,325 @@
- { %   e x t e n d s   ' b a s e . h t m l '   % } 
+ {% extends 'base.html' %}
  
  
  
- { %   b l o c k   t i t l e   % } M y   P r o f i l e   -   D a i l y F X   D e l i v e r y { %   e n d b l o c k   % } 
+ {% block title %}My Profile - DailyFX Delivery{% endblock %}
  
  
  
- { %   b l o c k   c o n t e n t   % } 
+ {% block content %}
  
- < ! - -   N a v i g a t i o n   - - > 
+ <!-- Navigation -->
  
- < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - c e n t e r   m b - 8 " > 
+ <div class="flex justify-between items-center mb-8">
  
-         < a   h r e f = " { %   u r l   ' d a s h b o a r d '   % } "   c l a s s = " f l e x   i t e m s - c e n t e r   t e x t - p r i m a r y - 6 0 0   h o v e r : t e x t - p r i m a r y - 8 0 0   t r a n s i t i o n " > 
+         <a href="{% url 'dashboard' %}" class="flex items-center text-primary-600 hover:text-primary-800 transition">
  
-                 < s p a n   c l a s s = " m r - 2 " > ← < / s p a n >   B a c k   t o   D a s h b o a r d 
+                 <span class="mr-2">←</span> Back to Dashboard
  
-         < / a > 
+         </a>
  
- < / d i v > 
+ </div>
  
  
  
- < d i v   c l a s s = " m a x - w - 4 x l   m x - a u t o " > 
+ <div class="max-w-4xl mx-auto">
  
-         < h 1   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 8 " > M y   P r o f i l e < / h 1 > 
- 
-         
- 
-         { %   i f   m e s s a g e s   % } 
- 
-                 { %   f o r   m e s s a g e   i n   m e s s a g e s   % } 
- 
-                 < d i v   c l a s s = " m b - 6   p - 4   r o u n d e d - x l   { %   i f   m e s s a g e . t a g s   = =   ' s u c c e s s '   % } b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0   b o r d e r   b o r d e r - g r e e n - 2 0 0 { %   e l s e   % } b g - r e d - 1 0 0   t e x t - r e d - 7 0 0   b o r d e r   b o r d e r - r e d - 2 0 0 { %   e n d i f   % } " > 
- 
-                         { {   m e s s a g e   } } 
- 
-                 < / d i v > 
- 
-                 { %   e n d f o r   % } 
- 
-         { %   e n d i f   % } 
+         <h1 class="text-3xl font-bold text-primary-800 mb-8">My Profile</h1>
  
          
  
-         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 3   g a p - 8 " > 
+         {% if messages %}
  
-                 < ! - -   P r o f i l e   S u m m a r y   - - > 
+                 {% for message in messages %}
  
-                 < d i v   c l a s s = " m d : c o l - s p a n - 1 " > 
+                 <div class="mb-6 p-4 rounded-xl {% if message.tags == 'success' %}bg-green-100 text-green-700 border border-green-200{% else %}bg-red-100 text-red-700 border border-red-200{% endif %}">
  
-                         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - 2 x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0   t e x t - c e n t e r " > 
+                         {{ message }}
  
-                                 < d i v   c l a s s = " w - 2 4   h - 2 4   b g - p r i m a r y - 2 0 0   r o u n d e d - f u l l   m x - a u t o   m b - 4   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r " > 
+                 </div>
  
-                                         < s p a n   c l a s s = " t e x t - 4 x l   f o n t - b o l d   t e x t - p r i m a r y - 7 0 0 " > 
+                 {% endfor %}
  
-                                                 { {   u s e r . f i r s t _ n a m e | s l i c e : " : 1 " | u p p e r   } } { {   u s e r . l a s t _ n a m e | s l i c e : " : 1 " | u p p e r | d e f a u l t : u s e r . u s e r n a m e | s l i c e : " : 2 " | u p p e r   } } 
+         {% endif %}
  
-                                         < / s p a n > 
+         
  
-                                 < / d i v > 
+         <div class="grid md:grid-cols-3 gap-8">
  
-                                 < h 2   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0 " > { {   u s e r . g e t _ f u l l _ n a m e | d e f a u l t : u s e r . u s e r n a m e   } } < / h 2 > 
+                 <!-- Profile Summary -->
  
-                                 < p   c l a s s = " t e x t - p r i m a r y - 5 0 0 " > { {   u s e r . e m a i l   } } < / p > 
+                 <div class="md:col-span-1">
  
-                                 < d i v   c l a s s = " m t - 4   i n l i n e - b l o c k   p x - 4   p y - 1   b g - p r i m a r y - 1 0 0   t e x t - p r i m a r y - 7 0 0   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > 
+                         <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-6 border border-primary-100 text-center">
  
-                                         { {   u s e r . g e t _ r o l e _ d i s p l a y   } } 
+                                 <div class="w-24 h-24 bg-primary-200 rounded-full mx-auto mb-4 flex items-center justify-center">
  
-                                 < / d i v > 
+                                         <span class="text-4xl font-bold text-primary-700">
  
-                                 < d i v   c l a s s = " m t - 4   p t - 4   b o r d e r - t   b o r d e r - p r i m a r y - 2 0 0   t e x t - s m   t e x t - p r i m a r y - 5 0 0 " > 
+                                                 {{ user.first_name|slice:":1"|upper }}{{ user.last_name|slice:":1"|upper|default:user.username|slice:":2"|upper }}
  
-                                         M e m b e r   s i n c e   { {   u s e r . d a t e _ j o i n e d | d a t e : " M   Y "   } } 
+                                         </span>
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                                 <h2 class="text-xl font-bold text-primary-800">{{ user.get_full_name|default:user.username }}</h2>
+ 
+                                 <p class="text-primary-500">{{ user.email }}</p>
+ 
+                                 <div class="mt-4 inline-block px-4 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold">
+ 
+                                         {{ user.get_role_display }}
+ 
+                                 </div>
+ 
+                                 <div class="mt-4 pt-4 border-t border-primary-200 text-sm text-primary-500">
+ 
+                                         Member since {{ user.date_joined|date:"M Y" }}
+ 
+                                 </div>
+ 
+                         </div>
  
                          
  
-                         < ! - -   Q u i c k   S t a t s   - - > 
+                         <!-- Quick Stats -->
  
-                         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - 2 x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0   m t - 6 " > 
+                         <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-6 border border-primary-100 mt-6">
  
-                                 < h 3   c l a s s = " f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 4 " > Y o u r   S t a t s < / h 3 > 
+                                 <h3 class="font-bold text-primary-800 mb-4">Your Stats</h3>
  
-                                 < d i v   c l a s s = " s p a c e - y - 3 " > 
+                                 <div class="space-y-3">
  
-                                         < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n " > 
+                                         <div class="flex justify-between">
  
-                                                 < s p a n   c l a s s = " t e x t - p r i m a r y - 6 0 0 " > T o t a l   P a c k a g e s < / s p a n > 
+                                                 <span class="text-primary-600">Total Packages</span>
  
-                                                 < s p a n   c l a s s = " f o n t - b o l d   t e x t - p r i m a r y - 8 0 0 " > { {   s t a t s . t o t a l   } } < / s p a n > 
+                                                 <span class="font-bold text-primary-800">{{ stats.total }}</span>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n " > 
+                                         <div class="flex justify-between">
  
-                                                 < s p a n   c l a s s = " t e x t - p r i m a r y - 6 0 0 " > D e l i v e r e d < / s p a n > 
+                                                 <span class="text-primary-600">Delivered</span>
  
-                                                 < s p a n   c l a s s = " f o n t - b o l d   t e x t - g r e e n - 6 0 0 " > { {   s t a t s . d e l i v e r e d   } } < / s p a n > 
+                                                 <span class="font-bold text-green-600">{{ stats.delivered }}</span>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n " > 
+                                         <div class="flex justify-between">
  
-                                                 < s p a n   c l a s s = " t e x t - p r i m a r y - 6 0 0 " > I n   T r a n s i t < / s p a n > 
+                                                 <span class="text-primary-600">In Transit</span>
  
-                                                 < s p a n   c l a s s = " f o n t - b o l d   t e x t - p r i m a r y - 6 0 0 " > { {   s t a t s . i n _ t r a n s i t   } } < / s p a n > 
+                                                 <span class="font-bold text-primary-600">{{ stats.in_transit }}</span>
  
-                                         < / d i v > 
+                                         </div>
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
+                 </div>
  
                  
  
-                 < ! - -   E d i t   P r o f i l e   F o r m   - - > 
+                 <!-- Edit Profile Form -->
  
-                 < d i v   c l a s s = " m d : c o l - s p a n - 2 " > 
+                 <div class="md:col-span-2">
  
-                         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - 2 x l   p - 8   b o r d e r   b o r d e r - p r i m a r y - 1 0 0 " > 
+                         <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 border border-primary-100">
  
-                                 < h 2   c l a s s = " t e x t - 2 x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 6 " > E d i t   P r o f i l e < / h 2 > 
- 
-                                 
- 
-                                 < f o r m   m e t h o d = " P O S T "   a c t i o n = " { %   u r l   ' p r o f i l e '   % } "   c l a s s = " s p a c e - y - 6 " > 
- 
-                                         { %   c s r f _ t o k e n   % } 
- 
-                                         < i n p u t   t y p e = " h i d d e n "   n a m e = " a c t i o n "   v a l u e = " u p d a t e _ p r o f i l e " > 
- 
-                                         
- 
-                                         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 4 " > 
- 
-                                                 < d i v > 
- 
-                                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > F i r s t   N a m e < / l a b e l > 
- 
-                                                         < i n p u t   t y p e = " t e x t "   n a m e = " f i r s t _ n a m e "   v a l u e = " { {   u s e r . f i r s t _ n a m e   } } " 
- 
-                                                                       c l a s s = " w - f u l l   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
- 
-                                                 < / d i v > 
- 
-                                                 < d i v > 
- 
-                                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > L a s t   N a m e < / l a b e l > 
- 
-                                                         < i n p u t   t y p e = " t e x t "   n a m e = " l a s t _ n a m e "   v a l u e = " { {   u s e r . l a s t _ n a m e   } } " 
- 
-                                                                       c l a s s = " w - f u l l   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
- 
-                                                 < / d i v > 
- 
-                                         < / d i v > 
- 
-                                         
- 
-                                         < d i v > 
- 
-                                                 < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > E m a i l   A d d r e s s < / l a b e l > 
- 
-                                                 < i n p u t   t y p e = " e m a i l "   n a m e = " e m a i l "   v a l u e = " { {   u s e r . e m a i l   } } "   r e q u i r e d 
- 
-                                                               c l a s s = " w - f u l l   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
- 
-                                         < / d i v > 
- 
-                                         
- 
-                                         < d i v > 
- 
-                                                 < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > P h o n e   N u m b e r < / l a b e l > 
- 
-                                                 < i n p u t   t y p e = " t e l "   n a m e = " p h o n e "   v a l u e = " { {   u s e r . p h o n e   } } " 
- 
-                                                               c l a s s = " w - f u l l   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
- 
-                                         < / d i v > 
- 
-                                         
- 
-                                         < d i v > 
- 
-                                                 < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > A d d r e s s < / l a b e l > 
- 
-                                                 < t e x t a r e a   n a m e = " a d d r e s s "   r o w s = " 3 " 
- 
-                                                                     c l a s s = " w - f u l l   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > { {   u s e r . a d d r e s s   } } < / t e x t a r e a > 
- 
-                                         < / d i v > 
- 
-                                         
- 
-                                         < b u t t o n   t y p e = " s u b m i t "   c l a s s = " w - f u l l   b g - g r a d i e n t - t o - r   f r o m - p r i m a r y - 6 0 0   t o - a c c e n t - 6 0 0   t e x t - w h i t e   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : f r o m - p r i m a r y - 7 0 0   h o v e r : t o - a c c e n t - 7 0 0   t r a n s i t i o n " > 
- 
-                                                 S a v e   C h a n g e s 
- 
-                                         < / b u t t o n > 
- 
-                                 < / f o r m > 
- 
-                         < / d i v > 
- 
-                         
- 
-                         < ! - -   C h a n g e   P a s s w o r d   - - > 
- 
-                         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - 2 x l   p - 8   b o r d e r   b o r d e r - p r i m a r y - 1 0 0   m t - 6 " > 
- 
-                                 < h 2   c l a s s = " t e x t - 2 x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 6 " > C h a n g e   P a s s w o r d < / h 2 > 
+                                 <h2 class="text-2xl font-bold text-primary-800 mb-6">Edit Profile</h2>
  
                                  
  
-                                 < f o r m   m e t h o d = " P O S T "   a c t i o n = " { %   u r l   ' p r o f i l e '   % } "   c l a s s = " s p a c e - y - 4 " > 
+                                 <form method="POST" action="{% url 'profile' %}" class="space-y-6">
  
-                                         { %   c s r f _ t o k e n   % } 
+                                         {% csrf_token %}
  
-                                         < i n p u t   t y p e = " h i d d e n "   n a m e = " a c t i o n "   v a l u e = " c h a n g e _ p a s s w o r d " > 
- 
-                                         
- 
-                                         < d i v > 
- 
-                                                 < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > C u r r e n t   P a s s w o r d < / l a b e l > 
- 
-                                                 < i n p u t   t y p e = " p a s s w o r d "   n a m e = " c u r r e n t _ p a s s w o r d "   r e q u i r e d 
- 
-                                                               c l a s s = " w - f u l l   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
- 
-                                         < / d i v > 
+                                         <input type="hidden" name="action" value="update_profile">
  
                                          
  
-                                         < d i v > 
+                                         <div class="grid md:grid-cols-2 gap-4">
  
-                                                 < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > N e w   P a s s w o r d < / l a b e l > 
+                                                 <div>
  
-                                                 < i n p u t   t y p e = " p a s s w o r d "   n a m e = " n e w _ p a s s w o r d "   r e q u i r e d   m i n l e n g t h = " 8 " 
+                                                         <label class="block text-sm font-medium text-primary-700 mb-1">First Name</label>
  
-                                                               c l a s s = " w - f u l l   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                                                         <input type="text" name="first_name" value="{{ user.first_name }}"
  
-                                         < / d i v > 
+                                                                       class="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
+ 
+                                                 </div>
+ 
+                                                 <div>
+ 
+                                                         <label class="block text-sm font-medium text-primary-700 mb-1">Last Name</label>
+ 
+                                                         <input type="text" name="last_name" value="{{ user.last_name }}"
+ 
+                                                                       class="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
+ 
+                                                 </div>
+ 
+                                         </div>
  
                                          
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > C o n f i r m   N e w   P a s s w o r d < / l a b e l > 
+                                                 <label class="block text-sm font-medium text-primary-700 mb-1">Email Address</label>
  
-                                                 < i n p u t   t y p e = " p a s s w o r d "   n a m e = " c o n f i r m _ p a s s w o r d "   r e q u i r e d   m i n l e n g t h = " 8 " 
+                                                 <input type="email" name="email" value="{{ user.email }}" required
  
-                                                               c l a s s = " w - f u l l   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                                                               class="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                                         < / d i v > 
+                                         </div>
  
                                          
  
-                                         < b u t t o n   t y p e = " s u b m i t "   c l a s s = " w - f u l l   b g - p r i m a r y - 6 0 0   t e x t - w h i t e   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - p r i m a r y - 7 0 0   t r a n s i t i o n " > 
+                                         <div>
  
-                                                 U p d a t e   P a s s w o r d 
+                                                 <label class="block text-sm font-medium text-primary-700 mb-1">Phone Number</label>
  
-                                         < / b u t t o n > 
+                                                 <input type="tel" name="phone" value="{{ user.phone }}"
  
-                                 < / f o r m > 
+                                                               class="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                         < / d i v > 
+                                         </div>
+ 
+                                         
+ 
+                                         <div>
+ 
+                                                 <label class="block text-sm font-medium text-primary-700 mb-1">Address</label>
+ 
+                                                 <textarea name="address" rows="3"
+ 
+                                                                     class="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">{{ user.address }}</textarea>
+ 
+                                         </div>
+ 
+                                         
+ 
+                                         <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-accent-600 text-white py-3 rounded-lg font-semibold hover:from-primary-700 hover:to-accent-700 transition">
+ 
+                                                 Save Changes
+ 
+                                         </button>
+ 
+                                 </form>
+ 
+                         </div>
  
                          
  
-                         < ! - -   D a n g e r   Z o n e   - - > 
+                         <!-- Change Password -->
  
-                         < d i v   c l a s s = " b g - r e d - 5 0   r o u n d e d - 2 x l   p - 8   b o r d e r   b o r d e r - r e d - 2 0 0   m t - 6 " > 
+                         <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 border border-primary-100 mt-6">
  
-                                 < h 2   c l a s s = " t e x t - 2 x l   f o n t - b o l d   t e x t - r e d - 8 0 0   m b - 4 " > D a n g e r   Z o n e < / h 2 > 
+                                 <h2 class="text-2xl font-bold text-primary-800 mb-6">Change Password</h2>
  
-                                 < p   c l a s s = " t e x t - r e d - 6 0 0   m b - 4 " > O n c e   y o u   d e l e t e   y o u r   a c c o u n t ,   t h e r e   i s   n o   g o i n g   b a c k .   P l e a s e   b e   c e r t a i n . < / p > 
+                                 
  
-                                 < f o r m   m e t h o d = " P O S T "   a c t i o n = " { %   u r l   ' p r o f i l e '   % } "   o n s u b m i t = " r e t u r n   c o n f i r m ( ' A r e   y o u   s u r e   y o u   w a n t   t o   d e l e t e   y o u r   a c c o u n t ?   T h i s   a c t i o n   c a n n o t   b e   u n d o n e . ' ) ; " > 
+                                 <form method="POST" action="{% url 'profile' %}" class="space-y-4">
  
-                                         { %   c s r f _ t o k e n   % } 
+                                         {% csrf_token %}
  
-                                         < i n p u t   t y p e = " h i d d e n "   n a m e = " a c t i o n "   v a l u e = " d e l e t e _ a c c o u n t " > 
+                                         <input type="hidden" name="action" value="change_password">
  
-                                         < d i v   c l a s s = " m b - 4 " > 
+                                         
  
-                                                 < l a b e l   f o r = " c o n f i r m _ d e l e t e _ p a s s w o r d "   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - r e d - 7 0 0   m b - 1 " > C o n f i r m   y o u r   p a s s w o r d   t o   d e l e t e   a c c o u n t < / l a b e l > 
+                                         <div>
  
-                                                 < i n p u t   t y p e = " p a s s w o r d "   i d = " c o n f i r m _ d e l e t e _ p a s s w o r d "   n a m e = " c o n f i r m _ d e l e t e _ p a s s w o r d "   r e q u i r e d 
+                                                 <label class="block text-sm font-medium text-primary-700 mb-1">Current Password</label>
  
-                                                               c l a s s = " w - f u l l   m a x - w - x s   p x - 4   p y - 2   b o r d e r   b o r d e r - r e d - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - r e d - 5 0 0   b g - w h i t e " 
+                                                 <input type="password" name="current_password" required
  
-                                                               p l a c e h o l d e r = " E n t e r   y o u r   p a s s w o r d " > 
+                                                               class="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < b u t t o n   t y p e = " s u b m i t "   c l a s s = " b g - r e d - 6 0 0   t e x t - w h i t e   p x - 6   p y - 2   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - r e d - 7 0 0   t r a n s i t i o n " > 
+                                         
  
-                                                 D e l e t e   M y   A c c o u n t 
+                                         <div>
  
-                                         < / b u t t o n > 
+                                                 <label class="block text-sm font-medium text-primary-700 mb-1">New Password</label>
  
-                                 < / f o r m > 
+                                                 <input type="password" name="new_password" required minlength="8"
  
-                         < / d i v > 
+                                                               class="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                 < / d i v > 
+                                         </div>
  
-         < / d i v > 
+                                         
  
- < / d i v > 
+                                         <div>
  
- { %   e n d b l o c k   % } 
+                                                 <label class="block text-sm font-medium text-primary-700 mb-1">Confirm New Password</label>
+ 
+                                                 <input type="password" name="confirm_password" required minlength="8"
+ 
+                                                               class="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
+ 
+                                         </div>
+ 
+                                         
+ 
+                                         <button type="submit" class="w-full bg-primary-600 text-white py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+ 
+                                                 Update Password
+ 
+                                         </button>
+ 
+                                 </form>
+ 
+                         </div>
+ 
+                         
+ 
+                         <!-- Danger Zone -->
+ 
+                         <div class="bg-red-50 rounded-2xl p-8 border border-red-200 mt-6">
+ 
+                                 <h2 class="text-2xl font-bold text-red-800 mb-4">Danger Zone</h2>
+ 
+                                 <p class="text-red-600 mb-4">Once you delete your account, there is no going back. Please be certain.</p>
+ 
+                                 <form method="POST" action="{% url 'profile' %}" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+ 
+                                         {% csrf_token %}
+ 
+                                         <input type="hidden" name="action" value="delete_account">
+ 
+                                         <div class="mb-4">
+ 
+                                                 <label for="confirm_delete_password" class="block text-sm font-medium text-red-700 mb-1">Confirm your password to delete account</label>
+ 
+                                                 <input type="password" id="confirm_delete_password" name="confirm_delete_password" required
+ 
+                                                               class="w-full max-w-xs px-4 py-2 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 bg-white"
+ 
+                                                               placeholder="Enter your password">
+ 
+                                         </div>
+ 
+                                         <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition">
+ 
+                                                 Delete My Account
+ 
+                                         </button>
+ 
+                                 </form>
+ 
+                         </div>
+ 
+                 </div>
+ 
+         </div>
+ 
+ </div>
+ 
+ {% endblock %}
  
  

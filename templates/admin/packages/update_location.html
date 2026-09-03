@@ -1,459 +1,459 @@
- { %   e x t e n d s   " a d m i n / b a s e _ s i t e . h t m l "   % } 
+ {% extends "admin/base_site.html" %}
  
- { %   l o a d   s t a t i c   % } 
- 
- 
- 
- { %   b l o c k   t i t l e   % } U p d a t e   L o c a t i o n   -   { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } { %   e n d b l o c k   % } 
+ {% load static %}
  
  
  
- { %   b l o c k   e x t r a h e a d   % } 
- 
- { {   b l o c k . s u p e r   } } 
- 
- < l i n k   r e l = " s t y l e s h e e t "   h r e f = " { %   s t a t i c   ' c s s / l e a f l e t . m i n . c s s '   % } "   / > 
- 
- < s c r i p t   s r c = " { %   s t a t i c   ' j s / l e a f l e t . m i n . j s '   % } " > < / s c r i p t > 
- 
- < l i n k   r e l = " s t y l e s h e e t "   h r e f = " { %   s t a t i c   ' c s s / t a i l w i n d . m i n . c s s '   % } " > 
- 
- < s t y l e > 
- 
-         # l o c a t i o n - m a p   {   h e i g h t :   5 0 0 p x ;   b o r d e r - r a d i u s :   8 p x ;   } 
- 
-         . l o c a t i o n - f o r m   {   b a c k g r o u n d :   w h i t e ;   p a d d i n g :   2 0 p x ;   b o r d e r - r a d i u s :   8 p x ;   b o x - s h a d o w :   0   2 p x   1 0 p x   r g b a ( 0 , 0 , 0 , 0 . 1 ) ;   } 
- 
- < / s t y l e > 
- 
- { %   e n d b l o c k   % } 
+ {% block title %}Update Location - {{ package.tracking_number }}{% endblock %}
  
  
  
- { %   b l o c k   c o n t e n t   % } 
+ {% block extrahead %}
  
- < d i v   s t y l e = " m a x - w i d t h :   1 2 0 0 p x ;   m a r g i n :   0   a u t o ;   p a d d i n g :   2 0 p x ; " > 
+ {{ block.super }}
  
-         < h 1   s t y l e = " f o n t - s i z e :   2 4 p x ;   f o n t - w e i g h t :   b o l d ;   m a r g i n - b o t t o m :   2 0 p x ; " > 
+ <link rel="stylesheet" href="{% static 'css/leaflet.min.css' %}" />
  
-                 � �   U p d a t e   L o c a t i o n   f o r   { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } 
+ <script src="{% static 'js/leaflet.min.js' %}"></script>
  
-         < / h 1 > 
+ <link rel="stylesheet" href="{% static 'css/tailwind.min.css' %}">
+ 
+ <style>
+ 
+         #location-map { height: 500px; border-radius: 8px; }
+ 
+         .location-form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+ 
+ </style>
+ 
+ {% endblock %}
+ 
+ 
+ 
+ {% block content %}
+ 
+ <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+ 
+         <h1 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+ 
+                 �� Update Location for {{ package.tracking_number }}
+ 
+         </h1>
  
          
  
-         < d i v   s t y l e = " d i s p l a y :   g r i d ;   g r i d - t e m p l a t e - c o l u m n s :   1 f r   4 0 0 p x ;   g a p :   2 0 p x ; " > 
+         <div style="display: grid; grid-template-columns: 1fr 400px; gap: 20px;">
  
-                 < ! - -   M a p   - - > 
+                 <!-- Map -->
  
-                 < d i v   c l a s s = " l o c a t i o n - f o r m " > 
+                 <div class="location-form">
  
-                         < h 2   s t y l e = " f o n t - w e i g h t :   b o l d ;   m a r g i n - b o t t o m :   1 0 p x ; " > C l i c k   o n   m a p   t o   s e t   l o c a t i o n < / h 2 > 
+                         <h2 style="font-weight: bold; margin-bottom: 10px;">Click on map to set location</h2>
  
-                         < d i v   i d = " l o c a t i o n - m a p " > < / d i v > 
+                         <div id="location-map"></div>
  
-                         < p   s t y l e = " m a r g i n - t o p :   1 0 p x ;   c o l o r :   # 6 6 6 ;   f o n t - s i z e :   1 4 p x ; " > 
+                         <p style="margin-top: 10px; color: #666; font-size: 14px;">
  
-                                 C l i c k   a n y w h e r e   o n   t h e   m a p   t o   u p d a t e   t h e   p a c k a g e   l o c a t i o n .   T h e   c o o r d i n a t e s   w i l l   b e   f i l l e d   a u t o m a t i c a l l y . 
+                                 Click anywhere on the map to update the package location. The coordinates will be filled automatically.
  
-                         < / p > 
+                         </p>
  
-                 < / d i v > 
+                 </div>
  
                  
  
-                 < ! - -   F o r m   - - > 
+                 <!-- Form -->
  
-                 < d i v   c l a s s = " l o c a t i o n - f o r m " > 
+                 <div class="location-form">
  
-                         < h 2   s t y l e = " f o n t - w e i g h t :   b o l d ;   m a r g i n - b o t t o m :   1 5 p x ; " > � �   P a c k a g e   D e t a i l s < / h 2 > 
- 
-                         
- 
-                         < d i v   s t y l e = " b a c k g r o u n d :   # f 3 f 4 f 6 ;   p a d d i n g :   1 5 p x ;   b o r d e r - r a d i u s :   8 p x ;   m a r g i n - b o t t o m :   2 0 p x ; " > 
- 
-                                 < p > < s t r o n g > T r a c k i n g : < / s t r o n g >   { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } < / p > 
- 
-                                 < p > < s t r o n g > S t a t u s : < / s t r o n g >   { {   p a c k a g e . g e t _ s t a t u s _ d i s p l a y   } } < / p > 
- 
-                                 < p > < s t r o n g > F r o m : < / s t r o n g >   { {   p a c k a g e . s e n d e r _ c i t y   } } < / p > 
- 
-                                 < p > < s t r o n g > T o : < / s t r o n g >   { {   p a c k a g e . r e c e i v e r _ c i t y   } } < / p > 
- 
-                         < / d i v > 
+                         <h2 style="font-weight: bold; margin-bottom: 15px;">�� Package Details</h2>
  
                          
  
-                         < f o r m   m e t h o d = " P O S T "   i d = " l o c a t i o n - f o r m " > 
+                         <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
  
-                                 { %   c s r f _ t o k e n   % } 
+                                 <p><strong>Tracking:</strong> {{ package.tracking_number }}</p>
  
-                                 
+                                 <p><strong>Status:</strong> {{ package.get_status_display }}</p>
  
-                                 < d i v   s t y l e = " m a r g i n - b o t t o m :   1 5 p x ; " > 
+                                 <p><strong>From:</strong> {{ package.sender_city }}</p>
  
-                                         < l a b e l   s t y l e = " d i s p l a y :   b l o c k ;   f o n t - w e i g h t :   5 0 0 ;   m a r g i n - b o t t o m :   5 p x ; " > S t a t u s   * < / l a b e l > 
+                                 <p><strong>To:</strong> {{ package.receiver_city }}</p>
  
-                                         < s e l e c t   n a m e = " s t a t u s "   s t y l e = " w i d t h :   1 0 0 % ;   p a d d i n g :   1 0 p x ;   b o r d e r :   1 p x   s o l i d   # d d d ;   b o r d e r - r a d i u s :   6 p x ; " > 
- 
-                                                 < o p t i o n   v a l u e = " p e n d i n g "   { %   i f   p a c k a g e . s t a t u s   = =   ' p e n d i n g '   % } s e l e c t e d { %   e n d i f   % } > P e n d i n g < / o p t i o n > 
- 
-                                                 < o p t i o n   v a l u e = " p r o c e s s i n g "   { %   i f   p a c k a g e . s t a t u s   = =   ' p r o c e s s i n g '   % } s e l e c t e d { %   e n d i f   % } > P r o c e s s i n g < / o p t i o n > 
- 
-                                                 < o p t i o n   v a l u e = " i n _ t r a n s i t "   { %   i f   p a c k a g e . s t a t u s   = =   ' i n _ t r a n s i t '   % } s e l e c t e d { %   e n d i f   % } > I n   T r a n s i t < / o p t i o n > 
- 
-                                                 < o p t i o n   v a l u e = " o u t _ f o r _ d e l i v e r y "   { %   i f   p a c k a g e . s t a t u s   = =   ' o u t _ f o r _ d e l i v e r y '   % } s e l e c t e d { %   e n d i f   % } > O u t   f o r   D e l i v e r y < / o p t i o n > 
- 
-                                                 < o p t i o n   v a l u e = " d e l i v e r e d "   { %   i f   p a c k a g e . s t a t u s   = =   ' d e l i v e r e d '   % } s e l e c t e d { %   e n d i f   % } > D e l i v e r e d < / o p t i o n > 
- 
-                                                 < o p t i o n   v a l u e = " c a n c e l l e d "   { %   i f   p a c k a g e . s t a t u s   = =   ' c a n c e l l e d '   % } s e l e c t e d { %   e n d i f   % } > C a n c e l l e d < / o p t i o n > 
- 
-                                         < / s e l e c t > 
- 
-                                 < / d i v > 
- 
-                                 
- 
-                                 < d i v   s t y l e = " m a r g i n - b o t t o m :   1 5 p x ; " > 
- 
-                                         < l a b e l   s t y l e = " d i s p l a y :   b l o c k ;   f o n t - w e i g h t :   5 0 0 ;   m a r g i n - b o t t o m :   5 p x ; " > L o c a t i o n   N a m e   * < / l a b e l > 
- 
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " l o c a t i o n "   i d = " l o c a t i o n - n a m e "   r e q u i r e d 
- 
-                                                       p l a c e h o l d e r = " e . g . ,   M a n c h e s t e r   D i s t r i b u t i o n   C e n t r e " 
- 
-                                                       s t y l e = " w i d t h :   1 0 0 % ;   p a d d i n g :   1 0 p x ;   b o r d e r :   1 p x   s o l i d   # d d d ;   b o r d e r - r a d i u s :   6 p x ; " > 
- 
-                                 < / d i v > 
- 
-                                 
- 
-                                 < d i v   s t y l e = " d i s p l a y :   g r i d ;   g r i d - t e m p l a t e - c o l u m n s :   1 f r   1 f r ;   g a p :   1 0 p x ;   m a r g i n - b o t t o m :   1 5 p x ; " > 
- 
-                                         < d i v > 
- 
-                                                 < l a b e l   s t y l e = " d i s p l a y :   b l o c k ;   f o n t - w e i g h t :   5 0 0 ;   m a r g i n - b o t t o m :   5 p x ; " > L a t i t u d e < / l a b e l > 
- 
-                                                 < i n p u t   t y p e = " t e x t "   n a m e = " l a t i t u d e "   i d = " l a t i t u d e "   r e a d o n l y 
- 
-                                                               s t y l e = " w i d t h :   1 0 0 % ;   p a d d i n g :   1 0 p x ;   b o r d e r :   1 p x   s o l i d   # d d d ;   b o r d e r - r a d i u s :   6 p x ;   b a c k g r o u n d :   # f 9 f a f b ; " > 
- 
-                                         < / d i v > 
- 
-                                         < d i v > 
- 
-                                                 < l a b e l   s t y l e = " d i s p l a y :   b l o c k ;   f o n t - w e i g h t :   5 0 0 ;   m a r g i n - b o t t o m :   5 p x ; " > L o n g i t u d e < / l a b e l > 
- 
-                                                 < i n p u t   t y p e = " t e x t "   n a m e = " l o n g i t u d e "   i d = " l o n g i t u d e "   r e a d o n l y 
- 
-                                                               s t y l e = " w i d t h :   1 0 0 % ;   p a d d i n g :   1 0 p x ;   b o r d e r :   1 p x   s o l i d   # d d d ;   b o r d e r - r a d i u s :   6 p x ;   b a c k g r o u n d :   # f 9 f a f b ; " > 
- 
-                                         < / d i v > 
- 
-                                 < / d i v > 
- 
-                                 
- 
-                                 < d i v   s t y l e = " m a r g i n - b o t t o m :   1 5 p x ; " > 
- 
-                                         < l a b e l   s t y l e = " d i s p l a y :   b l o c k ;   f o n t - w e i g h t :   5 0 0 ;   m a r g i n - b o t t o m :   5 p x ; " > N o t e s < / l a b e l > 
- 
-                                         < t e x t a r e a   n a m e = " n o t e s "   r o w s = " 3 "   p l a c e h o l d e r = " A d d   a n y   n o t e s . . . " 
- 
-                                                             s t y l e = " w i d t h :   1 0 0 % ;   p a d d i n g :   1 0 p x ;   b o r d e r :   1 p x   s o l i d   # d d d ;   b o r d e r - r a d i u s :   6 p x ; " > < / t e x t a r e a > 
- 
-                                 < / d i v > 
- 
-                                 
- 
-                                 < d i v   s t y l e = " m a r g i n - b o t t o m :   2 0 p x ; " > 
- 
-                                         < h 3   s t y l e = " f o n t - w e i g h t :   5 0 0 ;   m a r g i n - b o t t o m :   1 0 p x ; " > Q u i c k   L o c a t i o n s   ( N o r w a y ) < / h 3 > 
- 
-                                         < d i v   s t y l e = " d i s p l a y :   f l e x ;   f l e x - w r a p :   w r a p ;   g a p :   5 p x ; " > 
- 
-                                                 < b u t t o n   t y p e = " b u t t o n "   o n c l i c k = " s e t L o c a t i o n ( 5 1 . 5 0 7 4 ,   - 0 . 1 2 7 8 ,   ' L o n d o n ' ) "   
- 
-                                                                 s t y l e = " p a d d i n g :   5 p x   1 0 p x ;   b a c k g r o u n d :   # e 0 e 7 f f ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   4 p x ;   c u r s o r :   p o i n t e r ; " > L o n d o n < / b u t t o n > 
- 
-                                                 < b u t t o n   t y p e = " b u t t o n "   o n c l i c k = " s e t L o c a t i o n ( 5 3 . 4 8 0 8 ,   - 2 . 2 4 2 6 ,   ' M a n c h e s t e r ' ) " 
- 
-                                                                 s t y l e = " p a d d i n g :   5 p x   1 0 p x ;   b a c k g r o u n d :   # e 0 e 7 f f ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   4 p x ;   c u r s o r :   p o i n t e r ; " > M a n c h e s t e r < / b u t t o n > 
- 
-                                                 < b u t t o n   t y p e = " b u t t o n "   o n c l i c k = " s e t L o c a t i o n ( 5 2 . 4 8 6 2 ,   - 1 . 8 9 0 4 ,   ' B i r m i n g h a m ' ) " 
- 
-                                                                 s t y l e = " p a d d i n g :   5 p x   1 0 p x ;   b a c k g r o u n d :   # e 0 e 7 f f ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   4 p x ;   c u r s o r :   p o i n t e r ; " > B i r m i n g h a m < / b u t t o n > 
- 
-                                                 < b u t t o n   t y p e = " b u t t o n "   o n c l i c k = " s e t L o c a t i o n ( 5 3 . 8 0 0 8 ,   - 1 . 5 4 9 1 ,   ' L e e d s ' ) " 
- 
-                                                                 s t y l e = " p a d d i n g :   5 p x   1 0 p x ;   b a c k g r o u n d :   # e 0 e 7 f f ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   4 p x ;   c u r s o r :   p o i n t e r ; " > L e e d s < / b u t t o n > 
- 
-                                                 < b u t t o n   t y p e = " b u t t o n "   o n c l i c k = " s e t L o c a t i o n ( 5 5 . 9 5 3 3 ,   - 3 . 1 8 8 3 ,   ' E d i n b u r g h ' ) " 
- 
-                                                                 s t y l e = " p a d d i n g :   5 p x   1 0 p x ;   b a c k g r o u n d :   # e 0 e 7 f f ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   4 p x ;   c u r s o r :   p o i n t e r ; " > E d i n b u r g h < / b u t t o n > 
- 
-                                                 < b u t t o n   t y p e = " b u t t o n "   o n c l i c k = " s e t L o c a t i o n ( 5 5 . 8 6 4 2 ,   - 4 . 2 5 1 8 ,   ' G l a s g o w ' ) " 
- 
-                                                                 s t y l e = " p a d d i n g :   5 p x   1 0 p x ;   b a c k g r o u n d :   # e 0 e 7 f f ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   4 p x ;   c u r s o r :   p o i n t e r ; " > G l a s g o w < / b u t t o n > 
- 
-                                                 < b u t t o n   t y p e = " b u t t o n "   o n c l i c k = " s e t L o c a t i o n ( 5 1 . 4 5 4 5 ,   - 2 . 5 8 7 9 ,   ' B r i s t o l ' ) " 
- 
-                                                                 s t y l e = " p a d d i n g :   5 p x   1 0 p x ;   b a c k g r o u n d :   # e 0 e 7 f f ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   4 p x ;   c u r s o r :   p o i n t e r ; " > B r i s t o l < / b u t t o n > 
- 
-                                                 < b u t t o n   t y p e = " b u t t o n "   o n c l i c k = " s e t L o c a t i o n ( 5 1 . 4 8 1 6 ,   - 3 . 1 7 9 1 ,   ' C a r d i f f ' ) " 
- 
-                                                                 s t y l e = " p a d d i n g :   5 p x   1 0 p x ;   b a c k g r o u n d :   # e 0 e 7 f f ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   4 p x ;   c u r s o r :   p o i n t e r ; " > C a r d i f f < / b u t t o n > 
- 
-                                         < / d i v > 
- 
-                                 < / d i v > 
- 
-                                 
- 
-                                 < b u t t o n   t y p e = " s u b m i t "   s t y l e = " w i d t h :   1 0 0 % ;   p a d d i n g :   1 2 p x ;   b a c k g r o u n d :   # 4 f 4 6 e 5 ;   c o l o r :   w h i t e ;   b o r d e r :   n o n e ;   b o r d e r - r a d i u s :   6 p x ;   f o n t - w e i g h t :   b o l d ;   c u r s o r :   p o i n t e r ; " > 
- 
-                                         � �   U p d a t e   L o c a t i o n 
- 
-                                 < / b u t t o n > 
- 
-                         < / f o r m > 
+                         </div>
  
                          
  
-                         < d i v   s t y l e = " m a r g i n - t o p :   2 0 p x ;   p a d d i n g - t o p :   2 0 p x ;   b o r d e r - t o p :   1 p x   s o l i d   # e e e ; " > 
+                         <form method="POST" id="location-form">
  
-                                 < a   h r e f = " { %   u r l   ' a d m i n : p a c k a g e s _ p a c k a g e _ c h a n g e '   p a c k a g e . p k   % } "   
+                                 {% csrf_token %}
  
-                                       s t y l e = " c o l o r :   # 4 f 4 6 e 5 ;   t e x t - d e c o r a t i o n :   n o n e ; " > ←   B a c k   t o   P a c k a g e < / a > 
+                                 
  
-                         < / d i v > 
+                                 <div style="margin-bottom: 15px;">
  
-                 < / d i v > 
+                                         <label style="display: block; font-weight: 500; margin-bottom: 5px;">Status *</label>
  
-         < / d i v > 
+                                         <select name="status" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+ 
+                                                 <option value="pending" {% if package.status == 'pending' %}selected{% endif %}>Pending</option>
+ 
+                                                 <option value="processing" {% if package.status == 'processing' %}selected{% endif %}>Processing</option>
+ 
+                                                 <option value="in_transit" {% if package.status == 'in_transit' %}selected{% endif %}>In Transit</option>
+ 
+                                                 <option value="out_for_delivery" {% if package.status == 'out_for_delivery' %}selected{% endif %}>Out for Delivery</option>
+ 
+                                                 <option value="delivered" {% if package.status == 'delivered' %}selected{% endif %}>Delivered</option>
+ 
+                                                 <option value="cancelled" {% if package.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+ 
+                                         </select>
+ 
+                                 </div>
+ 
+                                 
+ 
+                                 <div style="margin-bottom: 15px;">
+ 
+                                         <label style="display: block; font-weight: 500; margin-bottom: 5px;">Location Name *</label>
+ 
+                                         <input type="text" name="location" id="location-name" required
+ 
+                                                       placeholder="e.g., Manchester Distribution Centre"
+ 
+                                                       style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+ 
+                                 </div>
+ 
+                                 
+ 
+                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+ 
+                                         <div>
+ 
+                                                 <label style="display: block; font-weight: 500; margin-bottom: 5px;">Latitude</label>
+ 
+                                                 <input type="text" name="latitude" id="latitude" readonly
+ 
+                                                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; background: #f9fafb;">
+ 
+                                         </div>
+ 
+                                         <div>
+ 
+                                                 <label style="display: block; font-weight: 500; margin-bottom: 5px;">Longitude</label>
+ 
+                                                 <input type="text" name="longitude" id="longitude" readonly
+ 
+                                                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; background: #f9fafb;">
+ 
+                                         </div>
+ 
+                                 </div>
+ 
+                                 
+ 
+                                 <div style="margin-bottom: 15px;">
+ 
+                                         <label style="display: block; font-weight: 500; margin-bottom: 5px;">Notes</label>
+ 
+                                         <textarea name="notes" rows="3" placeholder="Add any notes..."
+ 
+                                                             style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;"></textarea>
+ 
+                                 </div>
+ 
+                                 
+ 
+                                 <div style="margin-bottom: 20px;">
+ 
+                                         <h3 style="font-weight: 500; margin-bottom: 10px;">Quick Locations (Norway)</h3>
+ 
+                                         <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+ 
+                                                 <button type="button" onclick="setLocation(51.5074, -0.1278, 'London')"
+ 
+                                                                 style="padding: 5px 10px; background: #e0e7ff; border: none; border-radius: 4px; cursor: pointer;">London</button>
+ 
+                                                 <button type="button" onclick="setLocation(53.4808, -2.2426, 'Manchester')"
+ 
+                                                                 style="padding: 5px 10px; background: #e0e7ff; border: none; border-radius: 4px; cursor: pointer;">Manchester</button>
+ 
+                                                 <button type="button" onclick="setLocation(52.4862, -1.8904, 'Birmingham')"
+ 
+                                                                 style="padding: 5px 10px; background: #e0e7ff; border: none; border-radius: 4px; cursor: pointer;">Birmingham</button>
+ 
+                                                 <button type="button" onclick="setLocation(53.8008, -1.5491, 'Leeds')"
+ 
+                                                                 style="padding: 5px 10px; background: #e0e7ff; border: none; border-radius: 4px; cursor: pointer;">Leeds</button>
+ 
+                                                 <button type="button" onclick="setLocation(55.9533, -3.1883, 'Edinburgh')"
+ 
+                                                                 style="padding: 5px 10px; background: #e0e7ff; border: none; border-radius: 4px; cursor: pointer;">Edinburgh</button>
+ 
+                                                 <button type="button" onclick="setLocation(55.8642, -4.2518, 'Glasgow')"
+ 
+                                                                 style="padding: 5px 10px; background: #e0e7ff; border: none; border-radius: 4px; cursor: pointer;">Glasgow</button>
+ 
+                                                 <button type="button" onclick="setLocation(51.4545, -2.5879, 'Bristol')"
+ 
+                                                                 style="padding: 5px 10px; background: #e0e7ff; border: none; border-radius: 4px; cursor: pointer;">Bristol</button>
+ 
+                                                 <button type="button" onclick="setLocation(51.4816, -3.1791, 'Cardiff')"
+ 
+                                                                 style="padding: 5px 10px; background: #e0e7ff; border: none; border-radius: 4px; cursor: pointer;">Cardiff</button>
+ 
+                                         </div>
+ 
+                                 </div>
+ 
+                                 
+ 
+                                 <button type="submit" style="width: 100%; padding: 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+ 
+                                         �� Update Location
+ 
+                                 </button>
+ 
+                         </form>
+ 
+                         
+ 
+                         <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+ 
+                                 <a href="{% url 'admin:packages_package_change' package.pk %}"
+ 
+                                       style="color: #4f46e5; text-decoration: none;">← Back to Package</a>
+ 
+                         </div>
+ 
+                 </div>
+ 
+         </div>
  
          
  
-         < ! - -   R e c e n t   T r a c k i n g   H i s t o r y   - - > 
+         <!-- Recent Tracking History -->
  
-         < d i v   c l a s s = " l o c a t i o n - f o r m "   s t y l e = " m a r g i n - t o p :   2 0 p x ; " > 
+         <div class="location-form" style="margin-top: 20px;">
  
-                 < h 2   s t y l e = " f o n t - w e i g h t :   b o l d ;   m a r g i n - b o t t o m :   1 5 p x ; " > � �   R e c e n t   T r a c k i n g   H i s t o r y < / h 2 > 
+                 <h2 style="font-weight: bold; margin-bottom: 15px;">�� Recent Tracking History</h2>
  
-                 < t a b l e   s t y l e = " w i d t h :   1 0 0 % ;   b o r d e r - c o l l a p s e :   c o l l a p s e ; " > 
+                 <table style="width: 100%; border-collapse: collapse;">
  
-                         < t h e a d > 
+                         <thead>
  
-                                 < t r   s t y l e = " b a c k g r o u n d :   # f 3 f 4 f 6 ; " > 
+                                 <tr style="background: #f3f4f6;">
  
-                                         < t h   s t y l e = " p a d d i n g :   1 0 p x ;   t e x t - a l i g n :   l e f t ;   b o r d e r - b o t t o m :   2 p x   s o l i d   # e 5 e 7 e b ; " > S t a t u s < / t h > 
+                                         <th style="padding: 10px; text-align: left; border-bottom: 2px solid #e5e7eb;">Status</th>
  
-                                         < t h   s t y l e = " p a d d i n g :   1 0 p x ;   t e x t - a l i g n :   l e f t ;   b o r d e r - b o t t o m :   2 p x   s o l i d   # e 5 e 7 e b ; " > L o c a t i o n < / t h > 
+                                         <th style="padding: 10px; text-align: left; border-bottom: 2px solid #e5e7eb;">Location</th>
  
-                                         < t h   s t y l e = " p a d d i n g :   1 0 p x ;   t e x t - a l i g n :   l e f t ;   b o r d e r - b o t t o m :   2 p x   s o l i d   # e 5 e 7 e b ; " > C o o r d i n a t e s < / t h > 
+                                         <th style="padding: 10px; text-align: left; border-bottom: 2px solid #e5e7eb;">Coordinates</th>
  
-                                         < t h   s t y l e = " p a d d i n g :   1 0 p x ;   t e x t - a l i g n :   l e f t ;   b o r d e r - b o t t o m :   2 p x   s o l i d   # e 5 e 7 e b ; " > T i m e < / t h > 
+                                         <th style="padding: 10px; text-align: left; border-bottom: 2px solid #e5e7eb;">Time</th>
  
-                                 < / t r > 
+                                 </tr>
  
-                         < / t h e a d > 
+                         </thead>
  
-                         < t b o d y > 
+                         <tbody>
  
-                                 { %   f o r   e v e n t   i n   t r a c k i n g _ h i s t o r y   % } 
+                                 {% for event in tracking_history %}
  
-                                 < t r > 
+                                 <tr>
  
-                                         < t d   s t y l e = " p a d d i n g :   1 0 p x ;   b o r d e r - b o t t o m :   1 p x   s o l i d   # e 5 e 7 e b ; " > { {   e v e n t . s t a t u s   } } < / t d > 
+                                         <td style="padding: 10px; border-bottom: 1px solid #e5e7eb;">{{ event.status }}</td>
  
-                                         < t d   s t y l e = " p a d d i n g :   1 0 p x ;   b o r d e r - b o t t o m :   1 p x   s o l i d   # e 5 e 7 e b ; " > { {   e v e n t . l o c a t i o n   } } < / t d > 
+                                         <td style="padding: 10px; border-bottom: 1px solid #e5e7eb;">{{ event.location }}</td>
  
-                                         < t d   s t y l e = " p a d d i n g :   1 0 p x ;   b o r d e r - b o t t o m :   1 p x   s o l i d   # e 5 e 7 e b ;   f o n t - f a m i l y :   m o n o s p a c e ;   f o n t - s i z e :   1 2 p x ; " > 
+                                         <td style="padding: 10px; border-bottom: 1px solid #e5e7eb; font-family: monospace; font-size: 12px;">
  
-                                                 { %   i f   e v e n t . l a t i t u d e   % } { {   e v e n t . l a t i t u d e   } } ,   { {   e v e n t . l o n g i t u d e   } } { %   e l s e   % } - { %   e n d i f   % } 
+                                                 {% if event.latitude %}{{ event.latitude }}, {{ event.longitude }}{% else %}-{% endif %}
  
-                                         < / t d > 
+                                         </td>
  
-                                         < t d   s t y l e = " p a d d i n g :   1 0 p x ;   b o r d e r - b o t t o m :   1 p x   s o l i d   # e 5 e 7 e b ; " > { {   e v e n t . t i m e s t a m p | d a t e : " M   j ,   g : i   A "   } } < / t d > 
+                                         <td style="padding: 10px; border-bottom: 1px solid #e5e7eb;">{{ event.timestamp|date:"M j, g:i A" }}</td>
  
-                                 < / t r > 
+                                 </tr>
  
-                                 { %   e m p t y   % } 
+                                 {% empty %}
  
-                                 < t r > 
+                                 <tr>
  
-                                         < t d   c o l s p a n = " 4 "   s t y l e = " p a d d i n g :   2 0 p x ;   t e x t - a l i g n :   c e n t e r ;   c o l o r :   # 6 6 6 ; " > N o   t r a c k i n g   h i s t o r y   y e t . < / t d > 
+                                         <td colspan="4" style="padding: 20px; text-align: center; color: #666;">No tracking history yet.</td>
  
-                                 < / t r > 
+                                 </tr>
  
-                                 { %   e n d f o r   % } 
+                                 {% endfor %}
  
-                         < / t b o d y > 
+                         </tbody>
  
-                 < / t a b l e > 
+                 </table>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
  
  
- < s c r i p t > 
+ <script>
  
-         v a r   m a p   =   L . m a p ( ' l o c a t i o n - m a p ' ) . s e t V i e w ( [ 5 4 . 0 ,   - 2 . 0 ] ,   6 ) ; 
- 
-         
- 
-         L . t i l e L a y e r ( ' h t t p s : / / { s } . t i l e . o p e n s t r e e t m a p . o r g / { z } / { x } / { y } . p n g ' ,   { 
- 
-                 a t t r i b u t i o n :   ' ©   O p e n S t r e e t M a p ' 
- 
-         } ) . a d d T o ( m a p ) ; 
+         var map = L.map('location-map').setView([54.0, -2.0], 6);
  
          
  
-         v a r   m a r k e r   =   n u l l ; 
+         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+ 
+                 attribution: '© OpenStreetMap'
+ 
+         }).addTo(map);
  
          
  
-         / /   N o r w a y   C i t i e s   c o o r d i n a t e s 
- 
-         v a r   u k C i t i e s   =   { 
- 
-                 ' L o n d o n ' :   [ 5 1 . 5 0 7 4 ,   - 0 . 1 2 7 8 ] , 
- 
-                 ' M a n c h e s t e r ' :   [ 5 3 . 4 8 0 8 ,   - 2 . 2 4 2 6 ] , 
- 
-                 ' B i r m i n g h a m ' :   [ 5 2 . 4 8 6 2 ,   - 1 . 8 9 0 4 ] , 
- 
-                 ' L e e d s ' :   [ 5 3 . 8 0 0 8 ,   - 1 . 5 4 9 1 ] , 
- 
-                 ' G l a s g o w ' :   [ 5 5 . 8 6 4 2 ,   - 4 . 2 5 1 8 ] , 
- 
-                 ' E d i n b u r g h ' :   [ 5 5 . 9 5 3 3 ,   - 3 . 1 8 8 3 ] , 
- 
-                 ' L i v e r p o o l ' :   [ 5 3 . 4 0 8 4 ,   - 2 . 9 9 1 6 ] , 
- 
-                 ' B r i s t o l ' :   [ 5 1 . 4 5 4 5 ,   - 2 . 5 8 7 9 ] , 
- 
-                 ' C a r d i f f ' :   [ 5 1 . 4 8 1 6 ,   - 3 . 1 7 9 1 ] , 
- 
-                 ' B e l f a s t ' :   [ 5 4 . 5 9 7 3 ,   - 5 . 9 3 0 1 ] , 
- 
-         } ; 
+         var marker = null;
  
          
  
-         v a r   s e n d e r C i t y   =   ' { {   p a c k a g e . s e n d e r _ c i t y   } } ' ; 
+         // Norway Cities coordinates
  
-         v a r   r e c e i v e r C i t y   =   ' { {   p a c k a g e . r e c e i v e r _ c i t y   } } ' ; 
+         var ukCities = {
  
-         v a r   s e n d e r C o o r d s   =   u k C i t i e s [ s e n d e r C i t y ]   | |   [ 5 1 . 5 ,   - 0 . 1 ] ; 
+                 'London': [51.5074, -0.1278],
  
-         v a r   r e c e i v e r C o o r d s   =   u k C i t i e s [ r e c e i v e r C i t y ]   | |   [ 5 3 . 5 ,   - 2 . 2 ] ; 
+                 'Manchester': [53.4808, -2.2426],
  
-         
+                 'Birmingham': [52.4862, -1.8904],
  
-         L . m a r k e r ( s e n d e r C o o r d s ,   { o p a c i t y :   0 . 6 } ) 
+                 'Leeds': [53.8008, -1.5491],
  
-                 . a d d T o ( m a p ) 
+                 'Glasgow': [55.8642, -4.2518],
  
-                 . b i n d P o p u p ( ' O r i g i n :   { {   p a c k a g e . s e n d e r _ c i t y   } } ' ) ; 
+                 'Edinburgh': [55.9533, -3.1883],
  
-         
+                 'Liverpool': [53.4084, -2.9916],
  
-         L . m a r k e r ( r e c e i v e r C o o r d s ,   { o p a c i t y :   0 . 6 } ) 
+                 'Bristol': [51.4545, -2.5879],
  
-                 . a d d T o ( m a p ) 
+                 'Cardiff': [51.4816, -3.1791],
  
-                 . b i n d P o p u p ( ' D e s t i n a t i o n :   { {   p a c k a g e . r e c e i v e r _ c i t y   } } ' ) ; 
+                 'Belfast': [54.5973, -5.9301],
  
-         
- 
-         / /   D r a w   r o u t e   l i n e 
- 
-         L . p o l y l i n e ( [ s e n d e r C o o r d s ,   r e c e i v e r C o o r d s ] ,   { c o l o r :   ' # c 7 d 2 f e ' ,   w e i g h t :   3 ,   d a s h A r r a y :   ' 1 0 ,   1 0 ' } ) . a d d T o ( m a p ) ; 
+         };
  
          
  
-         / /   A d d   e x i s t i n g   t r a c k i n g   p o i n t s 
+         var senderCity = '{{ package.sender_city }}';
  
-         { %   f o r   e v e n t   i n   t r a c k i n g _ h i s t o r y   % } 
+         var receiverCity = '{{ package.receiver_city }}';
  
-         { %   i f   e v e n t . l a t i t u d e   a n d   e v e n t . l o n g i t u d e   % } 
+         var senderCoords = ukCities[senderCity] || [51.5, -0.1];
  
-         L . c i r c l e M a r k e r ( [ { {   e v e n t . l a t i t u d e   } } ,   { {   e v e n t . l o n g i t u d e   } } ] ,   { 
- 
-                 r a d i u s :   6 , 
- 
-                 f i l l C o l o r :   ' # 4 f 4 6 e 5 ' , 
- 
-                 c o l o r :   ' # f f f ' , 
- 
-                 w e i g h t :   2 , 
- 
-                 o p a c i t y :   1 , 
- 
-                 f i l l O p a c i t y :   0 . 8 
- 
-         } ) . a d d T o ( m a p ) . b i n d P o p u p ( ' { {   e v e n t . s t a t u s   } } < b r > { {   e v e n t . l o c a t i o n   } } ' ) ; 
- 
-         { %   e n d i f   % } 
- 
-         { %   e n d f o r   % } 
+         var receiverCoords = ukCities[receiverCity] || [53.5, -2.2];
  
          
  
-         f u n c t i o n   s e t L o c a t i o n ( l a t ,   l n g ,   n a m e )   { 
+         L.marker(senderCoords, {opacity: 0.6})
  
-                 d o c u m e n t . g e t E l e m e n t B y I d ( ' l a t i t u d e ' ) . v a l u e   =   l a t . t o F i x e d ( 7 ) ; 
+                 .addTo(map)
  
-                 d o c u m e n t . g e t E l e m e n t B y I d ( ' l o n g i t u d e ' ) . v a l u e   =   l n g . t o F i x e d ( 7 ) ; 
+                 .bindPopup('Origin: {{ package.sender_city }}');
  
-                 d o c u m e n t . g e t E l e m e n t B y I d ( ' l o c a t i o n - n a m e ' ) . v a l u e   =   n a m e   +   '   D i s t r i b u t i o n   C e n t r e ' ; 
+         
+ 
+         L.marker(receiverCoords, {opacity: 0.6})
+ 
+                 .addTo(map)
+ 
+                 .bindPopup('Destination: {{ package.receiver_city }}');
+ 
+         
+ 
+         // Draw route line
+ 
+         L.polyline([senderCoords, receiverCoords], {color: '#c7d2fe', weight: 3, dashArray: '10, 10'}).addTo(map);
+ 
+         
+ 
+         // Add existing tracking points
+ 
+         {% for event in tracking_history %}
+ 
+         {% if event.latitude and event.longitude %}
+ 
+         L.circleMarker([{{ event.latitude }}, {{ event.longitude }}], {
+ 
+                 radius: 6,
+ 
+                 fillColor: '#4f46e5',
+ 
+                 color: '#fff',
+ 
+                 weight: 2,
+ 
+                 opacity: 1,
+ 
+                 fillOpacity: 0.8
+ 
+         }).addTo(map).bindPopup('{{ event.status }}<br>{{ event.location }}');
+ 
+         {% endif %}
+ 
+         {% endfor %}
+ 
+         
+ 
+         function setLocation(lat, lng, name) {
+ 
+                 document.getElementById('latitude').value = lat.toFixed(7);
+ 
+                 document.getElementById('longitude').value = lng.toFixed(7);
+ 
+                 document.getElementById('location-name').value = name + ' Distribution Centre';
  
                  
  
-                 i f   ( m a r k e r )   { 
+                 if (marker) {
  
-                         m a p . r e m o v e L a y e r ( m a r k e r ) ; 
+                         map.removeLayer(marker);
  
-                 } 
+                 }
  
-                 m a r k e r   =   L . m a r k e r ( [ l a t ,   l n g ] ,   { 
+                 marker = L.marker([lat, lng], {
  
-                         i c o n :   L . d i v I c o n ( { 
+                         icon: L.divIcon({
  
-                                 c l a s s N a m e :   ' c u s t o m - d i v - i c o n ' , 
+                                 className: 'custom-div-icon',
  
-                                 h t m l :   " < d i v   s t y l e = ' b a c k g r o u n d - c o l o r : # e f 4 4 4 4 ; w i d t h : 3 0 p x ; h e i g h t : 3 0 p x ; b o r d e r - r a d i u s : 5 0 % ; d i s p l a y : f l e x ; a l i g n - i t e m s : c e n t e r ; j u s t i f y - c o n t e n t : c e n t e r ; b o r d e r : 3 p x   s o l i d   w h i t e ; b o x - s h a d o w : 0   2 p x   5 p x   r g b a ( 0 , 0 , 0 , 0 . 3 ) ; ' > < s p a n   s t y l e = ' f o n t - s i z e : 1 4 p x ; ' > � � < / s p a n > < / d i v > " , 
+                                 html: "<div style='background-color:#ef4444;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid white;box-shadow:0 2px 5px rgba(0,0,0,0.3);'><span style='font-size:14px;'>��</span></div>",
  
-                                 i c o n S i z e :   [ 3 0 ,   3 0 ] , 
+                                 iconSize: [30, 30],
  
-                                 i c o n A n c h o r :   [ 1 5 ,   1 5 ] 
+                                 iconAnchor: [15, 15]
  
-                         } ) 
+                         })
  
-                 } ) . a d d T o ( m a p ) ; 
+                 }).addTo(map);
  
-                 m a p . s e t V i e w ( [ l a t ,   l n g ] ,   1 0 ) ; 
+                 map.setView([lat, lng], 10);
  
-         } 
+         }
  
          
  
-         m a p . o n ( ' c l i c k ' ,   f u n c t i o n ( e )   { 
+         map.on('click', function(e) {
  
-                 s e t L o c a t i o n ( e . l a t l n g . l a t ,   e . l a t l n g . l n g ,   ' C u s t o m   L o c a t i o n ' ) ; 
+                 setLocation(e.latlng.lat, e.latlng.lng, 'Custom Location');
  
-                 d o c u m e n t . g e t E l e m e n t B y I d ( ' l o c a t i o n - n a m e ' ) . v a l u e   =   ' ' ; 
+                 document.getElementById('location-name').value = '';
  
-                 d o c u m e n t . g e t E l e m e n t B y I d ( ' l o c a t i o n - n a m e ' ) . f o c u s ( ) ; 
+                 document.getElementById('location-name').focus();
  
-         } ) ; 
+         });
  
- < / s c r i p t > 
+ </script>
  
- { %   e n d b l o c k   % } 
+ {% endblock %}
  
  

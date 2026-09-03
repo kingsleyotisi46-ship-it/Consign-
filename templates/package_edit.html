@@ -1,225 +1,225 @@
- { %   e x t e n d s   ' b a s e . h t m l '   % } 
+ {% extends 'base.html' %}
  
  
  
- { %   b l o c k   t i t l e   % } E d i t   P a c k a g e   -   D a i l y F X   D e l i v e r y { %   e n d b l o c k   % } 
+ {% block title %}Edit Package - DailyFX Delivery{% endblock %}
  
  
  
- { %   b l o c k   c o n t e n t   % } 
+ {% block content %}
  
- < ! - -   N a v i g a t i o n   - - > 
+ <!-- Navigation -->
  
- < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - c e n t e r   m b - 8 " > 
+ <div class="flex justify-between items-center mb-8">
  
-         < a   h r e f = " { %   u r l   ' p a c k a g e _ d e t a i l '   p a c k a g e . i d   % } "   c l a s s = " f l e x   i t e m s - c e n t e r   t e x t - p r i m a r y - 6 0 0   h o v e r : t e x t - p r i m a r y - 8 0 0   t r a n s i t i o n " > 
+         <a href="{% url 'package_detail' package.id %}" class="flex items-center text-primary-600 hover:text-primary-800 transition">
  
-                 < s p a n   c l a s s = " m r - 2 " > ← < / s p a n >   B a c k   t o   P a c k a g e 
+                 <span class="mr-2">←</span> Back to Package
  
-         < / a > 
+         </a>
  
- < / d i v > 
+ </div>
  
  
  
- < d i v   c l a s s = " m a x - w - 3 x l   m x - a u t o " > 
+ <div class="max-w-3xl mx-auto">
  
-         < h 1   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 2 " > E d i t   P a c k a g e < / h 1 > 
+         <h1 class="text-3xl font-bold text-primary-800 mb-2">Edit Package</h1>
  
-         < p   c l a s s = " t e x t - p r i m a r y - 6 0 0   m b - 8 " > T r a c k i n g :   < s p a n   c l a s s = " f o n t - m o n o   f o n t - b o l d " > { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } < / s p a n > < / p > 
- 
-         
- 
-         { %   i f   m e s s a g e s   % } 
- 
-                 { %   f o r   m e s s a g e   i n   m e s s a g e s   % } 
- 
-                 < d i v   c l a s s = " m b - 6   p - 4   r o u n d e d - x l   { %   i f   m e s s a g e . t a g s   = =   ' e r r o r '   % } b g - r e d - 1 0 0   t e x t - r e d - 7 0 0 { %   e l s e   % } b g - p r i m a r y - 1 0 0   t e x t - p r i m a r y - 7 0 0 { %   e n d i f   % } " > 
- 
-                         { {   m e s s a g e   } } 
- 
-                 < / d i v > 
- 
-                 { %   e n d f o r   % } 
- 
-         { %   e n d i f   % } 
+         <p class="text-primary-600 mb-8">Tracking: <span class="font-mono font-bold">{{ package.tracking_number }}</span></p>
  
          
  
-         < f o r m   m e t h o d = " P O S T "   c l a s s = " s p a c e - y - 8 " > 
+         {% if messages %}
  
-                 { %   c s r f _ t o k e n   % } 
+                 {% for message in messages %}
+ 
+                 <div class="mb-6 p-4 rounded-xl {% if message.tags == 'error' %}bg-red-100 text-red-700{% else %}bg-primary-100 text-primary-700{% endif %}">
+ 
+                         {{ message }}
+ 
+                 </div>
+ 
+                 {% endfor %}
+ 
+         {% endif %}
+ 
+         
+ 
+         <form method="POST" class="space-y-8">
+ 
+                 {% csrf_token %}
  
                  
  
-                 < ! - -   R e c e i v e r   I n f o r m a t i o n   ( e d i t a b l e )   - - > 
+                 <!-- Receiver Information (editable) -->
  
-                 < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0 " > 
+                 <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-6 border border-primary-100">
  
-                         < h 2   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 4 " > � �   R e c e i v e r   I n f o r m a t i o n < / h 2 > 
+                         <h2 class="text-xl font-bold text-primary-800 mb-4">�� Receiver Information</h2>
  
-                         < p   c l a s s = " t e x t - p r i m a r y - 5 0 0   t e x t - s m   m b - 4 " > Y o u   c a n   u p d a t e   t h e   r e c e i v e r   d e t a i l s   b e f o r e   t h e   p a c k a g e   i s   d i s p a t c h e d . < / p > 
+                         <p class="text-primary-500 text-sm mb-4">You can update the receiver details before the package is dispatched.</p>
  
                          
  
-                         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 4 " > 
+                         <div class="grid md:grid-cols-2 gap-4">
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > R e c e i v e r   N a m e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-primary-700 mb-1">Receiver Name *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " r e c e i v e r _ n a m e "   v a l u e = " { {   p a c k a g e . r e c e i v e r _ n a m e   } } "   r e q u i r e d 
+                                         <input type="text" name="receiver_name" value="{{ package.receiver_name }}" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                                                       class="w-full px-4 py-2 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > P h o n e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-primary-700 mb-1">Phone *</label>
  
-                                         < i n p u t   t y p e = " t e l "   n a m e = " r e c e i v e r _ p h o n e "   v a l u e = " { {   p a c k a g e . r e c e i v e r _ p h o n e   } } "   r e q u i r e d 
+                                         <input type="tel" name="receiver_phone" value="{{ package.receiver_phone }}" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                                                       class="w-full px-4 py-2 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v   c l a s s = " m d : c o l - s p a n - 2 " > 
+                                 <div class="md:col-span-2">
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > A d d r e s s   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-primary-700 mb-1">Address *</label>
  
-                                         < t e x t a r e a   n a m e = " r e c e i v e r _ a d d r e s s "   r o w s = " 2 "   r e q u i r e d 
+                                         <textarea name="receiver_address" rows="2" required
  
-                                                             c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > { {   p a c k a g e . r e c e i v e r _ a d d r e s s   } } < / t e x t a r e a > 
+                                                             class="w-full px-4 py-2 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">{{ package.receiver_address }}</textarea>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > C i t y   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-primary-700 mb-1">City *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " r e c e i v e r _ c i t y "   v a l u e = " { {   p a c k a g e . r e c e i v e r _ c i t y   } } "   r e q u i r e d 
+                                         <input type="text" name="receiver_city" value="{{ package.receiver_city }}" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                                                       class="w-full px-4 py-2 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > C o u n t r y   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-primary-700 mb-1">Country *</label>
  
-                                         < s e l e c t   n a m e = " r e c e i v e r _ c o u n t r y "   r e q u i r e d 
+                                         <select name="receiver_country" required
  
-                                                         c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                                                         class="w-full px-4 py-2 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                                                 < o p t i o n   v a l u e = " N o r w a y "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' N o r w a y '   % } s e l e c t e d { %   e n d i f   % } > N o r w a y < / o p t i o n > 
+                                                 <option value="Norway" {% if package.receiver_country == 'Norway' %}selected{% endif %}>Norway</option>
  
-                                                 < o p t i o n   v a l u e = " N o r w a y "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' N o r w a y '   % } s e l e c t e d { %   e n d i f   % } > N o r w a y < / o p t i o n > 
+                                                 <option value="Norway" {% if package.receiver_country == 'Norway' %}selected{% endif %}>Norway</option>
  
-                                                 < o p t i o n   v a l u e = " P a k i s t a n "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' P a k i s t a n '   % } s e l e c t e d { %   e n d i f   % } > P a k i s t a n < / o p t i o n > 
+                                                 <option value="Pakistan" {% if package.receiver_country == 'Pakistan' %}selected{% endif %}>Pakistan</option>
  
-                                                 < o p t i o n   v a l u e = " U n i t e d   S t a t e s "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' U n i t e d   S t a t e s '   % } s e l e c t e d { %   e n d i f   % } > U n i t e d   S t a t e s < / o p t i o n > 
+                                                 <option value="United States" {% if package.receiver_country == 'United States' %}selected{% endif %}>United States</option>
  
-                                                 < o p t i o n   v a l u e = " C a n a d a "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' C a n a d a '   % } s e l e c t e d { %   e n d i f   % } > C a n a d a < / o p t i o n > 
+                                                 <option value="Canada" {% if package.receiver_country == 'Canada' %}selected{% endif %}>Canada</option>
  
-                                                 < o p t i o n   v a l u e = " G e r m a n y "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' G e r m a n y '   % } s e l e c t e d { %   e n d i f   % } > G e r m a n y < / o p t i o n > 
+                                                 <option value="Germany" {% if package.receiver_country == 'Germany' %}selected{% endif %}>Germany</option>
  
-                                                 < o p t i o n   v a l u e = " F r a n c e "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' F r a n c e '   % } s e l e c t e d { %   e n d i f   % } > F r a n c e < / o p t i o n > 
+                                                 <option value="France" {% if package.receiver_country == 'France' %}selected{% endif %}>France</option>
  
-                                                 < o p t i o n   v a l u e = " N e t h e r l a n d s "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' N e t h e r l a n d s '   % } s e l e c t e d { %   e n d i f   % } > N e t h e r l a n d s < / o p t i o n > 
+                                                 <option value="Netherlands" {% if package.receiver_country == 'Netherlands' %}selected{% endif %}>Netherlands</option>
  
-                                                 < o p t i o n   v a l u e = " I t a l y "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' I t a l y '   % } s e l e c t e d { %   e n d i f   % } > I t a l y < / o p t i o n > 
+                                                 <option value="Italy" {% if package.receiver_country == 'Italy' %}selected{% endif %}>Italy</option>
  
-                                                 < o p t i o n   v a l u e = " S p a i n "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' S p a i n '   % } s e l e c t e d { %   e n d i f   % } > S p a i n < / o p t i o n > 
+                                                 <option value="Spain" {% if package.receiver_country == 'Spain' %}selected{% endif %}>Spain</option>
  
-                                                 < o p t i o n   v a l u e = " A u s t r a l i a "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' A u s t r a l i a '   % } s e l e c t e d { %   e n d i f   % } > A u s t r a l i a < / o p t i o n > 
+                                                 <option value="Australia" {% if package.receiver_country == 'Australia' %}selected{% endif %}>Australia</option>
  
-                                                 < o p t i o n   v a l u e = " I n d i a "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' I n d i a '   % } s e l e c t e d { %   e n d i f   % } > I n d i a < / o p t i o n > 
+                                                 <option value="India" {% if package.receiver_country == 'India' %}selected{% endif %}>India</option>
  
-                                                 < o p t i o n   v a l u e = " U A E "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' U A E '   % } s e l e c t e d { %   e n d i f   % } > U A E < / o p t i o n > 
+                                                 <option value="UAE" {% if package.receiver_country == 'UAE' %}selected{% endif %}>UAE</option>
  
-                                                 < o p t i o n   v a l u e = " S i n g a p o r e "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' S i n g a p o r e '   % } s e l e c t e d { %   e n d i f   % } > S i n g a p o r e < / o p t i o n > 
+                                                 <option value="Singapore" {% if package.receiver_country == 'Singapore' %}selected{% endif %}>Singapore</option>
  
-                                                 < o p t i o n   v a l u e = " J a p a n "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' J a p a n '   % } s e l e c t e d { %   e n d i f   % } > J a p a n < / o p t i o n > 
+                                                 <option value="Japan" {% if package.receiver_country == 'Japan' %}selected{% endif %}>Japan</option>
  
-                                                 < o p t i o n   v a l u e = " C h i n a "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' C h i n a '   % } s e l e c t e d { %   e n d i f   % } > C h i n a < / o p t i o n > 
+                                                 <option value="China" {% if package.receiver_country == 'China' %}selected{% endif %}>China</option>
  
-                                                 < o p t i o n   v a l u e = " B r a z i l "   { %   i f   p a c k a g e . r e c e i v e r _ c o u n t r y   = =   ' B r a z i l '   % } s e l e c t e d { %   e n d i f   % } > B r a z i l < / o p t i o n > 
+                                                 <option value="Brazil" {% if package.receiver_country == 'Brazil' %}selected{% endif %}>Brazil</option>
  
-                                         < / s e l e c t > 
+                                         </select>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - p r i m a r y - 7 0 0   m b - 1 " > P o s t c o d e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-primary-700 mb-1">Postcode *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " r e c e i v e r _ p o s t c o d e "   v a l u e = " { {   p a c k a g e . r e c e i v e r _ p o s t c o d e   } } "   r e q u i r e d 
+                                         <input type="text" name="receiver_postcode" value="{{ package.receiver_postcode }}" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                                                       class="w-full px-4 py-2 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
- 
-                 
- 
-                 < ! - -   P a c k a g e   D e s c r i p t i o n   - - > 
- 
-                 < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0 " > 
- 
-                         < h 2   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 4 " > � �   P a c k a g e   D e s c r i p t i o n < / h 2 > 
- 
-                         < t e x t a r e a   n a m e = " d e s c r i p t i o n "   r o w s = " 3 " 
- 
-                                             c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > { {   p a c k a g e . d e s c r i p t i o n   } } < / t e x t a r e a > 
- 
-                 < / d i v > 
+                 </div>
  
                  
  
-                 < ! - -   N o n - e d i t a b l e   I n f o   - - > 
+                 <!-- Package Description -->
  
-                 < d i v   c l a s s = " b g - g r a y - 1 0 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0 " > 
+                 <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-6 border border-primary-100">
  
-                         < h 2   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - g r a y - 7 0 0   m b - 4 " > � �   S e n d e r   I n f o r m a t i o n   ( R e a d - o n l y ) < / h 2 > 
+                         <h2 class="text-xl font-bold text-primary-800 mb-4">�� Package Description</h2>
  
-                         < d i v   c l a s s = " t e x t - g r a y - 6 0 0 " > 
+                         <textarea name="description" rows="3"
  
-                                 < p > < s t r o n g > { {   p a c k a g e . s e n d e r _ n a m e   } } < / s t r o n g > < / p > 
+                                             class="w-full px-4 py-2 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">{{ package.description }}</textarea>
  
-                                 < p > { {   p a c k a g e . s e n d e r _ a d d r e s s   } } < / p > 
- 
-                                 < p > { {   p a c k a g e . s e n d e r _ c i t y   } } ,   { {   p a c k a g e . s e n d e r _ p o s t c o d e   } } < / p > 
- 
-                         < / d i v > 
- 
-                 < / d i v > 
+                 </div>
  
                  
  
-                 < d i v   c l a s s = " f l e x   g a p - 4 " > 
+                 <!-- Non-editable Info -->
  
-                         < b u t t o n   t y p e = " s u b m i t "   c l a s s = " b g - g r a d i e n t - t o - r   f r o m - p r i m a r y - 6 0 0   t o - a c c e n t - 6 0 0   t e x t - w h i t e   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : f r o m - p r i m a r y - 7 0 0   h o v e r : t o - a c c e n t - 7 0 0   t r a n s i t i o n " > 
+                 <div class="bg-gray-100 rounded-xl p-6 border border-gray-200">
  
-                                 S a v e   C h a n g e s 
+                         <h2 class="text-xl font-bold text-gray-700 mb-4">�� Sender Information (Read-only)</h2>
  
-                         < / b u t t o n > 
+                         <div class="text-gray-600">
  
-                         < a   h r e f = " { %   u r l   ' p a c k a g e _ d e t a i l '   p a c k a g e . i d   % } "   c l a s s = " b g - g r a y - 2 0 0   t e x t - g r a y - 7 0 0   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - g r a y - 3 0 0   t r a n s i t i o n " > 
+                                 <p><strong>{{ package.sender_name }}</strong></p>
  
-                                 C a n c e l 
+                                 <p>{{ package.sender_address }}</p>
  
-                         < / a > 
+                                 <p>{{ package.sender_city }}, {{ package.sender_postcode }}</p>
  
-                 < / d i v > 
+                         </div>
  
-         < / f o r m > 
+                 </div>
  
- < / d i v > 
+                 
  
- { %   e n d b l o c k   % } 
+                 <div class="flex gap-4">
+ 
+                         <button type="submit" class="bg-gradient-to-r from-primary-600 to-accent-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-primary-700 hover:to-accent-700 transition">
+ 
+                                 Save Changes
+ 
+                         </button>
+ 
+                         <a href="{% url 'package_detail' package.id %}" class="bg-gray-200 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-300 transition">
+ 
+                                 Cancel
+ 
+                         </a>
+ 
+                 </div>
+ 
+         </form>
+ 
+ </div>
+ 
+ {% endblock %}
  
  

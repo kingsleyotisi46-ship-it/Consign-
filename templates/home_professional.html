@@ -1,338 +1,338 @@
- { %   e x t e n d s   ' b a s e . h t m l '   % } 
+ {% extends 'base.html' %}
  
- { %   l o a d   s t a t i c   % } 
- 
- 
- 
- { %   b l o c k   t i t l e   % } D a i l y F X   D e l i v e r y   -   P r o f e s s i o n a l   N o r w a y   P a r c e l   D e l i v e r y   &   L o g i s t i c s { %   e n d b l o c k   % } 
+ {% load static %}
  
  
  
- { %   b l o c k   e x t r a _ h e a d   % } 
+ {% block title %}DailyFX Delivery - Professional Norway Parcel Delivery & Logistics{% endblock %}
  
- < s t y l e > 
  
-         : r o o t   { 
  
-                 - - c o r p o r a t e - n a v y :   # 1 e 3 a 8 a ; 
+ {% block extra_head %}
  
-                 - - c o r p o r a t e - b l u e :   # 2 5 6 3 e b ; 
+ <style>
  
-                 - - c o r p o r a t e - l i g h t - b l u e :   # 3 b 8 2 f 6 ; 
+         :root {
  
-                 - - c o r p o r a t e - g r a y :   # 6 4 7 4 8 b ; 
+                 --corporate-navy: #1e3a8a;
  
-                 - - c o r p o r a t e - d a r k :   # 0 f 1 7 2 a ; 
+                 --corporate-blue: #2563eb;
  
-                 - - c o r p o r a t e - g o l d :   # d 9 7 7 0 6 ; 
+                 --corporate-light-blue: #3b82f6;
  
-         } 
+                 --corporate-gray: #64748b;
  
-         
+                 --corporate-dark: #0f172a;
  
-         . h e r o - b g   { 
+                 --corporate-gold: #d97706;
  
-                 b a c k g r o u n d :   l i n e a r - g r a d i e n t ( 1 3 5 d e g ,   r g b a ( 3 0 ,   5 8 ,   1 3 8 ,   0 . 9 5 )   0 % ,   r g b a ( 3 7 ,   9 9 ,   2 3 5 ,   0 . 9 0 )   1 0 0 % ) , 
- 
-                                         u r l ( ' h t t p s : / / i m a g e s . u n s p l a s h . c o m / p h o t o - 1 5 8 6 5 2 8 1 1 6 3 1 1 - a d 8 d d 3 c 8 3 1 0 d ? w = 1 9 2 0 & q = 8 0 ' )   c e n t e r / c o v e r ; 
- 
-         } 
+         }
  
          
  
-         . t e s t i m o n i a l - s l i d e r   {   a n i m a t i o n :   s l i d e   2 0 s   i n f i n i t e ;   } 
+         .hero-bg {
  
-         @ k e y f r a m e s   s l i d e   {   0 % ,   3 0 %   {   t r a n s f o r m :   t r a n s l a t e X ( 0 ) ;   }   3 5 % ,   6 5 %   {   t r a n s f o r m :   t r a n s l a t e X ( - 1 0 0 % ) ;   }   7 0 % ,   1 0 0 %   {   t r a n s f o r m :   t r a n s l a t e X ( - 2 0 0 % ) ;   }   } 
+                 background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.90) 100%),
  
-         
+                                         url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80') center/cover;
  
-         . p a r t n e r - l o g o   {   f i l t e r :   g r a y s c a l e ( 1 0 0 % )   b r i g h t n e s s ( 0 . 6 ) ;   t r a n s i t i o n :   a l l   0 . 3 s ;   } 
- 
-         . p a r t n e r - l o g o : h o v e r   {   f i l t e r :   g r a y s c a l e ( 0 % )   b r i g h t n e s s ( 1 ) ;   } 
+         }
  
          
  
-         @ k e y f r a m e s   s c r o l l   {   0 %   {   t r a n s f o r m :   t r a n s l a t e X ( 0 ) ;   }   1 0 0 %   {   t r a n s f o r m :   t r a n s l a t e X ( - 5 0 % ) ;   }   } 
+         .testimonial-slider { animation: slide 20s infinite; }
  
-         . a n i m a t e - s c r o l l   {   d i s p l a y :   f l e x ;   a n i m a t i o n :   s c r o l l   2 0 s   l i n e a r   i n f i n i t e ;   } 
- 
-         . a n i m a t e - s c r o l l : h o v e r   {   a n i m a t i o n - p l a y - s t a t e :   p a u s e d ;   } 
+         @keyframes slide { 0%, 30% { transform: translateX(0); } 35%, 65% { transform: translateX(-100%); } 70%, 100% { transform: translateX(-200%); } }
  
          
  
-         . p o p u p - r e v i e w   { 
+         .partner-logo { filter: grayscale(100%) brightness(0.6); transition: all 0.3s; }
  
-                 a n i m a t i o n :   s l i d e I n U p   0 . 5 s   e a s e - o u t ,   f a d e O u t   0 . 5 s   e a s e - i n   4 . 5 s   f o r w a r d s ; 
- 
-         } 
- 
-         @ k e y f r a m e s   s l i d e I n U p   { 
- 
-                 f r o m   {   t r a n s f o r m :   t r a n s l a t e Y ( 1 0 0 p x ) ;   o p a c i t y :   0 ;   } 
- 
-                 t o   {   t r a n s f o r m :   t r a n s l a t e Y ( 0 ) ;   o p a c i t y :   1 ;   } 
- 
-         } 
- 
-         @ k e y f r a m e s   f a d e O u t   { 
- 
-                 t o   {   o p a c i t y :   0 ;   t r a n s f o r m :   t r a n s l a t e Y ( - 2 0 p x ) ;   } 
- 
-         } 
+         .partner-logo:hover { filter: grayscale(0%) brightness(1); }
  
          
  
-         . i c o n - b a d g e   { 
+         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
  
-                 w i d t h :   4 0 p x ; 
+         .animate-scroll { display: flex; animation: scroll 20s linear infinite; }
  
-                 h e i g h t :   4 0 p x ; 
- 
-                 d i s p l a y :   f l e x ; 
- 
-                 a l i g n - i t e m s :   c e n t e r ; 
- 
-                 j u s t i f y - c o n t e n t :   c e n t e r ; 
- 
-                 b a c k g r o u n d :   v a r ( - - c o r p o r a t e - b l u e ) ; 
- 
-                 b o r d e r - r a d i u s :   8 p x ; 
- 
-                 c o l o r :   w h i t e ; 
- 
-                 f o n t - w e i g h t :   6 0 0 ; 
- 
-         } 
+         .animate-scroll:hover { animation-play-state: paused; }
  
          
  
-         . s t a t - c a r d   { 
+         .popup-review {
  
-                 b o r d e r - l e f t :   4 p x   s o l i d   v a r ( - - c o r p o r a t e - g o l d ) ; 
+                 animation: slideInUp 0.5s ease-out, fadeOut 0.5s ease-in 4.5s forwards;
  
-         } 
+         }
  
- < / s t y l e > 
+         @keyframes slideInUp {
  
- { %   e n d b l o c k   % } 
+                 from { transform: translateY(100px); opacity: 0; }
  
+                 to { transform: translateY(0); opacity: 1; }
  
+         }
  
- { %   b l o c k   c o n t e n t   % } 
+         @keyframes fadeOut {
  
- < ! - -   H e r o   S e c t i o n   -   P r o f e s s i o n a l   - - > 
+                 to { opacity: 0; transform: translateY(-20px); }
  
- < d i v   c l a s s = " h e r o - b g   r o u n d e d - 2 x l   t e x t - w h i t e   p - 1 2   m b - 1 2   r e l a t i v e   o v e r f l o w - h i d d e n   m i n - h - [ 5 0 0 p x ]   f l e x   i t e m s - c e n t e r " > 
+         }
  
-         < d i v   c l a s s = " a b s o l u t e   i n s e t - 0   b g - g r a d i e n t - t o - r   f r o m - b l u e - 9 0 0 / 8 0   t o - b l u e - 8 0 0 / 6 0 " > < / d i v > 
+         
  
-         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 8   i t e m s - c e n t e r   r e l a t i v e   z - 1 0   w - f u l l " > 
+         .icon-badge {
  
-                 < d i v > 
+                 width: 40px;
  
-                         < s p a n   c l a s s = " b g - w h i t e / 2 0   b a c k d r o p - b l u r   t e x t - s m   p x - 4   p y - 2   r o u n d e d - f u l l   m b - 4   i n l i n e - f l e x   i t e m s - c e n t e r   g a p - 2   f o n t - m e d i u m " > 
+                 height: 40px;
  
-                                 < s v g   c l a s s = " w - 4   h - 4 "   f i l l = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 0   2 0 " > < p a t h   d = " M 9 . 0 4 9   2 . 9 2 7 c . 3 - . 9 2 1   1 . 6 0 3 - . 9 2 1   1 . 9 0 2   0 l 1 . 0 7   3 . 2 9 2 a 1   1   0   0 0 . 9 5 . 6 9 h 3 . 4 6 2 c . 9 6 9   0   1 . 3 7 1   1 . 2 4 . 5 8 8   1 . 8 1 l - 2 . 8   2 . 0 3 4 a 1   1   0   0 0 - . 3 6 4   1 . 1 1 8 l 1 . 0 7   3 . 2 9 2 c . 3 . 9 2 1 - . 7 5 5   1 . 6 8 8 - 1 . 5 4   1 . 1 1 8 l - 2 . 8 - 2 . 0 3 4 a 1   1   0   0 0 - 1 . 1 7 5   0 l - 2 . 8   2 . 0 3 4 c - . 7 8 4 . 5 7 - 1 . 8 3 8 - . 1 9 7 - 1 . 5 3 9 - 1 . 1 1 8 l 1 . 0 7 - 3 . 2 9 2 a 1   1   0   0 0 - . 3 6 4 - 1 . 1 1 8 L 2 . 9 8   8 . 7 2 c - . 7 8 3 - . 5 7 - . 3 8 - 1 . 8 1 . 5 8 8 - 1 . 8 1 h 3 . 4 6 1 a 1   1   0   0 0 . 9 5 1 - . 6 9 l 1 . 0 7 - 3 . 2 9 2 z " / > < / s v g > 
+                 display: flex;
  
-                                 # 1   R a t e d   N o r w a y   D e l i v e r y   S e r v i c e 
+                 align-items: center;
  
-                         < / s p a n > 
+                 justify-content: center;
  
-                         < h 1   c l a s s = " t e x t - 5 x l   f o n t - b o l d   m b - 4   l e a d i n g - t i g h t " > E n t e r p r i s e - G r a d e   P a r c e l   D e l i v e r y   S o l u t i o n s < / h 1 > 
+                 background: var(--corporate-blue);
  
-                         < p   c l a s s = " t e x t - x l   t e x t - b l u e - 1 0 0   m b - 8 " > P r o f e s s i o n a l   l o g i s t i c s   s e r v i c e s   w i t h   r e a l - t i m e   G P S   t r a c k i n g .   C o m p r e h e n s i v e   d e l i v e r y   o p t i o n s   f o r   b u s i n e s s e s   a n d   i n d i v i d u a l s   a c r o s s   t h e   N o r w a y . < / p > 
+                 border-radius: 8px;
  
-                         < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 4 " > 
+                 color: white;
  
-                                 < a   h r e f = " { %   u r l   ' t r a c k '   % } "   c l a s s = " b g - w h i t e   t e x t - b l u e - 6 0 0   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - b l u e - 5 0   t r a n s i t i o n   s h a d o w - l g   f l e x   i t e m s - c e n t e r   g a p - 2 " > 
+                 font-weight: 600;
  
-                                         < s v g   c l a s s = " w - 5   h - 5 "   f i l l = " n o n e "   s t r o k e = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 4   2 4 " > < p a t h   s t r o k e - l i n e c a p = " r o u n d "   s t r o k e - l i n e j o i n = " r o u n d "   s t r o k e - w i d t h = " 2 "   d = " M 1 7 . 6 5 7   1 6 . 6 5 7 L 1 3 . 4 1 4   2 0 . 9 a 1 . 9 9 8   1 . 9 9 8   0   0 1 - 2 . 8 2 7   0 l - 4 . 2 4 4 - 4 . 2 4 3 a 8   8   0   1 1 1 1 . 3 1 4   0 z " / > < p a t h   s t r o k e - l i n e c a p = " r o u n d "   s t r o k e - l i n e j o i n = " r o u n d "   s t r o k e - w i d t h = " 2 "   d = " M 1 5   1 1 a 3   3   0   1 1 - 6   0   3   3   0   0 1 6   0 z " / > < / s v g > 
+         }
  
-                                         T r a c k   S h i p m e n t 
+         
  
-                                 < / a > 
+         .stat-card {
  
-                                 { %   i f   n o t   u s e r . i s _ a u t h e n t i c a t e d   % } 
+                 border-left: 4px solid var(--corporate-gold);
  
-                                         < a   h r e f = " { %   u r l   ' r e g i s t e r '   % } "   c l a s s = " b o r d e r - 2   b o r d e r - w h i t e   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - w h i t e   h o v e r : t e x t - b l u e - 6 0 0   t r a n s i t i o n " > G e t   S t a r t e d < / a > 
+         }
  
-                                 { %   e n d i f   % } 
+ </style>
  
-                                 < a   h r e f = " { %   u r l   ' p r i c i n g '   % } "   c l a s s = " b g - a m b e r - 5 0 0   t e x t - w h i t e   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - a m b e r - 6 0 0   t r a n s i t i o n   f l e x   i t e m s - c e n t e r   g a p - 2 " > 
+ {% endblock %}
  
-                                         < s v g   c l a s s = " w - 5   h - 5 "   f i l l = " n o n e "   s t r o k e = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 4   2 4 " > < p a t h   s t r o k e - l i n e c a p = " r o u n d "   s t r o k e - l i n e j o i n = " r o u n d "   s t r o k e - w i d t h = " 2 "   d = " M 9   7 h 6 m 0   1 0 v - 3 m - 3   3 h . 0 1 M 9   1 7 h . 0 1 M 9   1 4 h . 0 1 M 1 2   1 4 h . 0 1 M 1 5   1 1 h . 0 1 M 1 2   1 1 h . 0 1 M 9   1 1 h . 0 1 M 7   2 1 h 1 0 a 2   2   0   0 0 2 - 2 V 5 a 2   2   0   0 0 - 2 - 2 H 7 a 2   2   0   0 0 - 2   2 v 1 4 a 2   2   0   0 0 2   2 z " / > < / s v g > 
  
-                                         R e q u e s t   Q u o t e 
  
-                                 < / a > 
+ {% block content %}
  
-                         < / d i v > 
+ <!-- Hero Section - Professional -->
  
-                         < d i v   c l a s s = " m t - 8   f l e x   i t e m s - c e n t e r   g a p - 4 " > 
+ <div class="hero-bg rounded-2xl text-white p-12 mb-12 relative overflow-hidden min-h-[500px] flex items-center">
  
-                                 < d i v   c l a s s = " f l e x   - s p a c e - x - 2 " > 
+         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/60"></div>
  
-                                         < i m g   s r c = " h t t p s : / / i m a g e s . u n s p l a s h . c o m / p h o t o - 1 4 9 4 7 9 0 1 0 8 3 7 7 - b e 9 c 2 9 b 2 9 3 3 0 ? w = 1 0 0 & h = 1 0 0 & f i t = c r o p "   a l t = " C u s t o m e r "   c l a s s = " w - 1 0   h - 1 0   r o u n d e d - f u l l   b o r d e r - 2   b o r d e r - w h i t e " > 
+         <div class="grid md:grid-cols-2 gap-8 items-center relative z-10 w-full">
  
-                                         < i m g   s r c = " h t t p s : / / i m a g e s . u n s p l a s h . c o m / p h o t o - 1 5 0 7 0 0 3 2 1 1 1 6 9 - 0 a 1 d d 7 2 2 8 f 2 d ? w = 1 0 0 & h = 1 0 0 & f i t = c r o p "   a l t = " C u s t o m e r "   c l a s s = " w - 1 0   h - 1 0   r o u n d e d - f u l l   b o r d e r - 2   b o r d e r - w h i t e " > 
+                 <div>
  
-                                         < i m g   s r c = " h t t p s : / / i m a g e s . u n s p l a s h . c o m / p h o t o - 1 4 3 8 7 6 1 6 8 1 0 3 3 - 6 4 6 1 f f a d 8 d 8 0 ? w = 1 0 0 & h = 1 0 0 & f i t = c r o p "   a l t = " C u s t o m e r "   c l a s s = " w - 1 0   h - 1 0   r o u n d e d - f u l l   b o r d e r - 2   b o r d e r - w h i t e " > 
+                         <span class="bg-white/20 backdrop-blur text-sm px-4 py-2 rounded-full mb-4 inline-flex items-center gap-2 font-medium">
  
-                                         < i m g   s r c = " h t t p s : / / i m a g e s . u n s p l a s h . c o m / p h o t o - 1 5 0 0 6 4 8 7 6 7 7 9 1 - 0 0 d c c 9 9 4 a 4 3 e ? w = 1 0 0 & h = 1 0 0 & f i t = c r o p "   a l t = " C u s t o m e r "   c l a s s = " w - 1 0   h - 1 0   r o u n d e d - f u l l   b o r d e r - 2   b o r d e r - w h i t e " > 
+                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
  
-                                 < / d i v > 
+                                 #1 Rated Norway Delivery Service
  
-                                 < d i v > 
+                         </span>
  
-                                         < d i v   c l a s s = " f l e x   t e x t - y e l l o w - 4 0 0   t e x t - s m " > 
+                         <h1 class="text-5xl font-bold mb-4 leading-tight">Enterprise-Grade Parcel Delivery Solutions</h1>
  
-                                                 < s v g   c l a s s = " w - 4   h - 4 "   f i l l = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 0   2 0 " > < p a t h   d = " M 9 . 0 4 9   2 . 9 2 7 c . 3 - . 9 2 1   1 . 6 0 3 - . 9 2 1   1 . 9 0 2   0 l 1 . 0 7   3 . 2 9 2 a 1   1   0   0 0 . 9 5 . 6 9 h 3 . 4 6 2 c . 9 6 9   0   1 . 3 7 1   1 . 2 4 . 5 8 8   1 . 8 1 l - 2 . 8   2 . 0 3 4 a 1   1   0   0 0 - . 3 6 4   1 . 1 1 8 l 1 . 0 7   3 . 2 9 2 c . 3 . 9 2 1 - . 7 5 5   1 . 6 8 8 - 1 . 5 4   1 . 1 1 8 l - 2 . 8 - 2 . 0 3 4 a 1   1   0   0 0 - 1 . 1 7 5   0 l - 2 . 8   2 . 0 3 4 c - . 7 8 4 . 5 7 - 1 . 8 3 8 - . 1 9 7 - 1 . 5 3 9 - 1 . 1 1 8 l 1 . 0 7 - 3 . 2 9 2 a 1   1   0   0 0 - . 3 6 4 - 1 . 1 1 8 L 2 . 9 8   8 . 7 2 c - . 7 8 3 - . 5 7 - . 3 8 - 1 . 8 1 . 5 8 8 - 1 . 8 1 h 3 . 4 6 1 a 1   1   0   0 0 . 9 5 1 - . 6 9 l 1 . 0 7 - 3 . 2 9 2 z " / > < / s v g > 
+                         <p class="text-xl text-blue-100 mb-8">Professional logistics services with real-time GPS tracking. Comprehensive delivery options for businesses and individuals across the Norway.</p>
  
-                                                 < s v g   c l a s s = " w - 4   h - 4 "   f i l l = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 0   2 0 " > < p a t h   d = " M 9 . 0 4 9   2 . 9 2 7 c . 3 - . 9 2 1   1 . 6 0 3 - . 9 2 1   1 . 9 0 2   0 l 1 . 0 7   3 . 2 9 2 a 1   1   0   0 0 . 9 5 . 6 9 h 3 . 4 6 2 c . 9 6 9   0   1 . 3 7 1   1 . 2 4 . 5 8 8   1 . 8 1 l - 2 . 8   2 . 0 3 4 a 1   1   0   0 0 - . 3 6 4   1 . 1 1 8 l 1 . 0 7   3 . 2 9 2 c . 3 . 9 2 1 - . 7 5 5   1 . 6 8 8 - 1 . 5 4   1 . 1 1 8 l - 2 . 8 - 2 . 0 3 4 a 1   1   0   0 0 - 1 . 1 7 5   0 l - 2 . 8   2 . 0 3 4 c - . 7 8 4 . 5 7 - 1 . 8 3 8 - . 1 9 7 - 1 . 5 3 9 - 1 . 1 1 8 l 1 . 0 7 - 3 . 2 9 2 a 1   1   0   0 0 - . 3 6 4 - 1 . 1 1 8 L 2 . 9 8   8 . 7 2 c - . 7 8 3 - . 5 7 - . 3 8 - 1 . 8 1 . 5 8 8 - 1 . 8 1 h 3 . 4 6 1 a 1   1   0   0 0 . 9 5 1 - . 6 9 l 1 . 0 7 - 3 . 2 9 2 z " / > < / s v g > 
+                         <div class="flex flex-wrap gap-4">
  
-                                                 < s v g   c l a s s = " w - 4   h - 4 "   f i l l = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 0   2 0 " > < p a t h   d = " M 9 . 0 4 9   2 . 9 2 7 c . 3 - . 9 2 1   1 . 6 0 3 - . 9 2 1   1 . 9 0 2   0 l 1 . 0 7   3 . 2 9 2 a 1   1   0   0 0 . 9 5 . 6 9 h 3 . 4 6 2 c . 9 6 9   0   1 . 3 7 1   1 . 2 4 . 5 8 8   1 . 8 1 l - 2 . 8   2 . 0 3 4 a 1   1   0   0 0 - . 3 6 4   1 . 1 1 8 l 1 . 0 7   3 . 2 9 2 c . 3 . 9 2 1 - . 7 5 5   1 . 6 8 8 - 1 . 5 4   1 . 1 1 8 l - 2 . 8 - 2 . 0 3 4 a 1   1   0   0 0 - 1 . 1 7 5   0 l - 2 . 8   2 . 0 3 4 c - . 7 8 4 . 5 7 - 1 . 8 3 8 - . 1 9 7 - 1 . 5 3 9 - 1 . 1 1 8 l 1 . 0 7 - 3 . 2 9 2 a 1   1   0   0 0 - . 3 6 4 - 1 . 1 1 8 L 2 . 9 8   8 . 7 2 c - . 7 8 3 - . 5 7 - . 3 8 - 1 . 8 1 . 5 8 8 - 1 . 8 1 h 3 . 4 6 1 a 1   1   0   0 0 . 9 5 1 - . 6 9 l 1 . 0 7 - 3 . 2 9 2 z " / > < / s v g > 
+                                 <a href="{% url 'track' %}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition shadow-lg flex items-center gap-2">
  
-                                                 < s v g   c l a s s = " w - 4   h - 4 "   f i l l = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 0   2 0 " > < p a t h   d = " M 9 . 0 4 9   2 . 9 2 7 c . 3 - . 9 2 1   1 . 6 0 3 - . 9 2 1   1 . 9 0 2   0 l 1 . 0 7   3 . 2 9 2 a 1   1   0   0 0 . 9 5 . 6 9 h 3 . 4 6 2 c . 9 6 9   0   1 . 3 7 1   1 . 2 4 . 5 8 8   1 . 8 1 l - 2 . 8   2 . 0 3 4 a 1   1   0   0 0 - . 3 6 4   1 . 1 1 8 l 1 . 0 7   3 . 2 9 2 c . 3 . 9 2 1 - . 7 5 5   1 . 6 8 8 - 1 . 5 4   1 . 1 1 8 l - 2 . 8 - 2 . 0 3 4 a 1   1   0   0 0 - 1 . 1 7 5   0 l - 2 . 8   2 . 0 3 4 c - . 7 8 4 . 5 7 - 1 . 8 3 8 - . 1 9 7 - 1 . 5 3 9 - 1 . 1 1 8 l 1 . 0 7 - 3 . 2 9 2 a 1   1   0   0 0 - . 3 6 4 - 1 . 1 1 8 L 2 . 9 8   8 . 7 2 c - . 7 8 3 - . 5 7 - . 3 8 - 1 . 8 1 . 5 8 8 - 1 . 8 1 h 3 . 4 6 1 a 1   1   0   0 0 . 9 5 1 - . 6 9 l 1 . 0 7 - 3 . 2 9 2 z " / > < / s v g > 
+                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
  
-                                                 < s v g   c l a s s = " w - 4   h - 4 "   f i l l = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 0   2 0 " > < p a t h   d = " M 9 . 0 4 9   2 . 9 2 7 c . 3 - . 9 2 1   1 . 6 0 3 - . 9 2 1   1 . 9 0 2   0 l 1 . 0 7   3 . 2 9 2 a 1   1   0   0 0 . 9 5 . 6 9 h 3 . 4 6 2 c . 9 6 9   0   1 . 3 7 1   1 . 2 4 . 5 8 8   1 . 8 1 l - 2 . 8   2 . 0 3 4 a 1   1   0   0 0 - . 3 6 4   1 . 1 1 8 l 1 . 0 7   3 . 2 9 2 c . 3 . 9 2 1 - . 7 5 5   1 . 6 8 8 - 1 . 5 4   1 . 1 1 8 l - 2 . 8 - 2 . 0 3 4 a 1   1   0   0 0 - 1 . 1 7 5   0 l - 2 . 8   2 . 0 3 4 c - . 7 8 4 . 5 7 - 1 . 8 3 8 - . 1 9 7 - 1 . 5 3 9 - 1 . 1 1 8 l 1 . 0 7 - 3 . 2 9 2 a 1   1   0   0 0 - . 3 6 4 - 1 . 1 1 8 L 2 . 9 8   8 . 7 2 c - . 7 8 3 - . 5 7 - . 3 8 - 1 . 8 1 . 5 8 8 - 1 . 8 1 h 3 . 4 6 1 a 1   1   0   0 0 . 9 5 1 - . 6 9 l 1 . 0 7 - 3 . 2 9 2 z " / > < / s v g > 
+                                         Track Shipment
  
-                                         < / d i v > 
+                                 </a>
  
-                                         < p   c l a s s = " t e x t - s m   t e x t - b l u e - 1 0 0 " > T r u s t e d   b y   5 0 , 0 0 0 +   c u s t o m e r s < / p > 
+                                 {% if not user.is_authenticated %}
  
-                                 < / d i v > 
+                                         <a href="{% url 'register' %}" class="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">Get Started</a>
  
-                         < / d i v > 
+                                 {% endif %}
  
-                 < / d i v > 
+                                 <a href="{% url 'pricing' %}" class="bg-amber-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-600 transition flex items-center gap-2">
  
-                 < d i v   c l a s s = " h i d d e n   m d : b l o c k " > 
+                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
  
-                         < i m g   s r c = " { %   s t a t i c   ' i m a g e s / h e r o - d e l i v e r y . j p g '   % } "   a l t = " P r o f e s s i o n a l   d e l i v e r y   s e r v i c e s "   c l a s s = " r o u n d e d - l g   s h a d o w - 2 x l " > 
+                                         Request Quote
  
-                 < / d i v > 
+                                 </a>
  
-         < / d i v > 
+                         </div>
  
- < / d i v > 
+                         <div class="mt-8 flex items-center gap-4">
  
+                                 <div class="flex -space-x-2">
  
+                                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Customer" class="w-10 h-10 rounded-full border-2 border-white">
  
- < ! - -   T r u s t   B a d g e s   -   P r o f e s s i o n a l   - - > 
+                                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Customer" class="w-10 h-10 rounded-full border-2 border-white">
  
- < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   s h a d o w - s m   p - 8   m b - 1 2 " > 
+                                         <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="Customer" class="w-10 h-10 rounded-full border-2 border-white">
  
-         < d i v   c l a s s = " g r i d   g r i d - c o l s - 2   m d : g r i d - c o l s - 5   g a p - 6   i t e m s - c e n t e r " > 
+                                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="Customer" class="w-10 h-10 rounded-full border-2 border-white">
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
+                                 </div>
  
-                         < d i v   c l a s s = " b g - b l u e - 5 0   w - 1 2   h - 1 2   r o u n d e d - l g   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 2 " > 
+                                 <div>
  
-                                 < s v g   c l a s s = " w - 6   h - 6   t e x t - b l u e - 6 0 0 "   f i l l = " n o n e "   s t r o k e = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 4   2 4 " > < p a t h   s t r o k e - l i n e c a p = " r o u n d "   s t r o k e - l i n e j o i n = " r o u n d "   s t r o k e - w i d t h = " 2 "   d = " M 9   1 2 l 2   2   4 - 4 m 5 . 6 1 8 - 4 . 0 1 6 A 1 1 . 9 5 5   1 1 . 9 5 5   0   0 1 1 2   2 . 9 4 4 a 1 1 . 9 5 5   1 1 . 9 5 5   0   0 1 - 8 . 6 1 8   3 . 0 4 A 1 2 . 0 2   1 2 . 0 2   0   0 0 3   9 c 0   5 . 5 9 1   3 . 8 2 4   1 0 . 2 9   9   1 1 . 6 2 2   5 . 1 7 6 - 1 . 3 3 2   9 - 6 . 0 3   9 - 1 1 . 6 2 2   0 - 1 . 0 4 2 - . 1 3 3 - 2 . 0 5 2 - . 3 8 2 - 3 . 0 1 6 z " / > < / s v g > 
+                                         <div class="flex text-yellow-400 text-sm">
  
-                         < / d i v > 
+                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
  
-                         < p   c l a s s = " t e x t - x s   f o n t - m e d i u m   t e x t - g r a y - 6 0 0 " > S S L   S e c u r e d < / p > 
+                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
  
-                 < / d i v > 
+                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
+                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
  
-                         < d i v   c l a s s = " b g - b l u e - 5 0   w - 1 2   h - 1 2   r o u n d e d - l g   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 2 " > 
+                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
  
-                                 < s v g   c l a s s = " w - 6   h - 6   t e x t - b l u e - 6 0 0 "   f i l l = " n o n e "   s t r o k e = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 4   2 4 " > < p a t h   s t r o k e - l i n e c a p = " r o u n d "   s t r o k e - l i n e j o i n = " r o u n d "   s t r o k e - w i d t h = " 2 "   d = " M 1 2   1 5 v 2 m - 6   4 h 1 2 a 2   2   0   0 0 2 - 2 v - 6 a 2   2   0   0 0 - 2 - 2 H 6 a 2   2   0   0 0 - 2   2 v 6 a 2   2   0   0 0 2   2 z m 1 0 - 1 0 V 7 a 4   4   0   0 0 - 8   0 v 4 h 8 z " / > < / s v g > 
+                                         </div>
  
-                         < / d i v > 
+                                         <p class="text-sm text-blue-100">Trusted by 50,000+ customers</p>
  
-                         < p   c l a s s = " t e x t - x s   f o n t - m e d i u m   t e x t - g r a y - 6 0 0 " > G D P R   C o m p l i a n t < / p > 
+                                 </div>
  
-                 < / d i v > 
+                         </div>
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
+                 </div>
  
-                         < d i v   c l a s s = " b g - b l u e - 5 0   w - 1 2   h - 1 2   r o u n d e d - l g   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 2 " > 
+                 <div class="hidden md:block">
  
-                                 < s v g   c l a s s = " w - 6   h - 6   t e x t - b l u e - 6 0 0 "   f i l l = " n o n e "   s t r o k e = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 4   2 4 " > < p a t h   s t r o k e - l i n e c a p = " r o u n d "   s t r o k e - l i n e j o i n = " r o u n d "   s t r o k e - w i d t h = " 2 "   d = " M 9   1 2 l 2   2   4 - 4 m 6   2 a 9   9   0   1 1 - 1 8   0   9   9   0   0 1 1 8   0 z " / > < / s v g > 
+                         <img src="{% static 'images/hero-delivery.jpg' %}" alt="Professional delivery services" class="rounded-lg shadow-2xl">
  
-                         < / d i v > 
+                 </div>
  
-                         < p   c l a s s = " t e x t - x s   f o n t - m e d i u m   t e x t - g r a y - 6 0 0 " > I n s u r e d   D e l i v e r y < / p > 
+         </div>
  
-                 < / d i v > 
+ </div>
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
  
-                         < d i v   c l a s s = " b g - b l u e - 5 0   w - 1 2   h - 1 2   r o u n d e d - l g   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 2 " > 
  
-                                 < s v g   c l a s s = " w - 6   h - 6   t e x t - b l u e - 6 0 0 "   f i l l = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 0   2 0 " > < p a t h   d = " M 9 . 0 4 9   2 . 9 2 7 c . 3 - . 9 2 1   1 . 6 0 3 - . 9 2 1   1 . 9 0 2   0 l 1 . 0 7   3 . 2 9 2 a 1   1   0   0 0 . 9 5 . 6 9 h 3 . 4 6 2 c . 9 6 9   0   1 . 3 7 1   1 . 2 4 . 5 8 8   1 . 8 1 l - 2 . 8   2 . 0 3 4 a 1   1   0   0 0 - . 3 6 4   1 . 1 1 8 l 1 . 0 7   3 . 2 9 2 c . 3 . 9 2 1 - . 7 5 5   1 . 6 8 8 - 1 . 5 4   1 . 1 1 8 l - 2 . 8 - 2 . 0 3 4 a 1   1   0   0 0 - 1 . 1 7 5   0 l - 2 . 8   2 . 0 3 4 c - . 7 8 4 . 5 7 - 1 . 8 3 8 - . 1 9 7 - 1 . 5 3 9 - 1 . 1 1 8 l 1 . 0 7 - 3 . 2 9 2 a 1   1   0   0 0 - . 3 6 4 - 1 . 1 1 8 L 2 . 9 8   8 . 7 2 c - . 7 8 3 - . 5 7 - . 3 8 - 1 . 8 1 . 5 8 8 - 1 . 8 1 h 3 . 4 6 1 a 1   1   0   0 0 . 9 5 1 - . 6 9 l 1 . 0 7 - 3 . 2 9 2 z " / > < / s v g > 
+ <!-- Trust Badges - Professional -->
  
-                         < / d i v > 
+ <div class="bg-white rounded-xl shadow-sm p-8 mb-12">
  
-                         < p   c l a s s = " t e x t - x s   f o n t - m e d i u m   t e x t - g r a y - 6 0 0 " > 4 . 9 / 5   R a t i n g < / p > 
+         <div class="grid grid-cols-2 md:grid-cols-5 gap-6 items-center">
  
-                 < / d i v > 
+                 <div class="text-center">
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
+                         <div class="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
  
-                         < d i v   c l a s s = " b g - b l u e - 5 0   w - 1 2   h - 1 2   r o u n d e d - l g   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 2 " > 
+                                 <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
  
-                                 < s v g   c l a s s = " w - 6   h - 6   t e x t - b l u e - 6 0 0 "   f i l l = " n o n e "   s t r o k e = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 4   2 4 " > < p a t h   s t r o k e - l i n e c a p = " r o u n d "   s t r o k e - l i n e j o i n = " r o u n d "   s t r o k e - w i d t h = " 2 "   d = " M 9   1 2 h 6 m - 6   4 h 6 m 2   5 H 7 a 2   2   0   0 1 - 2 - 2 V 5 a 2   2   0   0 1 2 - 2 h 5 . 5 8 6 a 1   1   0   0 1 . 7 0 7 . 2 9 3 l 5 . 4 1 4   5 . 4 1 4 a 1   1   0   0 1 . 2 9 3 . 7 0 7 V 1 9 a 2   2   0   0 1 - 2   2 z " / > < / s v g > 
+                         </div>
  
-                         < / d i v > 
+                         <p class="text-xs font-medium text-gray-600">SSL Secured</p>
  
-                         < p   c l a s s = " t e x t - x s   f o n t - m e d i u m   t e x t - g r a y - 6 0 0 " > I S O   C e r t i f i e d < / p > 
+                 </div>
  
-                 < / d i v > 
+                 <div class="text-center">
  
-         < / d i v > 
+                         <div class="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
  
- < / d i v > 
+                                 <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
  
+                         </div>
  
+                         <p class="text-xs font-medium text-gray-600">GDPR Compliant</p>
  
- < ! - -   T r a c k   P a c k a g e   S e c t i o n   -   P r o f e s s i o n a l   - - > 
+                 </div>
  
- < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - b l u e - 6 0 0   t o - b l u e - 8 0 0   r o u n d e d - x l   p - 8   m b - 1 2   t e x t - w h i t e " > 
+                 <div class="text-center">
  
-         < h 2   c l a s s = " t e x t - 2 x l   f o n t - b o l d   t e x t - w h i t e   m b - 4   f l e x   i t e m s - c e n t e r   g a p - 3 " > 
+                         <div class="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
  
-                 < s v g   c l a s s = " w - 7   h - 7 "   f i l l = " n o n e "   s t r o k e = " c u r r e n t C o l o r "   v i e w B o x = " 0   0   2 4   2 4 " > < p a t h   s t r o k e - l i n e c a p = " r o u n d "   s t r o k e - l i n e j o i n = " r o u n d "   s t r o k e - w i d t h = " 2 "   d = " M 2 1   2 1 l - 6 - 6 m 2 - 5 a 7   7   0   1 1 - 1 4   0   7   7   0   0 1 1 4   0 z " / > < / s v g > 
+                                 <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
  
-                 Q u i c k   T r a c k 
+                         </div>
  
-         < / h 2 > 
+                         <p class="text-xs font-medium text-gray-600">Insured Delivery</p>
  
-         < f o r m   i d = " q u i c k - t r a c k - f o r m "   m e t h o d = " g e t "   a c t i o n = " { %   u r l   ' t r a c k '   % } "   c l a s s = " f l e x   f l e x - c o l   m d : f l e x - r o w   g a p - 4 " > 
+                 </div>
  
-                 < i n p u t   
+                 <div class="text-center">
  
-                         t y p e = " t e x t "   
+                         <div class="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
  
-                         n a m e = " t r a c k i n g _ n u m b e r "   
+                                 <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
  
-                         p l a c e h o l d e r = " E n t e r   t r a c k i n g   n u m b e r   ( e . g . ,   D F X - X X X X X X X X ) "   
+                         </div>
  
-                         c l a s s = " f l e x - 1   p x - 6   p y - 4   r o u n d e d - l g   t e x t - g r a y - 8 0 0   f o c u s : o u t l i n e - n o n e   f o c u s : r i n g - 2   f o c u s : r i n g - b l u e - 4 0 0 " 
+                         <p class="text-xs font-medium text-gray-600">4.9/5 Rating</p>
  
-                         r e q u i r e d 
+                 </div>
  
-                 > 
+                 <div class="text-center">
  
-                 < b u t t o n   t y p e = " s u b m i t "   c l a s s = " b g - a m b e r - 5 0 0   h o v e r : b g - a m b e r - 6 0 0   t e x t - w h i t e   p x - 8   p y - 4   r o u n d e d - l g   f o n t - s e m i b o l d   t r a n s i t i o n   s h a d o w - l g " > 
+                         <div class="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
  
-                         T r a c k   N o w 
+                                 <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
  
-                 < / b u t t o n > 
+                         </div>
  
-         < / f o r m > 
+                         <p class="text-xs font-medium text-gray-600">ISO Certified</p>
  
- < / d i v > 
+                 </div>
  
+         </div>
  
+ </div>
  
- < ! - -   R e m a i n i n g   c o n t e n t   c o n t i n u e s . . .   - - > 
  
- < ! - -   I ' l l   c r e a t e   t h i s   a s   a   c o m p r e h e n s i v e   r e p l a c e m e n t   b u t   k e e p i n g   t h e   s t r u c t u r e   m a n a g e a b l e   - - > 
+ 
+ <!-- Track Package Section - Professional -->
+ 
+ <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-8 mb-12 text-white">
+ 
+         <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+ 
+                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+ 
+                 Quick Track
+ 
+         </h2>
+ 
+         <form id="quick-track-form" method="get" action="{% url 'track' %}" class="flex flex-col md:flex-row gap-4">
+ 
+                 <input
+ 
+                         type="text"
+ 
+                         name="tracking_number"
+ 
+                         placeholder="Enter tracking number (e.g., DFX-XXXXXXXX)"
+ 
+                         class="flex-1 px-6 py-4 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+ 
+                         required
+ 
+                 >
+ 
+                 <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-lg font-semibold transition shadow-lg">
+ 
+                         Track Now
+ 
+                 </button>
+ 
+         </form>
+ 
+ </div>
+ 
+ 
+ 
+ <!-- Remaining content continues... -->
+ 
+ <!-- I'll create this as a comprehensive replacement but keeping the structure manageable -->
  
  
  

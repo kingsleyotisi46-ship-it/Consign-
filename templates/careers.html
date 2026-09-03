@@ -1,607 +1,607 @@
- { %   e x t e n d s   ' b a s e . h t m l '   % } 
+ {% extends 'base.html' %}
  
- { %   l o a d   s t a t i c   % } 
+ {% load static %}
  
  
  
- { %   b l o c k   t i t l e   % } C a r e e r s   -   J o i n   D a i l y F X   D e l i v e r y { %   e n d b l o c k   % } 
+ {% block title %}Careers - Join DailyFX Delivery{% endblock %}
  
  
  
- { %   b l o c k   e x t r a _ h e a d   % } 
+ {% block extra_head %}
  
- < s t y l e > 
+ <style>
  
-         . j o b - c a r d : h o v e r   {   t r a n s f o r m :   t r a n s l a t e Y ( - 5 p x ) ;   b o x - s h a d o w :   0   2 5 p x   5 0 p x   - 1 2 p x   r g b a ( 0 ,   0 ,   0 ,   0 . 1 5 ) ;   } 
+         .job-card:hover { transform: translateY(-5px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); }
  
-         . j o b - c a r d   {   t r a n s i t i o n :   a l l   0 . 3 s   e a s e ;   } 
+         .job-card { transition: all 0.3s ease; }
  
- < / s t y l e > 
+ </style>
  
- { %   e n d b l o c k   % } 
+ {% endblock %}
  
  
  
- { %   b l o c k   c o n t e n t   % } 
+ {% block content %}
  
- < ! - -   H e r o   S e c t i o n   - - > 
+ <!-- Hero Section -->
  
- < d i v   c l a s s = " r e l a t i v e   r o u n d e d - 2 x l   o v e r f l o w - h i d d e n   m b - 1 2 " > 
+ <div class="relative rounded-2xl overflow-hidden mb-12">
  
-         < i m g   s r c = " { %   s t a t i c   ' i m a g e s / c a r e e r - o f f i c e . j p g '   % } "   a l t = " T e a m "   c l a s s = " w - f u l l   h - [ 4 5 0 p x ]   o b j e c t - c o v e r " > 
+         <img src="{% static 'images/career-office.jpg' %}" alt="Team" class="w-full h-[450px] object-cover">
  
-         < d i v   c l a s s = " a b s o l u t e   i n s e t - 0   b g - g r a d i e n t - t o - r   f r o m - i n d i g o - 9 0 0 / 9 0   t o - p u r p l e - 9 0 0 / 7 0   f l e x   i t e m s - c e n t e r " > 
+         <div class="absolute inset-0 bg-gradient-to-r from-indigo-900/90 to-purple-900/70 flex items-center">
  
-                 < d i v   c l a s s = " p x - 1 2   m a x - w - 3 x l " > 
+                 <div class="px-12 max-w-3xl">
  
-                         < h 1   c l a s s = " t e x t - 5 x l   f o n t - b o l d   t e x t - w h i t e   m b - 4 " > J o i n   O u r   T e a m < / h 1 > 
+                         <h1 class="text-5xl font-bold text-white mb-4">Join Our Team</h1>
  
-                         < p   c l a s s = " t e x t - x l   t e x t - i n d i g o - 1 0 0   m b - 6 " > B e   p a r t   o f   t h e   N o r w a y ' s   f a s t e s t - g r o w i n g   d e l i v e r y   n e t w o r k .   W e ' r e   l o o k i n g   f o r   p a s s i o n a t e   p e o p l e   t o   h e l p   u s   r e v o l u t i o n i z e   l o g i s t i c s . < / p > 
+                         <p class="text-xl text-indigo-100 mb-6">Be part of the Norway's fastest-growing delivery network. We're looking for passionate people to help us revolutionize logistics.</p>
  
-                         < a   h r e f = " # o p e n i n g s "   c l a s s = " i n l i n e - b l o c k   b g - w h i t e   t e x t - i n d i g o - 6 0 0   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - i n d i g o - 5 0   t r a n s i t i o n " > 
+                         <a href="#openings" class="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition">
  
-                                 V i e w   O p e n   P o s i t i o n s   → 
+                                 View Open Positions →
  
-                         < / a > 
+                         </a>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   W h y   J o i n   U s   - - > 
+ <!-- Why Join Us -->
  
- < d i v   c l a s s = " m b - 1 6 " > 
+ <div class="mb-16">
  
-         < d i v   c l a s s = " t e x t - c e n t e r   m b - 1 2 " > 
+         <div class="text-center mb-12">
  
-                 < h 2   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 4 " > W h y   W o r k   a t   D a i l y F X   D e l i v e r y ? < / h 2 > 
+                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Why Work at DailyFX Delivery?</h2>
  
-                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m a x - w - 2 x l   m x - a u t o " > W e ' r e   m o r e   t h a n   j u s t   a   d e l i v e r y   c o m p a n y   –   w e ' r e   a   t e c h n o l o g y - d r i v e n   t e a m   s h a p i n g   t h e   f u t u r e   o f   l o g i s t i c s . < / p > 
+                 <p class="text-gray-600 max-w-2xl mx-auto">We're more than just a delivery company – we're a technology-driven team shaping the future of logistics.</p>
  
-         < / d i v > 
+         </div>
  
  
  
-         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 4   g a p - 8 " > 
+         <div class="grid md:grid-cols-4 gap-8">
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
+                 <div class="text-center">
  
-                         < d i v   c l a s s = " w - 2 0   h - 2 0   b g - i n d i g o - 1 0 0   r o u n d e d - 2 x l   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 4 " > 
+                         <div class="w-20 h-20 bg-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
  
-                                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - 3 d - f l u e n c y - 9 4 - m o n e y - b a g . s v g '   % } "   a l t = " P a y "   c l a s s = " w - 1 2   h - 1 2 " > 
+                                 <img src="{% static 'icons/icons8-3d-fluency-94-money-bag.svg' %}" alt="Pay" class="w-12 h-12">
  
-                         < / d i v > 
+                         </div>
  
-                         < h 3   c l a s s = " f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 2 " > C o m p e t i t i v e   P a y < / h 3 > 
+                         <h3 class="font-bold text-gray-800 mb-2">Competitive Pay</h3>
  
-                         < p   c l a s s = " t e x t - g r a y - 6 0 0   t e x t - s m " > A b o v e - m a r k e t   s a l a r i e s   w i t h   p e r f o r m a n c e   b o n u s e s   a n d   a n n u a l   r e v i e w s < / p > 
+                         <p class="text-gray-600 text-sm">Above-market salaries with performance bonuses and annual reviews</p>
  
-                 < / d i v > 
+                 </div>
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
+                 <div class="text-center">
  
-                         < d i v   c l a s s = " w - 2 0   h - 2 0   b g - g r e e n - 1 0 0   r o u n d e d - 2 x l   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 4 " > 
+                         <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
  
-                                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - 3 d - f l u e n c y - 9 4 - h o s p i t a l . s v g '   % } "   a l t = " B e n e f i t s "   c l a s s = " w - 1 2   h - 1 2 " > 
+                                 <img src="{% static 'icons/icons8-3d-fluency-94-hospital.svg' %}" alt="Benefits" class="w-12 h-12">
  
-                         < / d i v > 
+                         </div>
  
-                         < h 3   c l a s s = " f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 2 " > G r e a t   B e n e f i t s < / h 3 > 
+                         <h3 class="font-bold text-gray-800 mb-2">Great Benefits</h3>
  
-                         < p   c l a s s = " t e x t - g r a y - 6 0 0   t e x t - s m " > H e a l t h   i n s u r a n c e ,   p e n s i o n   c o n t r i b u t i o n s ,   a n d   e m p l o y e e   d i s c o u n t s < / p > 
+                         <p class="text-gray-600 text-sm">Health insurance, pension contributions, and employee discounts</p>
  
-                 < / d i v > 
+                 </div>
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
+                 <div class="text-center">
  
-                         < d i v   c l a s s = " w - 2 0   h - 2 0   b g - p u r p l e - 1 0 0   r o u n d e d - 2 x l   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 4 " > 
+                         <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
  
-                                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - 3 d - f l u e n c y - 9 4 - c a r e e r . s v g '   % } "   a l t = " G r o w t h "   c l a s s = " w - 1 2   h - 1 2 " > 
+                                 <img src="{% static 'icons/icons8-3d-fluency-94-career.svg' %}" alt="Growth" class="w-12 h-12">
  
-                         < / d i v > 
+                         </div>
  
-                         < h 3   c l a s s = " f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 2 " > C a r e e r   G r o w t h < / h 3 > 
+                         <h3 class="font-bold text-gray-800 mb-2">Career Growth</h3>
  
-                         < p   c l a s s = " t e x t - g r a y - 6 0 0   t e x t - s m " > T r a i n i n g   p r o g r a m s ,   p r o m o t i o n s   f r o m   w i t h i n ,   a n d   c l e a r   p r o g r e s s i o n   p a t h s < / p > 
+                         <p class="text-gray-600 text-sm">Training programs, promotions from within, and clear progression paths</p>
  
-                 < / d i v > 
+                 </div>
  
-                 < d i v   c l a s s = " t e x t - c e n t e r " > 
+                 <div class="text-center">
  
-                         < d i v   c l a s s = " w - 2 0   h - 2 0   b g - b l u e - 1 0 0   r o u n d e d - 2 x l   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   m x - a u t o   m b - 4 " > 
+                         <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
  
-                                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - 3 d - f l u e n c y - 9 4 - g l o b e . s v g '   % } "   a l t = " C u l t u r e "   c l a s s = " w - 1 2   h - 1 2 " > 
+                                 <img src="{% static 'icons/icons8-3d-fluency-94-globe.svg' %}" alt="Culture" class="w-12 h-12">
  
-                         < / d i v > 
+                         </div>
  
-                         < h 3   c l a s s = " f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 2 " > I n c l u s i v e   C u l t u r e < / h 3 > 
+                         <h3 class="font-bold text-gray-800 mb-2">Inclusive Culture</h3>
  
-                         < p   c l a s s = " t e x t - g r a y - 6 0 0   t e x t - s m " > D i v e r s e ,   s u p p o r t i v e   t e a m   w i t h   r e g u l a r   s o c i a l   e v e n t s   a n d   t e a m   b u i l d i n g < / p > 
+                         <p class="text-gray-600 text-sm">Diverse, supportive team with regular social events and team building</p>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   S t a t s   - - > 
+ <!-- Stats -->
  
- < d i v   c l a s s = " b g - g r a d i e n t - t o - r   f r o m - i n d i g o - 6 0 0   t o - p u r p l e - 6 0 0   r o u n d e d - 2 x l   p - 1 2   m b - 1 6   t e x t - w h i t e " > 
+ <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-12 mb-16 text-white">
  
-         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 4   g a p - 8   t e x t - c e n t e r " > 
+         <div class="grid md:grid-cols-4 gap-8 text-center">
  
-                 < d i v > 
+                 <div>
  
-                         < p   c l a s s = " t e x t - 5 x l   f o n t - b o l d   m b - 2 " > 7 5 0 + < / p > 
+                         <p class="text-5xl font-bold mb-2">750+</p>
  
-                         < p   c l a s s = " t e x t - i n d i g o - 2 0 0 " > T e a m   M e m b e r s < / p > 
+                         <p class="text-indigo-200">Team Members</p>
  
-                 < / d i v > 
+                 </div>
  
-                 < d i v > 
+                 <div>
  
-                         < p   c l a s s = " t e x t - 5 x l   f o n t - b o l d   m b - 2 " > 2 5 < / p > 
+                         <p class="text-5xl font-bold mb-2">25</p>
  
-                         < p   c l a s s = " t e x t - i n d i g o - 2 0 0 " > N o r w a y   L o c a t i o n s < / p > 
+                         <p class="text-indigo-200">Norway Locations</p>
  
-                 < / d i v > 
+                 </div>
  
-                 < d i v > 
+                 <div>
  
-                         < p   c l a s s = " t e x t - 5 x l   f o n t - b o l d   m b - 2 " > 4 . 7 ★ < / p > 
+                         <p class="text-5xl font-bold mb-2">4.7★</p>
  
-                         < p   c l a s s = " t e x t - i n d i g o - 2 0 0 " > G l a s s d o o r   R a t i n g < / p > 
+                         <p class="text-indigo-200">Glassdoor Rating</p>
  
-                 < / d i v > 
+                 </div>
  
-                 < d i v > 
+                 <div>
  
-                         < p   c l a s s = " t e x t - 5 x l   f o n t - b o l d   m b - 2 " > 9 2 % < / p > 
+                         <p class="text-5xl font-bold mb-2">92%</p>
  
-                         < p   c l a s s = " t e x t - i n d i g o - 2 0 0 " > E m p l o y e e   S a t i s f a c t i o n < / p > 
+                         <p class="text-indigo-200">Employee Satisfaction</p>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   O p e n   P o s i t i o n s   - - > 
+ <!-- Open Positions -->
  
- < d i v   i d = " o p e n i n g s "   c l a s s = " m b - 1 6 " > 
+ <div id="openings" class="mb-16">
  
-         < d i v   c l a s s = " t e x t - c e n t e r   m b - 1 2 " > 
+         <div class="text-center mb-12">
  
-                 < h 2   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 4 " > O p e n   P o s i t i o n s < / h 2 > 
+                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Open Positions</h2>
  
-                 < p   c l a s s = " t e x t - g r a y - 6 0 0 " > F i n d   y o u r   p e r f e c t   r o l e   a t   D a i l y F X   D e l i v e r y < / p > 
+                 <p class="text-gray-600">Find your perfect role at DailyFX Delivery</p>
  
-         < / d i v > 
+         </div>
  
  
  
-         < ! - -   D r i v e r   P o s i t i o n s   - - > 
+         <!-- Driver Positions -->
  
-         < d i v   c l a s s = " m b - 1 2 " > 
+         <div class="mb-12">
  
-                 < h 3   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 6   f l e x   i t e m s - c e n t e r   g a p - 3 " > 
+                 <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - 3 d - f l u e n c y - 9 4 - d r i v e r . s v g '   % } "   a l t = " D r i v e r "   c l a s s = " w - 1 0   h - 1 0 " > 
+                         <img src="{% static 'icons/icons8-3d-fluency-94-driver.svg' %}" alt="Driver" class="w-10 h-10">
  
-                         D r i v e r   P o s i t i o n s 
+                         Driver Positions
  
-                 < / h 3 > 
+                 </h3>
  
-                 < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 6 " > 
+                 <div class="grid md:grid-cols-2 gap-6">
  
-                         < d i v   c l a s s = " j o b - c a r d   b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                         <div class="job-card bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t   m b - 4 " > 
+                                 <div class="flex justify-between items-start mb-4">
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < h 4   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r a y - 8 0 0 " > M u l t i - D r o p   D e l i v e r y   D r i v e r < / h 4 > 
+                                                 <h4 class="text-lg font-bold text-gray-800">Multi-Drop Delivery Driver</h4>
  
-                                                 < p   c l a s s = " t e x t - g r a y - 5 0 0 " > M u l t i p l e   L o c a t i o n s < / p > 
+                                                 <p class="text-gray-500">Multiple Locations</p>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < s p a n   c l a s s = " b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0   p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > F u l l - t i m e < / s p a n > 
+                                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Full-time</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m b - 4 " > J o i n   o u r   f l e e t   o f   d r i v e r s   d e l i v e r i n g   p a r c e l s   a c r o s s   y o u r   l o c a l   a r e a .   C o m p e t i t i v e   d a i l y   r a t e s   w i t h   p e r f o r m a n c e   b o n u s e s . < / p > 
+                                 <p class="text-gray-600 mb-4">Join our fleet of drivers delivering parcels across your local area. Competitive daily rates with performance bonuses.</p>
  
-                                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 2   m b - 4 " > 
+                                 <div class="flex flex-wrap gap-2 mb-4">
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > £ 1 4 - 1 8 / h r < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">£14-18/hr</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > V a n   p r o v i d e d < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Van provided</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > F u e l   c a r d < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Fuel card</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e " > A p p l y   N o w   → < / a > 
+                                 <a href="{% url 'contact' %}" class="text-indigo-600 font-semibold hover:underline">Apply Now →</a>
  
-                         < / d i v > 
+                         </div>
  
-                         < d i v   c l a s s = " j o b - c a r d   b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                         <div class="job-card bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t   m b - 4 " > 
+                                 <div class="flex justify-between items-start mb-4">
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < h 4   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r a y - 8 0 0 " > O w n e r   D r i v e r   ( S e l f - E m p l o y e d ) < / h 4 > 
+                                                 <h4 class="text-lg font-bold text-gray-800">Owner Driver (Self-Employed)</h4>
  
-                                                 < p   c l a s s = " t e x t - g r a y - 5 0 0 " > N a t i o n w i d e < / p > 
+                                                 <p class="text-gray-500">Nationwide</p>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < s p a n   c l a s s = " b g - b l u e - 1 0 0   t e x t - b l u e - 7 0 0   p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > C o n t r a c t < / s p a n > 
+                                         <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">Contract</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m b - 4 " > U s e   y o u r   o w n   v a n   t o   d e l i v e r   w i t h   D a i l y F X   D e l i v e r y .   F l e x i b l e   h o u r s ,   g r e a t   e a r n i n g   p o t e n t i a l ,   a n d   c o n s i s t e n t   w o r k . < / p > 
+                                 <p class="text-gray-600 mb-4">Use your own van to deliver with DailyFX Delivery. Flexible hours, great earning potential, and consistent work.</p>
  
-                                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 2   m b - 4 " > 
+                                 <div class="flex flex-wrap gap-2 mb-4">
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > £ 1 5 0 - 2 5 0 / d a y < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">£150-250/day</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > O w n   v a n < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Own van</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > F l e x i b l e < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Flexible</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e " > A p p l y   N o w   → < / a > 
+                                 <a href="{% url 'contact' %}" class="text-indigo-600 font-semibold hover:underline">Apply Now →</a>
  
-                         < / d i v > 
+                         </div>
  
-                         < d i v   c l a s s = " j o b - c a r d   b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                         <div class="job-card bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t   m b - 4 " > 
+                                 <div class="flex justify-between items-start mb-4">
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < h 4   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r a y - 8 0 0 " > H G V   D r i v e r   ( C l a s s   2 ) < / h 4 > 
+                                                 <h4 class="text-lg font-bold text-gray-800">HGV Driver (Class 2)</h4>
  
-                                                 < p   c l a s s = " t e x t - g r a y - 5 0 0 " > B i r m i n g h a m ,   M a n c h e s t e r ,   L o n d o n < / p > 
+                                                 <p class="text-gray-500">Birmingham, Manchester, London</p>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < s p a n   c l a s s = " b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0   p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > F u l l - t i m e < / s p a n > 
+                                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Full-time</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m b - 4 " > D r i v e   o u r   1 8 - t o n n e   t r u c k s   f o r   i n t e r - d e p o t   t r a n s f e r s .   R e g u l a r   r o u t e s   w i t h   h o m e   t i m e   g u a r a n t e e d . < / p > 
+                                 <p class="text-gray-600 mb-4">Drive our 18-tonne trucks for inter-depot transfers. Regular routes with home time guaranteed.</p>
  
-                                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 2   m b - 4 " > 
+                                 <div class="flex flex-wrap gap-2 mb-4">
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > £ 3 8 - 4 5 K < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">£38-45K</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > C l a s s   2   C P C < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Class 2 CPC</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > D a y   s h i f t s < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Day shifts</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e " > A p p l y   N o w   → < / a > 
+                                 <a href="{% url 'contact' %}" class="text-indigo-600 font-semibold hover:underline">Apply Now →</a>
  
-                         < / d i v > 
+                         </div>
  
-                         < d i v   c l a s s = " j o b - c a r d   b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                         <div class="job-card bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t   m b - 4 " > 
+                                 <div class="flex justify-between items-start mb-4">
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < h 4   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r a y - 8 0 0 " > M o t o r c y c l e   C o u r i e r < / h 4 > 
+                                                 <h4 class="text-lg font-bold text-gray-800">Motorcycle Courier</h4>
  
-                                                 < p   c l a s s = " t e x t - g r a y - 5 0 0 " > L o n d o n ,   M a n c h e s t e r < / p > 
+                                                 <p class="text-gray-500">London, Manchester</p>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < s p a n   c l a s s = " b g - p u r p l e - 1 0 0   t e x t - p u r p l e - 7 0 0   p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > P a r t - t i m e < / s p a n > 
+                                         <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-semibold">Part-time</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m b - 4 " > F a s t - p a c e d   s a m e - d a y   d e l i v e r i e s   i n   c i t y   c e n t r e s .   M u s t   h a v e   o w n   m o t o r c y c l e   a n d   f u l l   l i c e n c e . < / p > 
+                                 <p class="text-gray-600 mb-4">Fast-paced same-day deliveries in city centres. Must have own motorcycle and full licence.</p>
  
-                                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 2   m b - 4 " > 
+                                 <div class="flex flex-wrap gap-2 mb-4">
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > £ 1 2 - 2 0 / h r < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">£12-20/hr</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > O w n   b i k e < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Own bike</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > T i p s < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Tips</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e " > A p p l y   N o w   → < / a > 
+                                 <a href="{% url 'contact' %}" class="text-indigo-600 font-semibold hover:underline">Apply Now →</a>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
  
  
-         < ! - -   W a r e h o u s e   P o s i t i o n s   - - > 
+         <!-- Warehouse Positions -->
  
-         < d i v   c l a s s = " m b - 1 2 " > 
+         <div class="mb-12">
  
-                 < h 3   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 6   f l e x   i t e m s - c e n t e r   g a p - 3 " > 
+                 <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - 3 d - f l u e n c y - 9 4 - w a r e h o u s e . s v g '   % } "   a l t = " W a r e h o u s e "   c l a s s = " w - 1 0   h - 1 0 " > 
+                         <img src="{% static 'icons/icons8-3d-fluency-94-warehouse.svg' %}" alt="Warehouse" class="w-10 h-10">
  
-                         W a r e h o u s e   &   O p e r a t i o n s 
+                         Warehouse & Operations
  
-                 < / h 3 > 
+                 </h3>
  
-                 < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 6 " > 
+                 <div class="grid md:grid-cols-2 gap-6">
  
-                         < d i v   c l a s s = " j o b - c a r d   b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                         <div class="job-card bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t   m b - 4 " > 
+                                 <div class="flex justify-between items-start mb-4">
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < h 4   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r a y - 8 0 0 " > W a r e h o u s e   O p e r a t i v e < / h 4 > 
+                                                 <h4 class="text-lg font-bold text-gray-800">Warehouse Operative</h4>
  
-                                                 < p   c l a s s = " t e x t - g r a y - 5 0 0 " > M u l t i p l e   N o r w a y   D e p o t s < / p > 
+                                                 <p class="text-gray-500">Multiple Norway Depots</p>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < s p a n   c l a s s = " b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0   p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > F u l l - t i m e < / s p a n > 
+                                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Full-time</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m b - 4 " > S o r t ,   s c a n ,   a n d   l o a d   p a r c e l s   i n   o u r   m o d e r n   d i s t r i b u t i o n   c e n t r e s .   V a r i o u s   s h i f t s   a v a i l a b l e . < / p > 
+                                 <p class="text-gray-600 mb-4">Sort, scan, and load parcels in our modern distribution centres. Various shifts available.</p>
  
-                                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 2   m b - 4 " > 
+                                 <div class="flex flex-wrap gap-2 mb-4">
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > £ 1 1 . 5 0 - 1 3 / h r < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">£11.50-13/hr</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > S h i f t s < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Shifts</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > T r a i n i n g < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Training</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e " > A p p l y   N o w   → < / a > 
+                                 <a href="{% url 'contact' %}" class="text-indigo-600 font-semibold hover:underline">Apply Now →</a>
  
-                         < / d i v > 
+                         </div>
  
-                         < d i v   c l a s s = " j o b - c a r d   b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                         <div class="job-card bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t   m b - 4 " > 
+                                 <div class="flex justify-between items-start mb-4">
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < h 4   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r a y - 8 0 0 " > D e p o t   M a n a g e r < / h 4 > 
+                                                 <h4 class="text-lg font-bold text-gray-800">Depot Manager</h4>
  
-                                                 < p   c l a s s = " t e x t - g r a y - 5 0 0 " > B r i s t o l ,   L e e d s ,   G l a s g o w < / p > 
+                                                 <p class="text-gray-500">Bristol, Leeds, Glasgow</p>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < s p a n   c l a s s = " b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0   p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > F u l l - t i m e < / s p a n > 
+                                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Full-time</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m b - 4 " > L e a d   d a i l y   o p e r a t i o n s   a t   o n e   o f   o u r   r e g i o n a l   h u b s .   M a n a g e   t e a m   o f   2 0 - 5 0   s t a f f . < / p > 
+                                 <p class="text-gray-600 mb-4">Lead daily operations at one of our regional hubs. Manage team of 20-50 staff.</p>
  
-                                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 2   m b - 4 " > 
+                                 <div class="flex flex-wrap gap-2 mb-4">
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > £ 4 5 - 5 5 K < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">£45-55K</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > B o n u s < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Bonus</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > C a r < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Car</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e " > A p p l y   N o w   → < / a > 
+                                 <a href="{% url 'contact' %}" class="text-indigo-600 font-semibold hover:underline">Apply Now →</a>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
  
  
-         < ! - -   O f f i c e   P o s i t i o n s   - - > 
+         <!-- Office Positions -->
  
-         < d i v > 
+         <div>
  
-                 < h 3   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 6   f l e x   i t e m s - c e n t e r   g a p - 3 " > 
+                 <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - 3 d - f l u e n c y - 9 4 - l a p t o p . s v g '   % } "   a l t = " O f f i c e "   c l a s s = " w - 1 0   h - 1 0 " > 
+                         <img src="{% static 'icons/icons8-3d-fluency-94-laptop.svg' %}" alt="Office" class="w-10 h-10">
  
-                         O f f i c e   &   T e c h n o l o g y 
+                         Office & Technology
  
-                 < / h 3 > 
+                 </h3>
  
-                 < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 6 " > 
+                 <div class="grid md:grid-cols-2 gap-6">
  
-                         < d i v   c l a s s = " j o b - c a r d   b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                         <div class="job-card bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t   m b - 4 " > 
+                                 <div class="flex justify-between items-start mb-4">
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < h 4   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r a y - 8 0 0 " > C u s t o m e r   S e r v i c e   A d v i s o r < / h 4 > 
+                                                 <h4 class="text-lg font-bold text-gray-800">Customer Service Advisor</h4>
  
-                                                 < p   c l a s s = " t e x t - g r a y - 5 0 0 " > L o n d o n   ( H y b r i d ) < / p > 
+                                                 <p class="text-gray-500">London (Hybrid)</p>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < s p a n   c l a s s = " b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0   p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > F u l l - t i m e < / s p a n > 
+                                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Full-time</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m b - 4 " > H e l p   c u s t o m e r s   t r a c k   p a r c e l s ,   r e s o l v e   i s s u e s ,   a n d   p r o v i d e   e x c e l l e n t   s e r v i c e   v i a   p h o n e ,   e m a i l ,   a n d   c h a t . < / p > 
+                                 <p class="text-gray-600 mb-4">Help customers track parcels, resolve issues, and provide excellent service via phone, email, and chat.</p>
  
-                                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 2   m b - 4 " > 
+                                 <div class="flex flex-wrap gap-2 mb-4">
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > £ 2 4 - 2 8 K < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">£24-28K</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > H y b r i d < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Hybrid</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > B e n e f i t s < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Benefits</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e " > A p p l y   N o w   → < / a > 
+                                 <a href="{% url 'contact' %}" class="text-indigo-600 font-semibold hover:underline">Apply Now →</a>
  
-                         < / d i v > 
+                         </div>
  
-                         < d i v   c l a s s = " j o b - c a r d   b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                         <div class="job-card bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t   m b - 4 " > 
+                                 <div class="flex justify-between items-start mb-4">
  
-                                         < d i v > 
+                                         <div>
  
-                                                 < h 4   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r a y - 8 0 0 " > S o f t w a r e   E n g i n e e r   ( P y t h o n / D j a n g o ) < / h 4 > 
+                                                 <h4 class="text-lg font-bold text-gray-800">Software Engineer (Python/Django)</h4>
  
-                                                 < p   c l a s s = " t e x t - g r a y - 5 0 0 " > L o n d o n   ( R e m o t e   O K ) < / p > 
+                                                 <p class="text-gray-500">London (Remote OK)</p>
  
-                                         < / d i v > 
+                                         </div>
  
-                                         < s p a n   c l a s s = " b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0   p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d " > F u l l - t i m e < / s p a n > 
+                                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Full-time</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < p   c l a s s = " t e x t - g r a y - 6 0 0   m b - 4 " > B u i l d   f e a t u r e s   f o r   o u r   t r a c k i n g   p l a t f o r m ,   d r i v e r   a p p ,   a n d   i n t e r n a l   t o o l s .   M o d e r n   s t a c k ,   a g i l e   t e a m . < / p > 
+                                 <p class="text-gray-600 mb-4">Build features for our tracking platform, driver app, and internal tools. Modern stack, agile team.</p>
  
-                                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 2   m b - 4 " > 
+                                 <div class="flex flex-wrap gap-2 mb-4">
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > £ 5 5 - 7 5 K < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">£55-75K</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > R e m o t e < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Remote</span>
  
-                                         < s p a n   c l a s s = " b g - g r a y - 1 0 0   t e x t - g r a y - 6 0 0   p x - 2   p y - 1   r o u n d e d   t e x t - s m " > E q u i t y < / s p a n > 
+                                         <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">Equity</span>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e " > A p p l y   N o w   → < / a > 
+                                 <a href="{% url 'contact' %}" class="text-indigo-600 font-semibold hover:underline">Apply Now →</a>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   E m p l o y e e   T e s t i m o n i a l s   - - > 
+ <!-- Employee Testimonials -->
  
- < d i v   c l a s s = " m b - 1 6 " > 
+ <div class="mb-16">
  
-         < d i v   c l a s s = " t e x t - c e n t e r   m b - 1 2 " > 
+         <div class="text-center mb-12">
  
-                 < h 2   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 4 " > W h a t   O u r   T e a m   S a y s < / h 2 > 
+                 <h2 class="text-3xl font-bold text-gray-800 mb-4">What Our Team Says</h2>
  
-         < / d i v > 
+         </div>
  
  
  
-         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 3   g a p - 8 " > 
+         <div class="grid md:grid-cols-3 gap-8">
  
-                 < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                 <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                         < d i v   c l a s s = " f l e x   i t e m s - c e n t e r   g a p - 4   m b - 4 " > 
+                         <div class="flex items-center gap-4 mb-4">
  
-                                 < i m g   s r c = " { %   s t a t i c   ' i m a g e s / t e a m - o p e r a t i o n s . j p g '   % } "   a l t = " E m p l o y e e "   c l a s s = " w - 1 4   h - 1 4   r o u n d e d - f u l l   o b j e c t - c o v e r " > 
+                                 <img src="{% static 'images/team-operations.jpg' %}" alt="Employee" class="w-14 h-14 rounded-full object-cover">
  
-                                 < d i v > 
+                                 <div>
  
-                                         < p   c l a s s = " f o n t - b o l d   t e x t - g r a y - 8 0 0 " > M a r c u s   T h o m p s o n < / p > 
+                                         <p class="font-bold text-gray-800">Marcus Thompson</p>
  
-                                         < p   c l a s s = " t e x t - g r a y - 5 0 0   t e x t - s m " > D e l i v e r y   D r i v e r ,   2   y e a r s < / p > 
+                                         <p class="text-gray-500 text-sm">Delivery Driver, 2 years</p>
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                         </div>
  
-                         < p   c l a s s = " t e x t - g r a y - 6 0 0   i t a l i c " > " B e s t   d r i v i n g   j o b   I ' v e   h a d .   T h e   r o u t e s   a r e   w e l l   p l a n n e d ,   t h e   v a n   i s   r e l i a b l e ,   a n d   t h e   s u p p o r t   t e a m   a c t u a l l y   h e l p s   w h e n   y o u   n e e d   t h e m .   P a y   i s   g o o d   t o o ! " < / p > 
+                         <p class="text-gray-600 italic">"Best driving job I've had. The routes are well planned, the van is reliable, and the support team actually helps when you need them. Pay is good too!"</p>
  
-                 < / d i v > 
+                 </div>
  
-                 < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                 <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                         < d i v   c l a s s = " f l e x   i t e m s - c e n t e r   g a p - 4   m b - 4 " > 
+                         <div class="flex items-center gap-4 mb-4">
  
-                                 < i m g   s r c = " { %   s t a t i c   ' i m a g e s / t e a m - c e o . j p g '   % } "   a l t = " E m p l o y e e "   c l a s s = " w - 1 4   h - 1 4   r o u n d e d - f u l l   o b j e c t - c o v e r " > 
+                                 <img src="{% static 'images/team-ceo.jpg' %}" alt="Employee" class="w-14 h-14 rounded-full object-cover">
  
-                                 < d i v > 
+                                 <div>
  
-                                         < p   c l a s s = " f o n t - b o l d   t e x t - g r a y - 8 0 0 " > P r i y a   S h a r m a < / p > 
+                                         <p class="font-bold text-gray-800">Priya Sharma</p>
  
-                                         < p   c l a s s = " t e x t - g r a y - 5 0 0   t e x t - s m " > S o f t w a r e   E n g i n e e r ,   1   y e a r < / p > 
+                                         <p class="text-gray-500 text-sm">Software Engineer, 1 year</p>
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                         </div>
  
-                         < p   c l a s s = " t e x t - g r a y - 6 0 0   i t a l i c " > " T h e   e n g i n e e r i n g   c u l t u r e   h e r e   i s   f a n t a s t i c .   W e   s h i p   f a s t ,   i t e r a t e   q u i c k l y ,   a n d   a c t u a l l y   s e e   o u r   c o d e   m a k i n g   r e a l   i m p a c t   o n   m i l l i o n s   o f   d e l i v e r i e s . " < / p > 
+                         <p class="text-gray-600 italic">"The engineering culture here is fantastic. We ship fast, iterate quickly, and actually see our code making real impact on millions of deliveries."</p>
  
-                 < / d i v > 
+                 </div>
  
-                 < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r a y - 2 0 0   s h a d o w - l g " > 
+                 <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
  
-                         < d i v   c l a s s = " f l e x   i t e m s - c e n t e r   g a p - 4   m b - 4 " > 
+                         <div class="flex items-center gap-4 mb-4">
  
-                                 < i m g   s r c = " { %   s t a t i c   ' i m a g e s / t e a m - f l e e t . j p g '   % } "   a l t = " E m p l o y e e "   c l a s s = " w - 1 4   h - 1 4   r o u n d e d - f u l l   o b j e c t - c o v e r " > 
+                                 <img src="{% static 'images/team-fleet.jpg' %}" alt="Employee" class="w-14 h-14 rounded-full object-cover">
  
-                                 < d i v > 
+                                 <div>
  
-                                         < p   c l a s s = " f o n t - b o l d   t e x t - g r a y - 8 0 0 " > J a m e s   O ' B r i e n < / p > 
+                                         <p class="font-bold text-gray-800">James O'Brien</p>
  
-                                         < p   c l a s s = " t e x t - g r a y - 5 0 0   t e x t - s m " > D e p o t   M a n a g e r ,   3   y e a r s < / p > 
+                                         <p class="text-gray-500 text-sm">Depot Manager, 3 years</p>
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                         </div>
  
-                         < p   c l a s s = " t e x t - g r a y - 6 0 0   i t a l i c " > " S t a r t e d   a s   a   w a r e h o u s e   o p e r a t i v e   a n d   w o r k e d   m y   w a y   u p .   D a i l y F X   D e l i v e r y   g e n u i n e l y   i n v e s t s   i n   p e o p l e   w h o   s h o w   i n i t i a t i v e .   T h e   t r a i n i n g   p r o g r a m s   a r e   e x c e l l e n t . " < / p > 
+                         <p class="text-gray-600 italic">"Started as a warehouse operative and worked my way up. DailyFX Delivery genuinely invests in people who show initiative. The training programs are excellent."</p>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   C T A   - - > 
+ <!-- CTA -->
  
- < d i v   c l a s s = " b g - g r a d i e n t - t o - r   f r o m - i n d i g o - 6 0 0   t o - p u r p l e - 6 0 0   r o u n d e d - 2 x l   p - 1 2   t e x t - w h i t e   t e x t - c e n t e r " > 
+ <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-12 text-white text-center">
  
-         < h 2   c l a s s = " t e x t - 3 x l   f o n t - b o l d   m b - 4 " > D o n ' t   S e e   Y o u r   R o l e ? < / h 2 > 
+         <h2 class="text-3xl font-bold mb-4">Don't See Your Role?</h2>
  
-         < p   c l a s s = " t e x t - i n d i g o - 1 0 0   m b - 8   m a x - w - 2 x l   m x - a u t o " > W e ' r e   a l w a y s   l o o k i n g   f o r   t a l e n t e d   p e o p l e .   S e n d   u s   y o u r   C V   a n d   w e ' l l   b e   i n   t o u c h   w h e n   a   s u i t a b l e   p o s i t i o n   o p e n s   u p . < / p > 
+         <p class="text-indigo-100 mb-8 max-w-2xl mx-auto">We're always looking for talented people. Send us your CV and we'll be in touch when a suitable position opens up.</p>
  
-         < a   h r e f = " { %   u r l   ' c o n t a c t '   % } "   c l a s s = " i n l i n e - b l o c k   b g - w h i t e   t e x t - i n d i g o - 6 0 0   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - i n d i g o - 5 0   t r a n s i t i o n " > 
+         <a href="{% url 'contact' %}" class="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition">
  
-                 S u b m i t   Y o u r   C V   → 
+                 Submit Your CV →
  
-         < / a > 
+         </a>
  
- < / d i v > 
+ </div>
  
- { %   e n d b l o c k   % } 
+ {% endblock %}
  
  

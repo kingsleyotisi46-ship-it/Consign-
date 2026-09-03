@@ -1,49 +1,49 @@
- { %   e x t e n d s   ' b a s e . h t m l '   % } 
+ {% extends 'base.html' %}
  
  
  
- { %   b l o c k   t i t l e   % } S e r v e r   E r r o r   -   D a i l y F X   D e l i v e r y { %   e n d b l o c k   % } 
+ {% block title %}Server Error - DailyFX Delivery{% endblock %}
  
  
  
- { %   b l o c k   c o n t e n t   % } 
+ {% block content %}
  
- < d i v   c l a s s = " m i n - h - [ 6 0 v h ]   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r " > 
+ <div class="min-h-[60vh] flex items-center justify-center">
  
-         < d i v   c l a s s = " t e x t - c e n t e r " > 
+         <div class="text-center">
  
-                 < d i v   c l a s s = " t e x t - 9 x l   m b - 4 " > � � < / d i v > 
+                 <div class="text-9xl mb-4">��</div>
  
-                 < h 1   c l a s s = " t e x t - 6 x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 4 " > 5 0 0 < / h 1 > 
+                 <h1 class="text-6xl font-bold text-primary-800 mb-4">500</h1>
  
-                 < h 2   c l a s s = " t e x t - 2 x l   f o n t - s e m i b o l d   t e x t - p r i m a r y - 6 0 0   m b - 4 " > S o m e t h i n g   W e n t   W r o n g < / h 2 > 
+                 <h2 class="text-2xl font-semibold text-primary-600 mb-4">Something Went Wrong</h2>
  
-                 < p   c l a s s = " t e x t - p r i m a r y - 5 0 0   m b - 8   m a x - w - m d   m x - a u t o " > 
+                 <p class="text-primary-500 mb-8 max-w-md mx-auto">
  
-                         O u r   s e r v e r s   a r e   e x p e r i e n c i n g   i s s u e s .   O u r   t e a m   h a s   b e e n   n o t i f i e d   a n d   i s   w o r k i n g   o n   i t . 
+                         Our servers are experiencing issues. Our team has been notified and is working on it.
  
-                 < / p > 
+                 </p>
  
-                 < d i v   c l a s s = " f l e x   f l e x - w r a p   j u s t i f y - c e n t e r   g a p - 4 " > 
+                 <div class="flex flex-wrap justify-center gap-4">
  
-                         < a   h r e f = " { %   u r l   ' h o m e '   % } "   c l a s s = " b g - p r i m a r y - 6 0 0   t e x t - w h i t e   p x - 6   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - p r i m a r y - 7 0 0   t r a n s i t i o n " > 
+                         <a href="{% url 'home' %}" class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
  
-                                 ←   B a c k   t o   H o m e 
+                                 ← Back to Home
  
-                         < / a > 
+                         </a>
  
-                         < a   h r e f = " m a i l t o : s u p p o r t @ d a i l y f x d e l i v e r y . c o . N o r w a y "   c l a s s = " b g - p r i m a r y - 1 0 0   t e x t - p r i m a r y - 7 0 0   p x - 6   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - p r i m a r y - 2 0 0   t r a n s i t i o n " > 
+                         <a href="mailto:support@dailyfxdelivery.co.Norway" class="bg-primary-100 text-primary-700 px-6 py-3 rounded-lg font-semibold hover:bg-primary-200 transition">
  
-                                 C o n t a c t   S u p p o r t 
+                                 Contact Support
  
-                         < / a > 
+                         </a>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
- { %   e n d b l o c k   % } 
+ {% endblock %}
  
  

@@ -1,375 +1,375 @@
- { %   e x t e n d s   ' b a s e . h t m l '   % } 
+ {% extends 'base.html' %}
  
- { %   l o a d   s t a t i c   % } 
- 
- 
- 
- { %   b l o c k   t i t l e   % } { {   p a c k a g e . t r a c k i n g _ n u m b e r   } }   -   D a i l y F X   D e l i v e r y { %   e n d b l o c k   % } 
+ {% load static %}
  
  
  
- { %   b l o c k   c o n t e n t   % } 
- 
- < ! - -   N a v i g a t i o n   - - > 
- 
- < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - c e n t e r   m b - 8 " > 
- 
-         < a   h r e f = " { %   u r l   ' d a s h b o a r d '   % } "   c l a s s = " f l e x   i t e m s - c e n t e r   t e x t - p r i m a r y - 6 0 0   h o v e r : t e x t - p r i m a r y - 8 0 0   t r a n s i t i o n " > 
- 
-                 < s p a n   c l a s s = " m r - 2 " > ← < / s p a n >   B a c k   t o   D a s h b o a r d 
- 
-         < / a > 
- 
-         < a   h r e f = " { %   u r l   ' t r a c k '   % } ? q = { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } "   c l a s s = " f l e x   i t e m s - c e n t e r   t e x t - p r i m a r y - 6 0 0   h o v e r : t e x t - p r i m a r y - 8 0 0   t r a n s i t i o n " > 
- 
-                 P u b l i c   T r a c k i n g   < s p a n   c l a s s = " m l - 2 " > → < / s p a n > 
- 
-         < / a > 
- 
- < / d i v > 
+ {% block title %}{{ package.tracking_number }} - DailyFX Delivery{% endblock %}
  
  
  
- < d i v   c l a s s = " m a x - w - 4 x l   m x - a u t o " > 
+ {% block content %}
  
-         { %   i f   m e s s a g e s   % } 
+ <!-- Navigation -->
  
-                 { %   f o r   m e s s a g e   i n   m e s s a g e s   % } 
+ <div class="flex justify-between items-center mb-8">
  
-                 < d i v   c l a s s = " m b - 6   p - 4   r o u n d e d - x l   { %   i f   m e s s a g e . t a g s   = =   ' s u c c e s s '   % } b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0   b o r d e r   b o r d e r - g r e e n - 2 0 0 { %   e l i f   m e s s a g e . t a g s   = =   ' e r r o r '   % } b g - r e d - 1 0 0   t e x t - r e d - 7 0 0   b o r d e r   b o r d e r - r e d - 2 0 0 { %   e l s e   % } b g - p r i m a r y - 1 0 0   t e x t - p r i m a r y - 7 0 0   b o r d e r   b o r d e r - p r i m a r y - 2 0 0 { %   e n d i f   % } " > 
+         <a href="{% url 'dashboard' %}" class="flex items-center text-primary-600 hover:text-primary-800 transition">
  
-                         { {   m e s s a g e   } } 
+                 <span class="mr-2">←</span> Back to Dashboard
  
-                 < / d i v > 
+         </a>
  
-                 { %   e n d f o r   % } 
+         <a href="{% url 'track' %}?q={{ package.tracking_number }}" class="flex items-center text-primary-600 hover:text-primary-800 transition">
  
-         { %   e n d i f   % } 
+                 Public Tracking <span class="ml-2">→</span>
+ 
+         </a>
+ 
+ </div>
+ 
+ 
+ 
+ <div class="max-w-4xl mx-auto">
+ 
+         {% if messages %}
+ 
+                 {% for message in messages %}
+ 
+                 <div class="mb-6 p-4 rounded-xl {% if message.tags == 'success' %}bg-green-100 text-green-700 border border-green-200{% elif message.tags == 'error' %}bg-red-100 text-red-700 border border-red-200{% else %}bg-primary-100 text-primary-700 border border-primary-200{% endif %}">
+ 
+                         {{ message }}
+ 
+                 </div>
+ 
+                 {% endfor %}
+ 
+         {% endif %}
  
          
  
-         < ! - -   P a c k a g e   H e a d e r   - - > 
+         <!-- Package Header -->
  
-         < d i v   c l a s s = " b g - g r a d i e n t - t o - r   f r o m - p r i m a r y - 6 0 0   t o - a c c e n t - 6 0 0   r o u n d e d - 2 x l   t e x t - w h i t e   p - 8   m b - 8 " > 
+         <div class="bg-gradient-to-r from-primary-600 to-accent-600 rounded-2xl text-white p-8 mb-8">
  
-                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t " > 
+                 <div class="flex justify-between items-start">
  
-                         < d i v > 
+                         <div>
  
-                                 < p   c l a s s = " t e x t - p r i m a r y - 2 0 0   t e x t - s m " > T r a c k i n g   N u m b e r < / p > 
+                                 <p class="text-primary-200 text-sm">Tracking Number</p>
  
-                                 < a   h r e f = " { %   u r l   ' t r a c k '   % } ? q = { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } "   c l a s s = " t e x t - 3 x l   f o n t - b o l d   f o n t - m o n o   h o v e r : u n d e r l i n e   f l e x   i t e m s - c e n t e r   g a p - 2 " > 
+                                 <a href="{% url 'track' %}?q={{ package.tracking_number }}" class="text-3xl font-bold font-mono hover:underline flex items-center gap-2">
  
-                                         { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } 
+                                         {{ package.tracking_number }}
  
-                                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - f l u e n c y - 3 2 - e x t e r n a l - l i n k . s v g '   % } "   a l t = " O p e n "   c l a s s = " w - 6   h - 6   o p a c i t y - 7 0 " > 
+                                         <img src="{% static 'icons/icons8-fluency-32-external-link.svg' %}" alt="Open" class="w-6 h-6 opacity-70">
  
-                                 < / a > 
+                                 </a>
  
-                                 < p   c l a s s = " t e x t - p r i m a r y - 2 0 0   m t - 2 " > C r e a t e d   { {   p a c k a g e . c r e a t e d _ a t | d a t e : " M   j ,   Y "   } } < / p > 
+                                 <p class="text-primary-200 mt-2">Created {{ package.created_at|date:"M j, Y" }}</p>
  
-                         < / d i v > 
+                         </div>
  
-                         < s p a n   c l a s s = " p x - 4   p y - 2   r o u n d e d - f u l l   t e x t - s m   f o n t - s e m i b o l d   b g - w h i t e / 2 0   b a c k d r o p - b l u r " > 
+                         <span class="px-4 py-2 rounded-full text-sm font-semibold bg-white/20 backdrop-blur">
  
-                                 { {   p a c k a g e . g e t _ s t a t u s _ d i s p l a y   } } 
+                                 {{ package.get_status_display }}
  
-                         < / s p a n > 
+                         </span>
  
-                 < / d i v > 
+                 </div>
  
                  
  
-                 < ! - -   T r a c k   o n   M a p   B u t t o n   - - > 
+                 <!-- Track on Map Button -->
  
-                 < a   h r e f = " { %   u r l   ' t r a c k '   % } ? q = { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } "   c l a s s = " m t - 6   i n l i n e - f l e x   i t e m s - c e n t e r   g a p - 2   b g - w h i t e   t e x t - p r i m a r y - 6 0 0   p x - 6   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - p r i m a r y - 5 0   t r a n s i t i o n " > 
+                 <a href="{% url 'track' %}?q={{ package.tracking_number }}" class="mt-6 inline-flex items-center gap-2 bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition">
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 4 - m a p - m a r k e r . s v g '   % } "   a l t = " M a p "   c l a s s = " w - 6   h - 6 " > 
+                         <img src="{% static 'icons/icons8-color-24-map-marker.svg' %}" alt="Map" class="w-6 h-6">
  
-                         T r a c k   o n   L i v e   M a p 
+                         Track on Live Map
  
-                 < / a > 
+                 </a>
  
-         < / d i v > 
+         </div>
  
          
  
-         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 8 " > 
+         <div class="grid md:grid-cols-2 gap-8">
  
-                 < ! - -   S e n d e r   I n f o   - - > 
+                 <!-- Sender Info -->
  
-                 < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0 " > 
+                 <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-6 border border-primary-100">
  
-                         < h 2   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 4   f l e x   i t e m s - c e n t e r " > 
+                         <h2 class="text-lg font-bold text-primary-800 mb-4 flex items-center">
  
-                                 < s p a n   c l a s s = " m r - 2 " > � � < / s p a n >   S e n d e r   I n f o r m a t i o n 
+                                 <span class="mr-2">��</span> Sender Information
  
-                         < / h 2 > 
+                         </h2>
  
-                         < d i v   c l a s s = " s p a c e - y - 2   t e x t - p r i m a r y - 7 0 0 " > 
+                         <div class="space-y-2 text-primary-700">
  
-                                 < p > < s t r o n g > { {   p a c k a g e . s e n d e r _ n a m e   } } < / s t r o n g > < / p > 
+                                 <p><strong>{{ package.sender_name }}</strong></p>
  
-                                 < p > { {   p a c k a g e . s e n d e r _ a d d r e s s   } } < / p > 
+                                 <p>{{ package.sender_address }}</p>
  
-                                 < p > { {   p a c k a g e . s e n d e r _ c i t y   } } ,   { {   p a c k a g e . s e n d e r _ p o s t c o d e   } } < / p > 
+                                 <p>{{ package.sender_city }}, {{ package.sender_postcode }}</p>
  
-                                 < p > � �   { {   p a c k a g e . s e n d e r _ p h o n e   } } < / p > 
+                                 <p>�� {{ package.sender_phone }}</p>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
+                 </div>
  
                  
  
-                 < ! - -   R e c e i v e r   I n f o   - - > 
+                 <!-- Receiver Info -->
  
-                 < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0 " > 
+                 <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-6 border border-primary-100">
  
-                         < h 2   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 4   f l e x   i t e m s - c e n t e r " > 
+                         <h2 class="text-lg font-bold text-primary-800 mb-4 flex items-center">
  
-                                 < s p a n   c l a s s = " m r - 2 " > � � < / s p a n >   R e c e i v e r   I n f o r m a t i o n 
+                                 <span class="mr-2">��</span> Receiver Information
  
-                         < / h 2 > 
+                         </h2>
  
-                         < d i v   c l a s s = " s p a c e - y - 2   t e x t - p r i m a r y - 7 0 0 " > 
+                         <div class="space-y-2 text-primary-700">
  
-                                 < p > < s t r o n g > { {   p a c k a g e . r e c e i v e r _ n a m e   } } < / s t r o n g > < / p > 
+                                 <p><strong>{{ package.receiver_name }}</strong></p>
  
-                                 < p > { {   p a c k a g e . r e c e i v e r _ a d d r e s s   } } < / p > 
+                                 <p>{{ package.receiver_address }}</p>
  
-                                 < p > { {   p a c k a g e . r e c e i v e r _ c i t y   } } ,   { {   p a c k a g e . r e c e i v e r _ p o s t c o d e   } } < / p > 
+                                 <p>{{ package.receiver_city }}, {{ package.receiver_postcode }}</p>
  
-                                 < p > � �   { {   p a c k a g e . r e c e i v e r _ p h o n e   } } < / p > 
+                                 <p>�� {{ package.receiver_phone }}</p>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
- 
-         
- 
-         < ! - -   P a c k a g e   D e t a i l s   - - > 
- 
-         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0   m t - 8 " > 
- 
-                 < h 2   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 4   f l e x   i t e m s - c e n t e r " > 
- 
-                         < s p a n   c l a s s = " m r - 2 " > � � < / s p a n >   P a c k a g e   D e t a i l s 
- 
-                 < / h 2 > 
- 
-                 < d i v   c l a s s = " g r i d   g r i d - c o l s - 2   m d : g r i d - c o l s - 4   g a p - 4 " > 
- 
-                         < d i v > 
- 
-                                 < p   c l a s s = " t e x t - p r i m a r y - 5 0 0   t e x t - s m " > W e i g h t < / p > 
- 
-                                 < p   c l a s s = " t e x t - p r i m a r y - 8 0 0   f o n t - s e m i b o l d " > { {   p a c k a g e . w e i g h t   } }   k g < / p > 
- 
-                         < / d i v > 
- 
-                         { %   i f   p a c k a g e . l e n g t h   % } 
- 
-                         < d i v > 
- 
-                                 < p   c l a s s = " t e x t - p r i m a r y - 5 0 0   t e x t - s m " > D i m e n s i o n s < / p > 
- 
-                                 < p   c l a s s = " t e x t - p r i m a r y - 8 0 0   f o n t - s e m i b o l d " > { {   p a c k a g e . l e n g t h   } } × { {   p a c k a g e . w i d t h   } } × { {   p a c k a g e . h e i g h t   } }   c m < / p > 
- 
-                         < / d i v > 
- 
-                         { %   e n d i f   % } 
- 
-                         < d i v > 
- 
-                                 < p   c l a s s = " t e x t - p r i m a r y - 5 0 0   t e x t - s m " > E s t i m a t e d   D e l i v e r y < / p > 
- 
-                                 < p   c l a s s = " t e x t - p r i m a r y - 8 0 0   f o n t - s e m i b o l d " > { {   p a c k a g e . e s t i m a t e d _ d e l i v e r y | d a t e : " M   j ,   Y " | d e f a u l t : " P e n d i n g "   } } < / p > 
- 
-                         < / d i v > 
- 
-                         < d i v > 
- 
-                                 < p   c l a s s = " t e x t - p r i m a r y - 5 0 0   t e x t - s m " > D r i v e r < / p > 
- 
-                                 < p   c l a s s = " t e x t - p r i m a r y - 8 0 0   f o n t - s e m i b o l d " > { {   p a c k a g e . a s s i g n e d _ d r i v e r . g e t _ f u l l _ n a m e | d e f a u l t : " N o t   a s s i g n e d "   } } < / p > 
- 
-                         < / d i v > 
- 
-                 < / d i v > 
- 
-                 { %   i f   p a c k a g e . d e s c r i p t i o n   % } 
- 
-                 < d i v   c l a s s = " m t - 4   p t - 4   b o r d e r - t   b o r d e r - p r i m a r y - 2 0 0 " > 
- 
-                         < p   c l a s s = " t e x t - p r i m a r y - 5 0 0   t e x t - s m " > D e s c r i p t i o n < / p > 
- 
-                         < p   c l a s s = " t e x t - p r i m a r y - 7 0 0 " > { {   p a c k a g e . d e s c r i p t i o n   } } < / p > 
- 
-                 < / d i v > 
- 
-                 { %   e n d i f   % } 
- 
-         < / d i v > 
+         </div>
  
          
  
-         < ! - -   T r a c k i n g   H i s t o r y   - - > 
+         <!-- Package Details -->
  
-         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0   m t - 8 " > 
+         <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-6 border border-primary-100 mt-8">
  
-                 < h 2   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 6   f l e x   i t e m s - c e n t e r " > 
+                 <h2 class="text-lg font-bold text-primary-800 mb-4 flex items-center">
  
-                         < s p a n   c l a s s = " m r - 2 " > � � < / s p a n >   T r a c k i n g   H i s t o r y 
+                         <span class="mr-2">��</span> Package Details
  
-                 < / h 2 > 
+                 </h2>
+ 
+                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+ 
+                         <div>
+ 
+                                 <p class="text-primary-500 text-sm">Weight</p>
+ 
+                                 <p class="text-primary-800 font-semibold">{{ package.weight }} kg</p>
+ 
+                         </div>
+ 
+                         {% if package.length %}
+ 
+                         <div>
+ 
+                                 <p class="text-primary-500 text-sm">Dimensions</p>
+ 
+                                 <p class="text-primary-800 font-semibold">{{ package.length }}×{{ package.width }}×{{ package.height }} cm</p>
+ 
+                         </div>
+ 
+                         {% endif %}
+ 
+                         <div>
+ 
+                                 <p class="text-primary-500 text-sm">Estimated Delivery</p>
+ 
+                                 <p class="text-primary-800 font-semibold">{{ package.estimated_delivery|date:"M j, Y"|default:"Pending" }}</p>
+ 
+                         </div>
+ 
+                         <div>
+ 
+                                 <p class="text-primary-500 text-sm">Driver</p>
+ 
+                                 <p class="text-primary-800 font-semibold">{{ package.assigned_driver.get_full_name|default:"Not assigned" }}</p>
+ 
+                         </div>
+ 
+                 </div>
+ 
+                 {% if package.description %}
+ 
+                 <div class="mt-4 pt-4 border-t border-primary-200">
+ 
+                         <p class="text-primary-500 text-sm">Description</p>
+ 
+                         <p class="text-primary-700">{{ package.description }}</p>
+ 
+                 </div>
+ 
+                 {% endif %}
+ 
+         </div>
+ 
+         
+ 
+         <!-- Tracking History -->
+ 
+         <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-6 border border-primary-100 mt-8">
+ 
+                 <h2 class="text-lg font-bold text-primary-800 mb-6 flex items-center">
+ 
+                         <span class="mr-2">��</span> Tracking History
+ 
+                 </h2>
  
                  
  
-                 < d i v   c l a s s = " s p a c e - y - 1 " > 
+                 <div class="space-y-1">
  
-                         { %   f o r   e v e n t   i n   t r a c k i n g _ h i s t o r y   % } 
+                         {% for event in tracking_history %}
  
-                         < d i v   c l a s s = " f l e x   g r o u p " > 
+                         <div class="flex group">
  
-                                 < d i v   c l a s s = " f l e x   f l e x - c o l   i t e m s - c e n t e r   m r - 4 " > 
+                                 <div class="flex flex-col items-center mr-4">
  
-                                         < d i v   c l a s s = " w - 4   h - 4   r o u n d e d - f u l l   { %   i f   f o r l o o p . f i r s t   % } b g - p r i m a r y - 6 0 0   r i n g - 4   r i n g - p r i m a r y - 1 0 0 { %   e l s e   % } b g - p r i m a r y - 3 0 0 { %   e n d i f   % } " > < / d i v > 
+                                         <div class="w-4 h-4 rounded-full {% if forloop.first %}bg-primary-600 ring-4 ring-primary-100{% else %}bg-primary-300{% endif %}"></div>
  
-                                         { %   i f   n o t   f o r l o o p . l a s t   % } 
+                                         {% if not forloop.last %}
  
-                                         < d i v   c l a s s = " w - 0 . 5   h - 1 6   b g - p r i m a r y - 2 0 0 " > < / d i v > 
+                                         <div class="w-0.5 h-16 bg-primary-200"></div>
  
-                                         { %   e n d i f   % } 
+                                         {% endif %}
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v   c l a s s = " p b - 6   f l e x - 1 " > 
+                                 <div class="pb-6 flex-1">
  
-                                         < d i v   c l a s s = " b g - w h i t e   r o u n d e d - l g   p - 4   g r o u p - h o v e r : b g - p r i m a r y - 1 0 0   t r a n s i t i o n   b o r d e r   b o r d e r - p r i m a r y - 1 0 0 " > 
+                                         <div class="bg-white rounded-lg p-4 group-hover:bg-primary-100 transition border border-primary-100">
  
-                                                 < d i v   c l a s s = " f l e x   j u s t i f y - b e t w e e n   i t e m s - s t a r t " > 
+                                                 <div class="flex justify-between items-start">
  
-                                                         < d i v > 
+                                                         <div>
  
-                                                                 < p   c l a s s = " f o n t - s e m i b o l d   t e x t - p r i m a r y - 8 0 0 " > { {   e v e n t . s t a t u s   } } < / p > 
+                                                                 <p class="font-semibold text-primary-800">{{ event.status }}</p>
  
-                                                                 < p   c l a s s = " t e x t - p r i m a r y - 6 0 0 " > � �   { {   e v e n t . l o c a t i o n   } } < / p > 
+                                                                 <p class="text-primary-600">�� {{ event.location }}</p>
  
-                                                         < / d i v > 
+                                                         </div>
  
-                                                         < p   c l a s s = " t e x t - s m   t e x t - p r i m a r y - 4 0 0 " > { {   e v e n t . t i m e s t a m p | d a t e : " M   j ,   g : i   A "   } } < / p > 
+                                                         <p class="text-sm text-primary-400">{{ event.timestamp|date:"M j, g:i A" }}</p>
  
-                                                 < / d i v > 
+                                                 </div>
  
-                                                 { %   i f   e v e n t . n o t e s   % } 
+                                                 {% if event.notes %}
  
-                                                 < p   c l a s s = " t e x t - s m   t e x t - p r i m a r y - 5 0 0   m t - 2 " > { {   e v e n t . n o t e s   } } < / p > 
+                                                 <p class="text-sm text-primary-500 mt-2">{{ event.notes }}</p>
  
-                                                 { %   e n d i f   % } 
+                                                 {% endif %}
  
-                                         < / d i v > 
+                                         </div>
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                         </div>
  
-                         { %   e m p t y   % } 
+                         {% empty %}
  
-                         < p   c l a s s = " t e x t - c e n t e r   t e x t - p r i m a r y - 5 0 0   p y - 4 " > N o   t r a c k i n g   h i s t o r y   y e t . < / p > 
+                         <p class="text-center text-primary-500 py-4">No tracking history yet.</p>
  
-                         { %   e n d f o r   % } 
+                         {% endfor %}
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
- 
-         
- 
-         < ! - -   A c t i o n s   - - > 
- 
-         { %   i f   p a c k a g e . s t a t u s   = =   ' p e n d i n g '   % } 
- 
-         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0   m t - 8 " > 
- 
-                 < h 2   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0   m b - 4 " > A c t i o n s < / h 2 > 
- 
-                 < d i v   c l a s s = " f l e x   f l e x - w r a p   g a p - 4 " > 
- 
-                         < a   h r e f = " { %   u r l   ' p a c k a g e _ e d i t '   p a c k a g e . i d   % } "   c l a s s = " b g - p r i m a r y - 6 0 0   t e x t - w h i t e   p x - 6   p y - 2   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - p r i m a r y - 7 0 0   t r a n s i t i o n " > 
- 
-                                 ✏ ️   E d i t   D e t a i l s 
- 
-                         < / a > 
- 
-                         < f o r m   m e t h o d = " P O S T "   a c t i o n = " { %   u r l   ' p a c k a g e _ c a n c e l '   p a c k a g e . i d   % } "   c l a s s = " i n l i n e "   o n s u b m i t = " r e t u r n   c o n f i r m ( ' A r e   y o u   s u r e   y o u   w a n t   t o   c a n c e l   t h i s   p a c k a g e ? ' ) ; " > 
- 
-                                 { %   c s r f _ t o k e n   % } 
- 
-                                 < b u t t o n   t y p e = " s u b m i t "   c l a s s = " b g - r e d - 6 0 0   t e x t - w h i t e   p x - 6   p y - 2   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - r e d - 7 0 0   t r a n s i t i o n " > 
- 
-                                         ❌   C a n c e l   P a c k a g e 
- 
-                                 < / b u t t o n > 
- 
-                         < / f o r m > 
- 
-                 < / d i v > 
- 
-         < / d i v > 
- 
-         { %   e n d i f   % } 
+         </div>
  
          
  
-         { %   i f   p a c k a g e . s t a t u s   = =   ' d e l i v e r e d '   a n d   p a c k a g e . p r o o f _ o f _ d e l i v e r y   % } 
+         <!-- Actions -->
  
-         < ! - -   P r o o f   o f   D e l i v e r y   - - > 
+         {% if package.status == 'pending' %}
  
-         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - g r e e n - 5 0   t o - g r e e n - 1 0 0   r o u n d e d - x l   p - 6   b o r d e r   b o r d e r - g r e e n - 2 0 0   m t - 8 " > 
+         <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-6 border border-primary-100 mt-8">
  
-                 < h 2   c l a s s = " t e x t - l g   f o n t - b o l d   t e x t - g r e e n - 8 0 0   m b - 4   f l e x   i t e m s - c e n t e r " > 
+                 <h2 class="text-lg font-bold text-primary-800 mb-4">Actions</h2>
  
-                         < s p a n   c l a s s = " m r - 2 " > ✅ < / s p a n >   P r o o f   o f   D e l i v e r y 
+                 <div class="flex flex-wrap gap-4">
  
-                 < / h 2 > 
+                         <a href="{% url 'package_edit' package.id %}" class="bg-primary-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-700 transition">
  
-                 < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 4 " > 
+                                 ✏️ Edit Details
  
-                         < d i v > 
+                         </a>
  
-                                 < p   c l a s s = " t e x t - g r e e n - 7 0 0 " > < s t r o n g > R e c e i v e d   b y : < / s t r o n g >   { {   p a c k a g e . p r o o f _ o f _ d e l i v e r y . r e c i p i e n t _ n a m e   } } < / p > 
+                         <form method="POST" action="{% url 'package_cancel' package.id %}" class="inline" onsubmit="return confirm('Are you sure you want to cancel this package?');">
  
-                                 < p   c l a s s = " t e x t - g r e e n - 7 0 0 " > < s t r o n g > D e l i v e r e d   a t : < / s t r o n g >   { {   p a c k a g e . p r o o f _ o f _ d e l i v e r y . d e l i v e r e d _ a t | d a t e : " M   j ,   Y   g : i   A "   } } < / p > 
+                                 {% csrf_token %}
  
-                                 { %   i f   p a c k a g e . p r o o f _ o f _ d e l i v e r y . n o t e s   % } 
+                                 <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition">
  
-                                 < p   c l a s s = " t e x t - g r e e n - 7 0 0   m t - 2 " > < s t r o n g > N o t e s : < / s t r o n g >   { {   p a c k a g e . p r o o f _ o f _ d e l i v e r y . n o t e s   } } < / p > 
+                                         ❌ Cancel Package
  
-                                 { %   e n d i f   % } 
+                                 </button>
  
-                         < / d i v > 
+                         </form>
  
-                         { %   i f   p a c k a g e . p r o o f _ o f _ d e l i v e r y . p h o t o   % } 
+                 </div>
  
-                         < d i v > 
+         </div>
  
-                                 < i m g   s r c = " { {   p a c k a g e . p r o o f _ o f _ d e l i v e r y . p h o t o . u r l   } } "   a l t = " D e l i v e r y   P h o t o "   c l a s s = " r o u n d e d - l g   m a x - h - 4 8   o b j e c t - c o v e r " > 
+         {% endif %}
  
-                         < / d i v > 
+         
  
-                         { %   e n d i f   % } 
+         {% if package.status == 'delivered' and package.proof_of_delivery %}
  
-                 < / d i v > 
+         <!-- Proof of Delivery -->
  
-         < / d i v > 
+         <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200 mt-8">
  
-         { %   e n d i f   % } 
+                 <h2 class="text-lg font-bold text-green-800 mb-4 flex items-center">
  
- < / d i v > 
+                         <span class="mr-2">✅</span> Proof of Delivery
  
- { %   e n d b l o c k   % } 
+                 </h2>
+ 
+                 <div class="grid md:grid-cols-2 gap-4">
+ 
+                         <div>
+ 
+                                 <p class="text-green-700"><strong>Received by:</strong> {{ package.proof_of_delivery.recipient_name }}</p>
+ 
+                                 <p class="text-green-700"><strong>Delivered at:</strong> {{ package.proof_of_delivery.delivered_at|date:"M j, Y g:i A" }}</p>
+ 
+                                 {% if package.proof_of_delivery.notes %}
+ 
+                                 <p class="text-green-700 mt-2"><strong>Notes:</strong> {{ package.proof_of_delivery.notes }}</p>
+ 
+                                 {% endif %}
+ 
+                         </div>
+ 
+                         {% if package.proof_of_delivery.photo %}
+ 
+                         <div>
+ 
+                                 <img src="{{ package.proof_of_delivery.photo.url }}" alt="Delivery Photo" class="rounded-lg max-h-48 object-cover">
+ 
+                         </div>
+ 
+                         {% endif %}
+ 
+                 </div>
+ 
+         </div>
+ 
+         {% endif %}
+ 
+ </div>
+ 
+ {% endblock %}
  
  

@@ -1,333 +1,333 @@
- { %   e x t e n d s   ' b a s e . h t m l '   % } 
+ {% extends 'base.html' %}
  
  
  
- { %   b l o c k   t i t l e   % } C r e a t e   S h i p m e n t   -   D a i l y F X   D e l i v e r y { %   e n d b l o c k   % } 
+ {% block title %}Create Shipment - DailyFX Delivery{% endblock %}
  
  
  
- { %   b l o c k   c o n t e n t   % } 
+ {% block content %}
  
- < d i v   c l a s s = " m a x - w - 3 x l   m x - a u t o " > 
+ <div class="max-w-3xl mx-auto">
  
-         < h 1   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 6 " > C r e a t e   N e w   S h i p m e n t < / h 1 > 
+         <h1 class="text-3xl font-bold text-gray-800 mb-6">Create New Shipment</h1>
  
          
  
-         < f o r m   m e t h o d = " P O S T "   c l a s s = " s p a c e - y - 8 " > 
+         <form method="POST" class="space-y-8">
  
-                 { %   c s r f _ t o k e n   % } 
+                 {% csrf_token %}
  
                  
  
-                 < ! - -   S e n d e r   I n f o r m a t i o n   - - > 
+                 <!-- Sender Information -->
  
-                 < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   s h a d o w - l g   p - 6 " > 
+                 <div class="bg-white rounded-xl shadow-lg p-6">
  
-                         < h 2   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 4 " > � �   S e n d e r   I n f o r m a t i o n < / h 2 > 
+                         <h2 class="text-xl font-bold text-gray-800 mb-4">�� Sender Information</h2>
  
-                         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 4 " > 
+                         <div class="grid md:grid-cols-2 gap-4">
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > F u l l   N a m e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " s e n d e r _ n a m e "   r e q u i r e d   v a l u e = " { {   u s e r . g e t _ f u l l _ n a m e | d e f a u l t : u s e r . u s e r n a m e   } } " 
+                                         <input type="text" name="sender_name" required value="{{ user.get_full_name|default:user.username }}"
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > P h o n e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
  
-                                         < i n p u t   t y p e = " t e l "   n a m e = " s e n d e r _ p h o n e "   r e q u i r e d   v a l u e = " { {   u s e r . p h o n e   } } " 
+                                         <input type="tel" name="sender_phone" required value="{{ user.phone }}"
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v   c l a s s = " m d : c o l - s p a n - 2 " > 
+                                 <div class="md:col-span-2">
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > A d d r e s s   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Address *</label>
  
-                                         < t e x t a r e a   n a m e = " s e n d e r _ a d d r e s s "   r o w s = " 2 "   r e q u i r e d 
+                                         <textarea name="sender_address" rows="2" required
  
-                                                             c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > { {   u s e r . a d d r e s s   } } < / t e x t a r e a > 
+                                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">{{ user.address }}</textarea>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > C i t y   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">City *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " s e n d e r _ c i t y "   r e q u i r e d 
+                                         <input type="text" name="sender_city" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > C o u n t r y   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Country *</label>
  
-                                         < s e l e c t   n a m e = " s e n d e r _ c o u n t r y "   r e q u i r e d 
+                                         <select name="sender_country" required
  
-                                                         c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                                 < o p t i o n   v a l u e = " N o r w a y " > N o r w a y < / o p t i o n >
+                                                 <option value="Norway">Norway</option>
  
-                                                 < o p t i o n   v a l u e = " N o r w a y " > N o r w a y < / o p t i o n >
+                                                 <option value="Norway">Norway</option>
  
-                                                 < o p t i o n   v a l u e = " P a k i s t a n " > P a k i s t a n < / o p t i o n > 
+                                                 <option value="Pakistan">Pakistan</option>
 
-                                                 < o p t i o n   v a l u e = " T h a i l a n d "   s e l e c t e d > T h a i l a n d < / o p t i o n >
+                                                 <option value="Thailand" selected>Thailand</option>
  
-                                                 < o p t i o n   v a l u e = " U n i t e d   S t a t e s " > U n i t e d   S t a t e s < / o p t i o n > 
+                                                 <option value="United States">United States</option>
  
-                                                 < o p t i o n   v a l u e = " C a n a d a " > C a n a d a < / o p t i o n > 
+                                                 <option value="Canada">Canada</option>
  
-                                                 < o p t i o n   v a l u e = " G e r m a n y " > G e r m a n y < / o p t i o n > 
+                                                 <option value="Germany">Germany</option>
  
-                                                 < o p t i o n   v a l u e = " F r a n c e " > F r a n c e < / o p t i o n > 
+                                                 <option value="France">France</option>
  
-                                                 < o p t i o n   v a l u e = " N e t h e r l a n d s " > N e t h e r l a n d s < / o p t i o n > 
+                                                 <option value="Netherlands">Netherlands</option>
  
-                                                 < o p t i o n   v a l u e = " I t a l y " > I t a l y < / o p t i o n > 
+                                                 <option value="Italy">Italy</option>
  
-                                                 < o p t i o n   v a l u e = " S p a i n " > S p a i n < / o p t i o n > 
+                                                 <option value="Spain">Spain</option>
  
-                                                 < o p t i o n   v a l u e = " A u s t r a l i a " > A u s t r a l i a < / o p t i o n > 
+                                                 <option value="Australia">Australia</option>
  
-                                                 < o p t i o n   v a l u e = " I n d i a " > I n d i a < / o p t i o n > 
+                                                 <option value="India">India</option>
  
-                                                 < o p t i o n   v a l u e = " U A E " > U A E < / o p t i o n > 
+                                                 <option value="UAE">UAE</option>
  
-                                                 < o p t i o n   v a l u e = " S i n g a p o r e " > S i n g a p o r e < / o p t i o n > 
+                                                 <option value="Singapore">Singapore</option>
  
-                                                 < o p t i o n   v a l u e = " J a p a n " > J a p a n < / o p t i o n > 
+                                                 <option value="Japan">Japan</option>
  
-                                                 < o p t i o n   v a l u e = " C h i n a " > C h i n a < / o p t i o n > 
+                                                 <option value="China">China</option>
  
-                                                 < o p t i o n   v a l u e = " B r a z i l " > B r a z i l < / o p t i o n > 
+                                                 <option value="Brazil">Brazil</option>
  
-                                         < / s e l e c t > 
+                                         </select>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > P o s t c o d e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Postcode *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " s e n d e r _ p o s t c o d e "   r e q u i r e d 
+                                         <input type="text" name="sender_postcode" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
+                 </div>
  
                  
  
-                 < ! - -   R e c e i v e r   I n f o r m a t i o n   - - > 
+                 <!-- Receiver Information -->
  
-                 < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   s h a d o w - l g   p - 6 " > 
+                 <div class="bg-white rounded-xl shadow-lg p-6">
  
-                         < h 2   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 4 " > � �   R e c e i v e r   I n f o r m a t i o n < / h 2 > 
+                         <h2 class="text-xl font-bold text-gray-800 mb-4">�� Receiver Information</h2>
  
-                         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 2   g a p - 4 " > 
+                         <div class="grid md:grid-cols-2 gap-4">
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > F u l l   N a m e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " r e c e i v e r _ n a m e "   r e q u i r e d 
+                                         <input type="text" name="receiver_name" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > P h o n e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
  
-                                         < i n p u t   t y p e = " t e l "   n a m e = " r e c e i v e r _ p h o n e "   r e q u i r e d 
+                                         <input type="tel" name="receiver_phone" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v   c l a s s = " m d : c o l - s p a n - 2 " > 
+                                 <div class="md:col-span-2">
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > A d d r e s s   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Address *</label>
  
-                                         < t e x t a r e a   n a m e = " r e c e i v e r _ a d d r e s s "   r o w s = " 2 "   r e q u i r e d 
+                                         <textarea name="receiver_address" rows="2" required
  
-                                                             c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > < / t e x t a r e a > 
+                                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"></textarea>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > C i t y   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">City *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " r e c e i v e r _ c i t y "   r e q u i r e d 
+                                         <input type="text" name="receiver_city" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > C o u n t r y   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Country *</label>
  
-                                         < s e l e c t   n a m e = " r e c e i v e r _ c o u n t r y "   r e q u i r e d
+                                         <select name="receiver_country" required
  
-                                                         c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                                 < o p t i o n   v a l u e = " N o r w a y " > N o r w a y < / o p t i o n >
+                                                 <option value="Norway">Norway</option>
  
-                                                 < o p t i o n   v a l u e = " N o r w a y " > N o r w a y < / o p t i o n > 
+                                                 <option value="Norway">Norway</option>
  
-                                                 < o p t i o n   v a l u e = " P a k i s t a n "   s e l e c t e d > P a k i s t a n < / o p t i o n >
+                                                 <option value="Pakistan" selected>Pakistan</option>
 
-                                                 < o p t i o n   v a l u e = " T h a i l a n d " > T h a i l a n d < / o p t i o n >
+                                                 <option value="Thailand">Thailand</option>
  
-                                                 < o p t i o n   v a l u e = " U n i t e d   S t a t e s " > U n i t e d   S t a t e s < / o p t i o n > 
+                                                 <option value="United States">United States</option>
  
-                                                 < o p t i o n   v a l u e = " C a n a d a " > C a n a d a < / o p t i o n > 
+                                                 <option value="Canada">Canada</option>
  
-                                                 < o p t i o n   v a l u e = " G e r m a n y " > G e r m a n y < / o p t i o n > 
+                                                 <option value="Germany">Germany</option>
  
-                                                 < o p t i o n   v a l u e = " F r a n c e " > F r a n c e < / o p t i o n > 
+                                                 <option value="France">France</option>
  
-                                                 < o p t i o n   v a l u e = " N e t h e r l a n d s " > N e t h e r l a n d s < / o p t i o n > 
+                                                 <option value="Netherlands">Netherlands</option>
  
-                                                 < o p t i o n   v a l u e = " I t a l y " > I t a l y < / o p t i o n > 
+                                                 <option value="Italy">Italy</option>
  
-                                                 < o p t i o n   v a l u e = " S p a i n " > S p a i n < / o p t i o n > 
+                                                 <option value="Spain">Spain</option>
  
-                                                 < o p t i o n   v a l u e = " A u s t r a l i a " > A u s t r a l i a < / o p t i o n > 
+                                                 <option value="Australia">Australia</option>
  
-                                                 < o p t i o n   v a l u e = " I n d i a " > I n d i a < / o p t i o n > 
+                                                 <option value="India">India</option>
  
-                                                 < o p t i o n   v a l u e = " U A E " > U A E < / o p t i o n > 
+                                                 <option value="UAE">UAE</option>
  
-                                                 < o p t i o n   v a l u e = " S i n g a p o r e " > S i n g a p o r e < / o p t i o n > 
+                                                 <option value="Singapore">Singapore</option>
  
-                                                 < o p t i o n   v a l u e = " J a p a n " > J a p a n < / o p t i o n > 
+                                                 <option value="Japan">Japan</option>
  
-                                                 < o p t i o n   v a l u e = " C h i n a " > C h i n a < / o p t i o n > 
+                                                 <option value="China">China</option>
  
-                                                 < o p t i o n   v a l u e = " B r a z i l " > B r a z i l < / o p t i o n > 
+                                                 <option value="Brazil">Brazil</option>
  
-                                         < / s e l e c t > 
+                                         </select>
  
-                                 < / d i v > 
+                                 </div>
  
-                                 < d i v > 
+                                 <div>
  
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > P o s t c o d e   * < / l a b e l > 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Postcode *</label>
  
-                                         < i n p u t   t y p e = " t e x t "   n a m e = " r e c e i v e r _ p o s t c o d e "   r e q u i r e d 
+                                         <input type="text" name="receiver_postcode" required
  
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-                                 < / d i v > 
+                                 </div>
  
-                         < / d i v > 
+                         </div>
  
-                 < / d i v > 
- 
-                 
- 
-                 < ! - -   P a c k a g e   D e t a i l s   - - > 
- 
-                 < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   s h a d o w - l g   p - 6 " > 
- 
-                         < h 2   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   m b - 4 " > � �   P a c k a g e   D e t a i l s < / h 2 > 
- 
-                         < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 4   g a p - 4 " > 
- 
-                                 < d i v > 
- 
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > W e i g h t   ( k g )   * < / l a b e l > 
- 
-                                         < i n p u t   t y p e = " n u m b e r "   n a m e = " w e i g h t "   s t e p = " 0 . 0 1 "   m i n = " 0 . 0 1 "   r e q u i r e d 
- 
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
- 
-                                 < / d i v > 
- 
-                                 < d i v > 
- 
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > L e n g t h   ( c m ) < / l a b e l > 
- 
-                                         < i n p u t   t y p e = " n u m b e r "   n a m e = " l e n g t h "   s t e p = " 0 . 0 1 " 
- 
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
- 
-                                 < / d i v > 
- 
-                                 < d i v > 
- 
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > W i d t h   ( c m ) < / l a b e l > 
- 
-                                         < i n p u t   t y p e = " n u m b e r "   n a m e = " w i d t h "   s t e p = " 0 . 0 1 " 
- 
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
- 
-                                 < / d i v > 
- 
-                                 < d i v > 
- 
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > H e i g h t   ( c m ) < / l a b e l > 
- 
-                                         < i n p u t   t y p e = " n u m b e r "   n a m e = " h e i g h t "   s t e p = " 0 . 0 1 " 
- 
-                                                       c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > 
- 
-                                 < / d i v > 
- 
-                                 < d i v   c l a s s = " m d : c o l - s p a n - 4 " > 
- 
-                                         < l a b e l   c l a s s = " b l o c k   t e x t - s m   f o n t - m e d i u m   t e x t - g r a y - 7 0 0   m b - 1 " > D e s c r i p t i o n < / l a b e l > 
- 
-                                         < t e x t a r e a   n a m e = " d e s c r i p t i o n "   r o w s = " 3 "   p l a c e h o l d e r = " D e s c r i b e   t h e   c o n t e n t s   o f   y o u r   p a c k a g e . . . " 
- 
-                                                             c l a s s = " w - f u l l   p x - 4   p y - 2   b o r d e r   b o r d e r - g r a y - 3 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - i n d i g o - 5 0 0 " > < / t e x t a r e a > 
- 
-                                 < / d i v > 
- 
-                         < / d i v > 
- 
-                 < / d i v > 
+                 </div>
  
                  
  
-                 < d i v   c l a s s = " f l e x   g a p - 4 " > 
+                 <!-- Package Details -->
  
-                         < b u t t o n   t y p e = " s u b m i t "   c l a s s = " b g - i n d i g o - 6 0 0   t e x t - w h i t e   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - i n d i g o - 7 0 0   t r a n s i t i o n " > 
+                 <div class="bg-white rounded-xl shadow-lg p-6">
  
-                                 C r e a t e   S h i p m e n t 
+                         <h2 class="text-xl font-bold text-gray-800 mb-4">�� Package Details</h2>
  
-                         < / b u t t o n > 
+                         <div class="grid md:grid-cols-4 gap-4">
  
-                         < a   h r e f = " { %   u r l   ' d a s h b o a r d '   % } "   c l a s s = " b g - g r a y - 2 0 0   t e x t - g r a y - 7 0 0   p x - 8   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - g r a y - 3 0 0   t r a n s i t i o n " > 
+                                 <div>
  
-                                 C a n c e l 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Weight (kg) *</label>
  
-                         < / a > 
+                                         <input type="number" name="weight" step="0.01" min="0.01" required
  
-                 < / d i v > 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
  
-         < / f o r m > 
+                                 </div>
  
- < / d i v > 
+                                 <div>
  
- { %   e n d b l o c k   % } 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Length (cm)</label>
+ 
+                                         <input type="number" name="length" step="0.01"
+ 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+ 
+                                 </div>
+ 
+                                 <div>
+ 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Width (cm)</label>
+ 
+                                         <input type="number" name="width" step="0.01"
+ 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+ 
+                                 </div>
+ 
+                                 <div>
+ 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Height (cm)</label>
+ 
+                                         <input type="number" name="height" step="0.01"
+ 
+                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+ 
+                                 </div>
+ 
+                                 <div class="md:col-span-4">
+ 
+                                         <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+ 
+                                         <textarea name="description" rows="3" placeholder="Describe the contents of your package..."
+ 
+                                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"></textarea>
+ 
+                                 </div>
+ 
+                         </div>
+ 
+                 </div>
+ 
+                 
+ 
+                 <div class="flex gap-4">
+ 
+                         <button type="submit" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
+ 
+                                 Create Shipment
+ 
+                         </button>
+ 
+                         <a href="{% url 'dashboard' %}" class="bg-gray-200 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-300 transition">
+ 
+                                 Cancel
+ 
+                         </a>
+ 
+                 </div>
+ 
+         </form>
+ 
+ </div>
+ 
+ {% endblock %}
  
  
