@@ -664,13 +664,48 @@
     // Always add destination as final point
     remainingWaypoints.push(receiverCoords);
     
-    // Draw remaining route line
-    var remainingRoute = L.polyline(remainingWaypoints, {
-        color: mapSettings.routeRemainingColor,
-        weight: mapSettings.routeRemainingWidth,
-        dashArray: '10, 6',
-        opacity: mapSettings.routeOpacity * 0.85
-    }).addTo(map);
+    // Request a road-following driving route instead of connecting locations
+    // with a straight line that can cross rivers or inaccessible borders.
+    var remainingRoute = null;
+    var roadRoutePoints = remainingWaypoints;
+    var roadRouteDistance = null;
+    var routeUrl = 'https://router.project-osrm.org/route/v1/driving/' +
+        remainingWaypoints.map(function(point) {
+            return point[1] + ',' + point[0];
+        }).join(';') +
+        '?overview=full&geometries=geojson&steps=false';
+
+    fetch(routeUrl)
+        .then(function(response) {
+            if (!response.ok) throw new Error('Routing service returned ' + response.status);
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.code !== 'Ok' || !data.routes || !data.routes.length) {
+                throw new Error('No drivable route returned');
+            }
+
+            roadRoutePoints = data.routes[0].geometry.coordinates.map(function(point) {
+                return [point[1], point[0]];
+            });
+            roadRouteDistance = data.routes[0].distance / 1000;
+            remainingRoute = L.polyline(roadRoutePoints, {
+                color: mapSettings.routeRemainingColor,
+                weight: mapSettings.routeRemainingWidth,
+                dashArray: '10, 6',
+                opacity: mapSettings.routeOpacity * 0.85
+            }).addTo(map);
+            updateRouteDistance(roadRouteDistance);
+        })
+        .catch(function(error) {
+            console.warn('Road route unavailable; showing planned corridor:', error);
+            remainingRoute = L.polyline(remainingWaypoints, {
+                color: mapSettings.routeRemainingColor,
+                weight: mapSettings.routeRemainingWidth,
+                dashArray: '10, 6',
+                opacity: mapSettings.routeOpacity * 0.85
+            }).addTo(map);
+        });
     
     // Add circle markers at remaining waypoints with city names
     for (var i = 1; i < remainingWaypoints.length - 1; i++) {
@@ -865,9 +900,26 @@
     var progressPercent = Math.round((completedDist / totalDist) * 100);
     var estimatedHoursRemaining = (remainingDist / 65).toFixed(1);
     
-    // Update distance info in footer
-    document.getElementById('distance-info').innerHTML = 
-        `Total: ${totalDist.toFixed(1)} km | Remaining: ${remainingDist.toFixed(1)} km | Progress: ${progressPercent}%`;
+    function updateRouteDistance(routeDistance) {
+        totalDist = routeDistance;
+        remainingDist = routeDistance * (1 - progress);
+        completedDist = totalDist - remainingDist;
+        progressPercent = Math.round(progress * 100);
+        estimatedHoursRemaining = (remainingDist / 65).toFixed(1);
+
+        document.getElementById('distance-info').innerHTML =
+            `Total: ${totalDist.toFixed(1)} km | Remaining: ${remainingDist.toFixed(1)} km | Progress: ${progressPercent}%`;
+        document.getElementById('total-distance').textContent = totalDist.toFixed(1) + ' km';
+        document.getElementById('completed-distance').textContent = completedDist.toFixed(1) + ' km';
+        document.getElementById('remaining-distance').textContent = remainingDist.toFixed(1) + ' km';
+        document.getElementById('journey-progress').textContent = progressPercent + '%';
+        document.getElementById('progress-bar').style.width = progressPercent + '%';
+        document.getElementById('eta-hours').textContent = estimatedHoursRemaining + ' hrs';
+    }
+
+    // Populate the initial estimate immediately, then replace it with the
+    // driving-route distance when OSRM responds.
+    updateRouteDistance(totalDist);
     
     // ===== UPGRADED: Populate Route Details Cards =====
     document.getElementById('total-distance').textContent = totalDist.toFixed(1) + ' km';
