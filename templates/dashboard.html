@@ -1,637 +1,637 @@
- { %   e x t e n d s   ' b a s e . h t m l '   % } 
+ {% extends 'base.html' %}
  
- { %   l o a d   s t a t i c   % } 
+ {% load static %}
  
  
  
- { %   b l o c k   t i t l e   % } D a s h b o a r d   -   D a i l y F X   D e l i v e r y { %   e n d b l o c k   % } 
+ {% block title %}Dashboard - DailyFX Delivery{% endblock %}
  
  
  
- { %   b l o c k   m a p _ c s s   % } 
+ {% block map_css %}
  
- < ! - -   L e a f l e t   C S S   f o r   d a s h b o a r d   m a p   - - > 
+ <!-- Leaflet CSS for dashboard map -->
  
- < l i n k   r e l = " s t y l e s h e e t "   h r e f = " { %   s t a t i c   ' c s s / l e a f l e t . m i n . c s s '   % } "   / > 
+ <link rel="stylesheet" href="{% static 'css/leaflet.min.css' %}" />
  
- { %   e n d b l o c k   % } 
+ {% endblock %}
  
  
  
- { %   b l o c k   c o n t e n t   % } 
+ {% block content %}
  
- < d i v   c l a s s = " m b - 8 " > 
+ <div class="mb-8">
  
-         < h 1   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0 " > W e l c o m e ,   { {   u s e r . f i r s t _ n a m e | d e f a u l t : u s e r . u s e r n a m e   } } ! < / h 1 > 
+         <h1 class="text-3xl font-bold text-primary-800">Welcome, {{ user.first_name|default:user.username }}!</h1>
  
-         < p   c l a s s = " t e x t - p r i m a r y - 6 0 0 " > M a n a g e   y o u r   s h i p m e n t s   a n d   t r a c k   d e l i v e r i e s < / p > 
+         <p class="text-primary-600">Manage your shipments and track deliveries</p>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   S t a t s   C a r d s   - - > 
+ <!-- Stats Cards -->
  
- < d i v   c l a s s = " g r i d   m d : g r i d - c o l s - 4   g a p - 6   m b - 8 " > 
+ <div class="grid md:grid-cols-4 gap-6 mb-8">
  
-         < d i v   c l a s s = " b g - g r a d i e n t - t o - b r   f r o m - p r i m a r y - 5 0   t o - a c c e n t - 5 0   r o u n d e d - x l   s h a d o w   p - 6   b o r d e r   b o r d e r - p r i m a r y - 1 0 0 " > 
+         <div class="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl shadow p-6 border border-primary-100">
  
-                 < d i v   c l a s s = " f l e x   i t e m s - c e n t e r   j u s t i f y - b e t w e e n " > 
+                 <div class="flex items-center justify-between">
  
-                         < d i v > 
+                         <div>
  
-                                 < p   c l a s s = " t e x t - p r i m a r y - 5 0 0   t e x t - s m " > T o t a l   P a c k a g e s < / p > 
+                                 <p class="text-primary-500 text-sm">Total Packages</p>
  
-                                 < p   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - p r i m a r y - 8 0 0 " > { {   s t a t s . t o t a l   } } < / p > 
+                                 <p class="text-3xl font-bold text-primary-800">{{ stats.total }}</p>
  
-                         < / d i v > 
+                         </div>
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 4 8 - p a c k a g e . s v g '   % } "   a l t = " T o t a l "   c l a s s = " w - 1 2   h - 1 2   o p a c i t y - 7 0 " > 
+                         <img src="{% static 'icons/icons8-color-48-package.svg' %}" alt="Total" class="w-12 h-12 opacity-70">
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
-         < d i v   c l a s s = " b g - y e l l o w - 5 0   r o u n d e d - x l   s h a d o w   p - 6   b o r d e r   b o r d e r - y e l l o w - 2 0 0 " > 
+         <div class="bg-yellow-50 rounded-xl shadow p-6 border border-yellow-200">
  
-                 < d i v   c l a s s = " f l e x   i t e m s - c e n t e r   j u s t i f y - b e t w e e n " > 
+                 <div class="flex items-center justify-between">
  
-                         < d i v > 
+                         <div>
  
-                                 < p   c l a s s = " t e x t - y e l l o w - 6 0 0   t e x t - s m " > P e n d i n g < / p > 
+                                 <p class="text-yellow-600 text-sm">Pending</p>
  
-                                 < p   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - y e l l o w - 7 0 0 " > { {   s t a t s . p e n d i n g   } } < / p > 
+                                 <p class="text-3xl font-bold text-yellow-700">{{ stats.pending }}</p>
  
-                         < / d i v > 
+                         </div>
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 4 8 - c l o c k - - v 1 . s v g '   % } "   a l t = " P e n d i n g "   c l a s s = " w - 1 2   h - 1 2   o p a c i t y - 7 0 " > 
+                         <img src="{% static 'icons/icons8-color-48-clock--v1.svg' %}" alt="Pending" class="w-12 h-12 opacity-70">
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
-         < d i v   c l a s s = " b g - b l u e - 5 0   r o u n d e d - x l   s h a d o w   p - 6   b o r d e r   b o r d e r - b l u e - 2 0 0 " > 
+         <div class="bg-blue-50 rounded-xl shadow p-6 border border-blue-200">
  
-                 < d i v   c l a s s = " f l e x   i t e m s - c e n t e r   j u s t i f y - b e t w e e n " > 
+                 <div class="flex items-center justify-between">
  
-                         < d i v > 
+                         <div>
  
-                                 < p   c l a s s = " t e x t - b l u e - 6 0 0   t e x t - s m " > I n   T r a n s i t < / p > 
+                                 <p class="text-blue-600 text-sm">In Transit</p>
  
-                                 < p   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - b l u e - 7 0 0 " > { {   s t a t s . i n _ t r a n s i t   } } < / p > 
+                                 <p class="text-3xl font-bold text-blue-700">{{ stats.in_transit }}</p>
  
-                         < / d i v > 
+                         </div>
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 4 8 - d e l i v e r y - t r u c k . s v g '   % } "   a l t = " T r a n s i t "   c l a s s = " w - 1 2   h - 1 2   o p a c i t y - 7 0 " > 
+                         <img src="{% static 'icons/icons8-color-48-delivery-truck.svg' %}" alt="Transit" class="w-12 h-12 opacity-70">
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
-         < d i v   c l a s s = " b g - g r e e n - 5 0   r o u n d e d - x l   s h a d o w   p - 6   b o r d e r   b o r d e r - g r e e n - 2 0 0 " > 
+         <div class="bg-green-50 rounded-xl shadow p-6 border border-green-200">
  
-                 < d i v   c l a s s = " f l e x   i t e m s - c e n t e r   j u s t i f y - b e t w e e n " > 
+                 <div class="flex items-center justify-between">
  
-                         < d i v > 
+                         <div>
  
-                                 < p   c l a s s = " t e x t - g r e e n - 6 0 0   t e x t - s m " > D e l i v e r e d < / p > 
+                                 <p class="text-green-600 text-sm">Delivered</p>
  
-                                 < p   c l a s s = " t e x t - 3 x l   f o n t - b o l d   t e x t - g r e e n - 7 0 0 " > { {   s t a t s . d e l i v e r e d   } } < / p > 
+                                 <p class="text-3xl font-bold text-green-700">{{ stats.delivered }}</p>
  
-                         < / d i v > 
+                         </div>
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 4 8 - c h e c k e d - - v 1 . s v g '   % } "   a l t = " D e l i v e r e d "   c l a s s = " w - 1 2   h - 1 2   o p a c i t y - 7 0 " > 
+                         <img src="{% static 'icons/icons8-color-48-checked--v1.svg' %}" alt="Delivered" class="w-12 h-12 opacity-70">
  
-                 < / d i v > 
+                 </div>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   L i v e   M a p   O v e r v i e w   - - > 
+ <!-- Live Map Overview -->
  
- < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   s h a d o w - l g   o v e r f l o w - h i d d e n   m b - 8   b o r d e r   b o r d e r - g r a y - 1 0 0 " > 
+ <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8 border border-gray-100">
  
-         < d i v   c l a s s = " p - 4   b o r d e r - b   f l e x   j u s t i f y - b e t w e e n   i t e m s - c e n t e r   b g - g r a d i e n t - t o - r   f r o m - i n d i g o - 5 0   t o - p u r p l e - 5 0 " > 
+         <div class="p-4 border-b flex justify-between items-center bg-gradient-to-r from-indigo-50 to-purple-50">
  
-                 < h 3   c l a s s = " f o n t - b o l d   t e x t - g r a y - 8 0 0   f l e x   i t e m s - c e n t e r " > 
+                 <h3 class="font-bold text-gray-800 flex items-center">
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 4 - m a p - m a r k e r . s v g '   % } "   a l t = " M a p "   c l a s s = " w - 6   h - 6   m r - 2 " > 
+                         <img src="{% static 'icons/icons8-color-24-map-marker.svg' %}" alt="Map" class="w-6 h-6 mr-2">
  
-                         L i v e   P a c k a g e   L o c a t i o n s 
+                         Live Package Locations
  
-                         < s p a n   c l a s s = " m l - 2   w - 2   h - 2   b g - g r e e n - 5 0 0   r o u n d e d - f u l l   a n i m a t e - p u l s e " > < / s p a n > 
+                         <span class="ml-2 w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
  
-                 < / h 3 > 
+                 </h3>
  
-                 < s p a n   c l a s s = " t e x t - s m   t e x t - g r a y - 5 0 0 " > S h o w i n g   { {   a c t i v e _ p a c k a g e s | l e n g t h | d e f a u l t : " 0 "   } }   a c t i v e   s h i p m e n t s < / s p a n > 
+                 <span class="text-sm text-gray-500">Showing {{ active_packages|length|default:"0" }} active shipments</span>
  
-         < / d i v > 
+         </div>
  
-         < d i v   i d = " d a s h b o a r d - m a p "   s t y l e = " h e i g h t :   3 5 0 p x ; " > < / d i v > 
+         <div id="dashboard-map" style="height: 350px;"></div>
  
-         < d i v   c l a s s = " p - 3   b g - g r a y - 5 0   b o r d e r - t   f l e x   i t e m s - c e n t e r   j u s t i f y - b e t w e e n   t e x t - x s " > 
+         <div class="p-3 bg-gray-50 border-t flex items-center justify-between text-xs">
  
-                 < d i v   c l a s s = " f l e x   i t e m s - c e n t e r   s p a c e - x - 4 " > 
+                 <div class="flex items-center space-x-4">
  
-                         < s p a n   c l a s s = " f l e x   i t e m s - c e n t e r " > < s p a n   c l a s s = " w - 3   h - 3   b g - y e l l o w - 5 0 0   r o u n d e d - f u l l   m r - 1 " > < / s p a n >   P e n d i n g < / s p a n > 
+                         <span class="flex items-center"><span class="w-3 h-3 bg-yellow-500 rounded-full mr-1"></span> Pending</span>
  
-                         < s p a n   c l a s s = " f l e x   i t e m s - c e n t e r " > < s p a n   c l a s s = " w - 3   h - 3   b g - b l u e - 5 0 0   r o u n d e d - f u l l   m r - 1 " > < / s p a n >   I n   T r a n s i t < / s p a n > 
+                         <span class="flex items-center"><span class="w-3 h-3 bg-blue-500 rounded-full mr-1"></span> In Transit</span>
  
-                         < s p a n   c l a s s = " f l e x   i t e m s - c e n t e r " > < s p a n   c l a s s = " w - 3   h - 3   b g - o r a n g e - 5 0 0   r o u n d e d - f u l l   m r - 1 " > < / s p a n >   O u t   f o r   D e l i v e r y < / s p a n > 
+                         <span class="flex items-center"><span class="w-3 h-3 bg-orange-500 rounded-full mr-1"></span> Out for Delivery</span>
  
-                         < s p a n   c l a s s = " f l e x   i t e m s - c e n t e r " > < s p a n   c l a s s = " w - 3   h - 3   b g - g r e e n - 5 0 0   r o u n d e d - f u l l   m r - 1 " > < / s p a n >   D e l i v e r e d < / s p a n > 
+                         <span class="flex items-center"><span class="w-3 h-3 bg-green-500 rounded-full mr-1"></span> Delivered</span>
  
-                 < / d i v > 
+                 </div>
  
-                 < a   h r e f = " { %   u r l   ' t r a c k '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   h o v e r : u n d e r l i n e " > O p e n   F u l l   T r a c k e r   → < / a > 
+                 <a href="{% url 'track' %}" class="text-indigo-600 hover:underline">Open Full Tracker →</a>
  
-         < / d i v > 
+         </div>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   A c t i o n s   &   S e a r c h   - - > 
+ <!-- Actions & Search -->
  
- < d i v   c l a s s = " f l e x   f l e x - c o l   m d : f l e x - r o w   g a p - 4   m b - 8 " > 
+ <div class="flex flex-col md:flex-row gap-4 mb-8">
  
-         < a   h r e f = " { %   u r l   ' c r e a t e _ p a c k a g e '   % } "   c l a s s = " b g - g r a d i e n t - t o - r   f r o m - p r i m a r y - 6 0 0   t o - a c c e n t - 6 0 0   t e x t - w h i t e   p x - 6   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : f r o m - p r i m a r y - 7 0 0   h o v e r : t o - a c c e n t - 7 0 0   t r a n s i t i o n   t e x t - c e n t e r   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   g a p - 2 " > 
+         <a href="{% url 'create_package' %}" class="bg-gradient-to-r from-primary-600 to-accent-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-primary-700 hover:to-accent-700 transition text-center flex items-center justify-center gap-2">
  
-                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 4 - p l u s - m a t h . s v g '   % } "   a l t = " A d d "   c l a s s = " w - 5   h - 5 " >   C r e a t e   N e w   S h i p m e n t 
+                 <img src="{% static 'icons/icons8-color-24-plus-math.svg' %}" alt="Add" class="w-5 h-5"> Create New Shipment
  
-         < / a > 
+         </a>
  
-         < a   h r e f = " { %   u r l   ' p r o f i l e '   % } "   c l a s s = " b g - p r i m a r y - 1 0 0   t e x t - p r i m a r y - 7 0 0   p x - 6   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - p r i m a r y - 2 0 0   t r a n s i t i o n   t e x t - c e n t e r   f l e x   i t e m s - c e n t e r   j u s t i f y - c e n t e r   g a p - 2 " > 
+         <a href="{% url 'profile' %}" class="bg-primary-100 text-primary-700 px-6 py-3 rounded-lg font-semibold hover:bg-primary-200 transition text-center flex items-center justify-center gap-2">
  
-                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 4 - u s e r . s v g '   % } "   a l t = " P r o f i l e "   c l a s s = " w - 5   h - 5 " >   M y   P r o f i l e 
+                 <img src="{% static 'icons/icons8-color-24-user.svg' %}" alt="Profile" class="w-5 h-5"> My Profile
  
-         < / a > 
+         </a>
  
          
  
-         < ! - -   S e a r c h   &   F i l t e r   - - > 
+         <!-- Search & Filter -->
  
-         < f o r m   m e t h o d = " G E T "   c l a s s = " f l e x - 1   f l e x   g a p - 2 " > 
+         <form method="GET" class="flex-1 flex gap-2">
  
-                 < i n p u t   t y p e = " t e x t "   n a m e = " s e a r c h "   v a l u e = " { {   s e a r c h   } } "   p l a c e h o l d e r = " S e a r c h   t r a c k i n g   # ,   n a m e ,   c i t y . . . "   
+                 <input type="text" name="search" value="{{ search }}" placeholder="Search tracking #, name, city..."
  
-                               c l a s s = " f l e x - 1   p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                               class="flex-1 px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                 < s e l e c t   n a m e = " s t a t u s "   c l a s s = " p x - 4   p y - 3   b o r d e r   b o r d e r - p r i m a r y - 2 0 0   r o u n d e d - l g   f o c u s : r i n g - 2   f o c u s : r i n g - p r i m a r y - 5 0 0   b g - w h i t e " > 
+                 <select name="status" class="px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 bg-white">
  
-                         < o p t i o n   v a l u e = " " > A l l   S t a t u s < / o p t i o n > 
+                         <option value="">All Status</option>
  
-                         < o p t i o n   v a l u e = " p e n d i n g "   { %   i f   s t a t u s _ f i l t e r   = =   ' p e n d i n g '   % } s e l e c t e d { %   e n d i f   % } > P e n d i n g < / o p t i o n > 
+                         <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>Pending</option>
  
-                         < o p t i o n   v a l u e = " p r o c e s s i n g "   { %   i f   s t a t u s _ f i l t e r   = =   ' p r o c e s s i n g '   % } s e l e c t e d { %   e n d i f   % } > P r o c e s s i n g < / o p t i o n > 
+                         <option value="processing" {% if status_filter == 'processing' %}selected{% endif %}>Processing</option>
  
-                         < o p t i o n   v a l u e = " i n _ t r a n s i t "   { %   i f   s t a t u s _ f i l t e r   = =   ' i n _ t r a n s i t '   % } s e l e c t e d { %   e n d i f   % } > I n   T r a n s i t < / o p t i o n > 
+                         <option value="in_transit" {% if status_filter == 'in_transit' %}selected{% endif %}>In Transit</option>
  
-                         < o p t i o n   v a l u e = " o u t _ f o r _ d e l i v e r y "   { %   i f   s t a t u s _ f i l t e r   = =   ' o u t _ f o r _ d e l i v e r y '   % } s e l e c t e d { %   e n d i f   % } > O u t   f o r   D e l i v e r y < / o p t i o n > 
+                         <option value="out_for_delivery" {% if status_filter == 'out_for_delivery' %}selected{% endif %}>Out for Delivery</option>
  
-                         < o p t i o n   v a l u e = " d e l i v e r e d "   { %   i f   s t a t u s _ f i l t e r   = =   ' d e l i v e r e d '   % } s e l e c t e d { %   e n d i f   % } > D e l i v e r e d < / o p t i o n > 
+                         <option value="delivered" {% if status_filter == 'delivered' %}selected{% endif %}>Delivered</option>
  
-                         < o p t i o n   v a l u e = " c a n c e l l e d "   { %   i f   s t a t u s _ f i l t e r   = =   ' c a n c e l l e d '   % } s e l e c t e d { %   e n d i f   % } > C a n c e l l e d < / o p t i o n > 
+                         <option value="cancelled" {% if status_filter == 'cancelled' %}selected{% endif %}>Cancelled</option>
  
-                 < / s e l e c t > 
+                 </select>
  
-                 < b u t t o n   t y p e = " s u b m i t "   c l a s s = " b g - p r i m a r y - 6 0 0   t e x t - w h i t e   p x - 6   p y - 3   r o u n d e d - l g   f o n t - s e m i b o l d   h o v e r : b g - p r i m a r y - 7 0 0   t r a n s i t i o n " > 
+                 <button type="submit" class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
  
-                         � � 
+                         ��
  
-                 < / b u t t o n > 
+                 </button>
  
-                 { %   i f   s e a r c h   o r   s t a t u s _ f i l t e r   % } 
+                 {% if search or status_filter %}
  
-                 < a   h r e f = " { %   u r l   ' d a s h b o a r d '   % } "   c l a s s = " b g - g r a y - 2 0 0   t e x t - g r a y - 7 0 0   p x - 4   p y - 3   r o u n d e d - l g   h o v e r : b g - g r a y - 3 0 0   t r a n s i t i o n " > ✕ < / a > 
+                 <a href="{% url 'dashboard' %}" class="bg-gray-200 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-300 transition">✕</a>
  
-                 { %   e n d i f   % } 
+                 {% endif %}
  
-         < / f o r m > 
+         </form>
  
- < / d i v > 
+ </div>
  
  
  
- < ! - -   R e c e n t   P a c k a g e s   - - > 
+ <!-- Recent Packages -->
  
- < d i v   c l a s s = " b g - w h i t e   r o u n d e d - x l   s h a d o w - l g   o v e r f l o w - h i d d e n   b o r d e r   b o r d e r - g r a y - 1 0 0 " > 
+ <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
  
-         < d i v   c l a s s = " p - 6   b o r d e r - b   b g - g r a d i e n t - t o - r   f r o m - g r a y - 5 0   t o - w h i t e " > 
+         <div class="p-6 border-b bg-gradient-to-r from-gray-50 to-white">
  
-                 < h 2   c l a s s = " t e x t - x l   f o n t - b o l d   t e x t - g r a y - 8 0 0   f l e x   i t e m s - c e n t e r " > 
+                 <h2 class="text-xl font-bold text-gray-800 flex items-center">
  
-                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 4 - c a r d b o a r d - b o x . s v g '   % } "   a l t = " P a c k a g e s "   c l a s s = " w - 6   h - 6   m r - 2 " > 
+                         <img src="{% static 'icons/icons8-color-24-cardboard-box.svg' %}" alt="Packages" class="w-6 h-6 mr-2">
  
-                         Y o u r   S h i p m e n t s 
+                         Your Shipments
  
-                 < / h 2 > 
+                 </h2>
  
-         < / d i v > 
+         </div>
  
          
  
-         < d i v   c l a s s = " o v e r f l o w - x - a u t o " > 
+         <div class="overflow-x-auto">
  
-                 < t a b l e   c l a s s = " w - f u l l " > 
+                 <table class="w-full">
  
-                         < t h e a d   c l a s s = " b g - g r a y - 5 0 " > 
+                         <thead class="bg-gray-50">
  
-                                 < t r > 
+                                 <tr>
  
-                                         < t h   c l a s s = " p x - 6   p y - 3   t e x t - l e f t   t e x t - x s   f o n t - s e m i b o l d   t e x t - g r a y - 6 0 0   u p p e r c a s e " > T r a c k i n g   # < / t h > 
+                                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Tracking #</th>
  
-                                         < t h   c l a s s = " p x - 6   p y - 3   t e x t - l e f t   t e x t - x s   f o n t - s e m i b o l d   t e x t - g r a y - 6 0 0   u p p e r c a s e " > R e c e i v e r < / t h > 
+                                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Receiver</th>
  
-                                         < t h   c l a s s = " p x - 6   p y - 3   t e x t - l e f t   t e x t - x s   f o n t - s e m i b o l d   t e x t - g r a y - 6 0 0   u p p e r c a s e " > D e s t i n a t i o n < / t h > 
+                                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Destination</th>
  
-                                         < t h   c l a s s = " p x - 6   p y - 3   t e x t - l e f t   t e x t - x s   f o n t - s e m i b o l d   t e x t - g r a y - 6 0 0   u p p e r c a s e " > S t a t u s < / t h > 
+                                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Status</th>
  
-                                         < t h   c l a s s = " p x - 6   p y - 3   t e x t - l e f t   t e x t - x s   f o n t - s e m i b o l d   t e x t - g r a y - 6 0 0   u p p e r c a s e " > D a t e < / t h > 
+                                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Date</th>
  
-                                         < t h   c l a s s = " p x - 6   p y - 3   t e x t - l e f t   t e x t - x s   f o n t - s e m i b o l d   t e x t - g r a y - 6 0 0   u p p e r c a s e " > A c t i o n s < / t h > 
+                                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Actions</th>
  
-                                 < / t r > 
+                                 </tr>
  
-                         < / t h e a d > 
+                         </thead>
  
-                         < t b o d y   c l a s s = " d i v i d e - y   d i v i d e - g r a y - 1 0 0 " > 
+                         <tbody class="divide-y divide-gray-100">
  
-                                 { %   f o r   p a c k a g e   i n   p a c k a g e s   % } 
+                                 {% for package in packages %}
  
-                                 < t r   c l a s s = " h o v e r : b g - i n d i g o - 5 0   t r a n s i t i o n " > 
+                                 <tr class="hover:bg-indigo-50 transition">
  
-                                         < t d   c l a s s = " p x - 6   p y - 4 " > 
+                                         <td class="px-6 py-4">
  
-                                                 < a   h r e f = " { %   u r l   ' t r a c k '   % } ? q = { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } "   c l a s s = " t e x t - i n d i g o - 6 0 0   f o n t - m o n o   f o n t - s e m i b o l d   h o v e r : u n d e r l i n e   f l e x   i t e m s - c e n t e r   g a p - 2 " > 
+                                                 <a href="{% url 'track' %}?q={{ package.tracking_number }}" class="text-indigo-600 font-mono font-semibold hover:underline flex items-center gap-2">
  
-                                                         < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 0 - g p s - d e v i c e . s v g '   % } "   a l t = " T r a c k "   c l a s s = " w - 5   h - 5 " > 
+                                                         <img src="{% static 'icons/icons8-color-20-gps-device.svg' %}" alt="Track" class="w-5 h-5">
  
-                                                         { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } 
+                                                         {{ package.tracking_number }}
  
-                                                 < / a > 
+                                                 </a>
  
-                                         < / t d > 
+                                         </td>
  
-                                         < t d   c l a s s = " p x - 6   p y - 4   t e x t - g r a y - 8 0 0 " > { {   p a c k a g e . r e c e i v e r _ n a m e   } } < / t d > 
+                                         <td class="px-6 py-4 text-gray-800">{{ package.receiver_name }}</td>
  
-                                         < t d   c l a s s = " p x - 6   p y - 4   t e x t - g r a y - 6 0 0 " > { {   p a c k a g e . r e c e i v e r _ c i t y   } } < / t d > 
+                                         <td class="px-6 py-4 text-gray-600">{{ package.receiver_city }}</td>
  
-                                         < t d   c l a s s = " p x - 6   p y - 4 " > 
+                                         <td class="px-6 py-4">
  
-                                                 < s p a n   c l a s s = " p x - 3   p y - 1   r o u n d e d - f u l l   t e x t - x s   f o n t - s e m i b o l d 
+                                                 <span class="px-3 py-1 rounded-full text-xs font-semibold
  
-                                                         { %   i f   p a c k a g e . s t a t u s   = =   ' d e l i v e r e d '   % } b g - g r e e n - 1 0 0   t e x t - g r e e n - 7 0 0 
+                                                         {% if package.status == 'delivered' %}bg-green-100 text-green-700
  
-                                                         { %   e l i f   p a c k a g e . s t a t u s   = =   ' i n _ t r a n s i t '   % } b g - b l u e - 1 0 0   t e x t - b l u e - 7 0 0 
+                                                         {% elif package.status == 'in_transit' %}bg-blue-100 text-blue-700
  
-                                                         { %   e l i f   p a c k a g e . s t a t u s   = =   ' o u t _ f o r _ d e l i v e r y '   % } b g - o r a n g e - 1 0 0   t e x t - o r a n g e - 7 0 0 
+                                                         {% elif package.status == 'out_for_delivery' %}bg-orange-100 text-orange-700
  
-                                                         { %   e l i f   p a c k a g e . s t a t u s   = =   ' p e n d i n g '   % } b g - y e l l o w - 1 0 0   t e x t - y e l l o w - 7 0 0 
+                                                         {% elif package.status == 'pending' %}bg-yellow-100 text-yellow-700
  
-                                                         { %   e l i f   p a c k a g e . s t a t u s   = =   ' c a n c e l l e d '   % } b g - r e d - 1 0 0   t e x t - r e d - 7 0 0 
+                                                         {% elif package.status == 'cancelled' %}bg-red-100 text-red-700
  
-                                                         { %   e l s e   % } b g - g r a y - 1 0 0   t e x t - g r a y - 7 0 0 { %   e n d i f   % } " > 
+                                                         {% else %}bg-gray-100 text-gray-700{% endif %}">
  
-                                                         { {   p a c k a g e . g e t _ s t a t u s _ d i s p l a y   } } 
+                                                         {{ package.get_status_display }}
  
-                                                 < / s p a n > 
+                                                 </span>
  
-                                         < / t d > 
+                                         </td>
  
-                                         < t d   c l a s s = " p x - 6   p y - 4   t e x t - g r a y - 5 0 0   t e x t - s m " > { {   p a c k a g e . c r e a t e d _ a t | d a t e : " M   j ,   Y "   } } < / t d > 
+                                         <td class="px-6 py-4 text-gray-500 text-sm">{{ package.created_at|date:"M j, Y" }}</td>
  
-                                         < t d   c l a s s = " p x - 6   p y - 4 " > 
+                                         <td class="px-6 py-4">
  
-                                                 < d i v   c l a s s = " f l e x   g a p - 2 " > 
+                                                 <div class="flex gap-2">
  
-                                                         < a   h r e f = " { %   u r l   ' p a c k a g e _ d e t a i l '   p a c k a g e . i d   % } "   c l a s s = " p - 2   h o v e r : b g - i n d i g o - 1 0 0   r o u n d e d - l g   t r a n s i t i o n "   t i t l e = " V i e w " > 
+                                                         <a href="{% url 'package_detail' package.id %}" class="p-2 hover:bg-indigo-100 rounded-lg transition" title="View">
  
-                                                                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 0 - v i s i b l e . s v g '   % } "   a l t = " V i e w " > 
+                                                                 <img src="{% static 'icons/icons8-color-20-visible.svg' %}" alt="View">
  
-                                                         < / a > 
+                                                         </a>
  
-                                                         < a   h r e f = " { %   u r l   ' t r a c k '   % } ? q = { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } "   c l a s s = " p - 2   h o v e r : b g - i n d i g o - 1 0 0   r o u n d e d - l g   t r a n s i t i o n "   t i t l e = " T r a c k " > 
+                                                         <a href="{% url 'track' %}?q={{ package.tracking_number }}" class="p-2 hover:bg-indigo-100 rounded-lg transition" title="Track">
  
-                                                                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 0 - m a r k e r . s v g '   % } "   a l t = " T r a c k " > 
+                                                                 <img src="{% static 'icons/icons8-color-20-marker.svg' %}" alt="Track">
  
-                                                         < / a > 
+                                                         </a>
  
-                                                         { %   i f   p a c k a g e . s t a t u s   = =   ' p e n d i n g '   % } 
+                                                         {% if package.status == 'pending' %}
  
-                                                         < a   h r e f = " { %   u r l   ' p a c k a g e _ e d i t '   p a c k a g e . i d   % } "   c l a s s = " p - 2   h o v e r : b g - i n d i g o - 1 0 0   r o u n d e d - l g   t r a n s i t i o n "   t i t l e = " E d i t " > 
+                                                         <a href="{% url 'package_edit' package.id %}" class="p-2 hover:bg-indigo-100 rounded-lg transition" title="Edit">
  
-                                                                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 2 0 - e d i t - - v 1 . s v g '   % } "   a l t = " E d i t " > 
+                                                                 <img src="{% static 'icons/icons8-color-20-edit--v1.svg' %}" alt="Edit">
  
-                                                         < / a > 
+                                                         </a>
  
-                                                         { %   e n d i f   % } 
+                                                         {% endif %}
  
-                                                 < / d i v > 
+                                                 </div>
  
-                                         < / t d > 
+                                         </td>
  
-                                 < / t r > 
+                                 </tr>
  
-                                 { %   e m p t y   % } 
+                                 {% empty %}
  
-                                 < t r > 
+                                 <tr>
  
-                                         < t d   c o l s p a n = " 6 "   c l a s s = " p x - 6   p y - 1 2   t e x t - c e n t e r   t e x t - g r a y - 5 0 0 " > 
+                                         <td colspan="6" class="px-6 py-12 text-center text-gray-500">
  
-                                                 < i m g   s r c = " { %   s t a t i c   ' i c o n s / i c o n s 8 - c o l o r - 6 4 - e m p t y - b o x . s v g '   % } "   a l t = " N o   p a c k a g e s "   c l a s s = " m x - a u t o   m b - 4 " > 
+                                                 <img src="{% static 'icons/icons8-color-64-empty-box.svg' %}" alt="No packages" class="mx-auto mb-4">
  
-                                                 { %   i f   s e a r c h   o r   s t a t u s _ f i l t e r   % } 
+                                                 {% if search or status_filter %}
  
-                                                 < p > N o   p a c k a g e s   f o u n d   m a t c h i n g   y o u r   c r i t e r i a . < / p > 
+                                                 <p>No packages found matching your criteria.</p>
  
-                                                 < a   h r e f = " { %   u r l   ' d a s h b o a r d '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   h o v e r : u n d e r l i n e " > C l e a r   f i l t e r s < / a > 
+                                                 <a href="{% url 'dashboard' %}" class="text-indigo-600 hover:underline">Clear filters</a>
  
-                                                 { %   e l s e   % } 
+                                                 {% else %}
  
-                                                 < p > N o   s h i p m e n t s   y e t . < / p > 
+                                                 <p>No shipments yet.</p>
  
-                                                 < a   h r e f = " { %   u r l   ' c r e a t e _ p a c k a g e '   % } "   c l a s s = " t e x t - i n d i g o - 6 0 0   h o v e r : u n d e r l i n e " > C r e a t e   y o u r   f i r s t   s h i p m e n t < / a > 
+                                                 <a href="{% url 'create_package' %}" class="text-indigo-600 hover:underline">Create your first shipment</a>
  
-                                                 { %   e n d i f   % } 
+                                                 {% endif %}
  
-                                         < / t d > 
+                                         </td>
  
-                                 < / t r > 
+                                 </tr>
  
-                                 { %   e n d f o r   % } 
+                                 {% endfor %}
  
-                         < / t b o d y > 
+                         </tbody>
  
-                 < / t a b l e > 
+                 </table>
  
-         < / d i v > 
+         </div>
  
          
  
-         < ! - -   P a g i n a t i o n   - - > 
+         <!-- Pagination -->
  
-         { %   i f   p a c k a g e s . h a s _ o t h e r _ p a g e s   % } 
+         {% if packages.has_other_pages %}
  
-         < d i v   c l a s s = " p - 4   b o r d e r - t   f l e x   j u s t i f y - c e n t e r   g a p - 2 " > 
+         <div class="p-4 border-t flex justify-center gap-2">
  
-                 { %   i f   p a c k a g e s . h a s _ p r e v i o u s   % } 
+                 {% if packages.has_previous %}
  
-                 < a   h r e f = " ? p a g e = { {   p a c k a g e s . p r e v i o u s _ p a g e _ n u m b e r   } } { %   i f   s e a r c h   % } & s e a r c h = { {   s e a r c h   } } { %   e n d i f   % } { %   i f   s t a t u s _ f i l t e r   % } & s t a t u s = { {   s t a t u s _ f i l t e r   } } { %   e n d i f   % } "   
+                 <a href="?page={{ packages.previous_page_number }}{% if search %}&search={{ search }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}"
  
-                       c l a s s = " p x - 4   p y - 2   b g - g r a y - 1 0 0   t e x t - g r a y - 7 0 0   r o u n d e d - l g   h o v e r : b g - g r a y - 2 0 0   t r a n s i t i o n " > 
+                       class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
  
-                         ←   P r e v i o u s 
+                         ← Previous
  
-                 < / a > 
+                 </a>
  
-                 { %   e n d i f   % } 
+                 {% endif %}
  
                  
  
-                 < s p a n   c l a s s = " p x - 4   p y - 2   t e x t - g r a y - 6 0 0 " > 
+                 <span class="px-4 py-2 text-gray-600">
  
-                         P a g e   { {   p a c k a g e s . n u m b e r   } }   o f   { {   p a c k a g e s . p a g i n a t o r . n u m _ p a g e s   } } 
+                         Page {{ packages.number }} of {{ packages.paginator.num_pages }}
  
-                 < / s p a n > 
- 
-                 
- 
-                 { %   i f   p a c k a g e s . h a s _ n e x t   % } 
- 
-                 < a   h r e f = " ? p a g e = { {   p a c k a g e s . n e x t _ p a g e _ n u m b e r   } } { %   i f   s e a r c h   % } & s e a r c h = { {   s e a r c h   } } { %   e n d i f   % } { %   i f   s t a t u s _ f i l t e r   % } & s t a t u s = { {   s t a t u s _ f i l t e r   } } { %   e n d i f   % } "   
- 
-                       c l a s s = " p x - 4   p y - 2   b g - g r a y - 1 0 0   t e x t - g r a y - 7 0 0   r o u n d e d - l g   h o v e r : b g - g r a y - 2 0 0   t r a n s i t i o n " > 
- 
-                         N e x t   → 
- 
-                 < / a > 
- 
-                 { %   e n d i f   % } 
- 
-         < / d i v > 
- 
-         { %   e n d i f   % } 
- 
- < / d i v > 
- 
- { %   e n d b l o c k   % } 
- 
- 
- 
- { %   b l o c k   m a p _ j s   % } 
- 
- < ! - -   L e a f l e t   J S   -   l o a d e d   w i t h   d e f e r   f o r   p e r f o r m a n c e   - - > 
- 
- < s c r i p t   s r c = " { %   s t a t i c   ' j s / l e a f l e t . m i n . j s '   % } "   d e f e r > < / s c r i p t > 
- 
- { %   e n d b l o c k   % } 
- 
- 
- 
- { %   b l o c k   e x t r a _ j s   % } 
- 
- < s c r i p t > 
- 
-         / /   W a i t   f o r   L e a f l e t   t o   l o a d   b e f o r e   i n i t i a l i z i n g   m a p 
- 
-         f u n c t i o n   i n i t D a s h b o a r d M a p ( )   { 
- 
-                 i f   ( t y p e o f   L   = = =   ' u n d e f i n e d ' )   { 
- 
-                         s e t T i m e o u t ( i n i t D a s h b o a r d M a p ,   5 0 ) ; 
- 
-                         r e t u r n ; 
- 
-                 } 
+                 </span>
  
                  
  
-         / /   N o r w a y   c i t y   c o o r d i n a t e s 
+                 {% if packages.has_next %}
  
-         v a r   u k C i t i e s   =   { 
+                 <a href="?page={{ packages.next_page_number }}{% if search %}&search={{ search }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}"
  
-                 ' L o n d o n ' :   [ 5 1 . 5 0 7 4 ,   - 0 . 1 2 7 8 ] ,   ' M a n c h e s t e r ' :   [ 5 3 . 4 8 0 8 ,   - 2 . 2 4 2 6 ] ,   ' B i r m i n g h a m ' :   [ 5 2 . 4 8 6 2 ,   - 1 . 8 9 0 4 ] , 
+                       class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
  
-                 ' L e e d s ' :   [ 5 3 . 8 0 0 8 ,   - 1 . 5 4 9 1 ] ,   ' G l a s g o w ' :   [ 5 5 . 8 6 4 2 ,   - 4 . 2 5 1 8 ] ,   ' E d i n b u r g h ' :   [ 5 5 . 9 5 3 3 ,   - 3 . 1 8 8 3 ] , 
+                         Next →
  
-                 ' L i v e r p o o l ' :   [ 5 3 . 4 0 8 4 ,   - 2 . 9 9 1 6 ] ,   ' B r i s t o l ' :   [ 5 1 . 4 5 4 5 ,   - 2 . 5 8 7 9 ] ,   ' C a r d i f f ' :   [ 5 1 . 4 8 1 6 ,   - 3 . 1 7 9 1 ] , 
+                 </a>
  
-                 ' B e l f a s t ' :   [ 5 4 . 5 9 7 3 ,   - 5 . 9 3 0 1 ] ,   ' S h e f f i e l d ' :   [ 5 3 . 3 8 1 1 ,   - 1 . 4 7 0 1 ] ,   ' N e w c a s t l e ' :   [ 5 4 . 9 7 8 3 ,   - 1 . 6 1 7 8 ] , 
+                 {% endif %}
  
-                 ' N o t t i n g h a m ' :   [ 5 2 . 9 5 4 8 ,   - 1 . 1 5 8 1 ] ,   ' S o u t h a m p t o n ' :   [ 5 0 . 9 0 9 7 ,   - 1 . 4 0 4 4 ] ,   ' P l y m o u t h ' :   [ 5 0 . 3 7 5 5 ,   - 4 . 1 4 2 7 ] 
+         </div>
  
-         } ; 
+         {% endif %}
  
-         
+ </div>
  
-         / /   I n i t i a l i z e   d a s h b o a r d   m a p 
+ {% endblock %}
  
-         v a r   d a s h M a p   =   L . m a p ( ' d a s h b o a r d - m a p ' ) . s e t V i e w ( [ 5 4 . 0 ,   - 2 . 0 ] ,   6 ) ; 
  
-         L . t i l e L a y e r ( ' h t t p s : / / { s } . t i l e . o p e n s t r e e t m a p . o r g / { z } / { x } / { y } . p n g ' ,   { 
  
-                 a t t r i b u t i o n :   ' ©   O p e n S t r e e t M a p ' 
+ {% block map_js %}
  
-         } ) . a d d T o ( d a s h M a p ) ; 
+ <!-- Leaflet JS - loaded with defer for performance -->
  
-         
+ <script src="{% static 'js/leaflet.min.js' %}" defer></script>
  
-         / /   S t a t u s   c o l o r s 
+ {% endblock %}
  
-         v a r   s t a t u s C o l o r s   =   { 
  
-                 ' p e n d i n g ' :   ' # e a b 3 0 8 ' , 
  
-                 ' p r o c e s s i n g ' :   ' # 8 b 5 c f 6 ' , 
+ {% block extra_js %}
  
-                 ' i n _ t r a n s i t ' :   ' # 3 b 8 2 f 6 ' , 
+ <script>
  
-                 ' o u t _ f o r _ d e l i v e r y ' :   ' # f 9 7 3 1 6 ' , 
+         // Wait for Leaflet to load before initializing map
  
-                 ' d e l i v e r e d ' :   ' # 2 2 c 5 5 e ' , 
+         function initDashboardMap() {
  
-                 ' c a n c e l l e d ' :   ' # e f 4 4 4 4 ' 
+                 if (typeof L === 'undefined') {
  
-         } ; 
+                         setTimeout(initDashboardMap, 50);
  
-         
+                         return;
  
-         / /   P a c k a g e   i c o n   c r e a t o r 
+                 }
  
-         f u n c t i o n   c r e a t e P a c k a g e I c o n ( s t a t u s ,   t r a c k i n g N u m )   { 
+                 
  
-                 v a r   c o l o r   =   s t a t u s C o l o r s [ s t a t u s ]   | |   ' # 6 b 7 2 8 0 ' ; 
+         // Norway city coordinates
  
-                 r e t u r n   L . d i v I c o n ( { 
+         var ukCities = {
  
-                         c l a s s N a m e :   ' p a c k a g e - m a r k e r ' , 
+                 'London': [51.5074, -0.1278], 'Manchester': [53.4808, -2.2426], 'Birmingham': [52.4862, -1.8904],
  
-                         h t m l :   ` < d i v   s t y l e = " p o s i t i o n : r e l a t i v e ; " > 
+                 'Leeds': [53.8008, -1.5491], 'Glasgow': [55.8642, -4.2518], 'Edinburgh': [55.9533, -3.1883],
  
-                                 < d i v   s t y l e = " b a c k g r o u n d : $ { c o l o r } ; w i d t h : 3 6 p x ; h e i g h t : 3 6 p x ; b o r d e r - r a d i u s : 5 0 % ; d i s p l a y : f l e x ; a l i g n - i t e m s : c e n t e r ; j u s t i f y - c o n t e n t : c e n t e r ; b o r d e r : 3 p x   s o l i d   w h i t e ; b o x - s h a d o w : 0   2 p x   8 p x   r g b a ( 0 , 0 , 0 , 0 . 3 ) ; " > 
+                 'Liverpool': [53.4084, -2.9916], 'Bristol': [51.4545, -2.5879], 'Cardiff': [51.4816, -3.1791],
  
-                                         < s p a n   s t y l e = " f o n t - s i z e : 1 8 p x ; " > � � < / s p a n > 
+                 'Belfast': [54.5973, -5.9301], 'Sheffield': [53.3811, -1.4701], 'Newcastle': [54.9783, -1.6178],
  
-                                 < / d i v > 
+                 'Nottingham': [52.9548, -1.1581], 'Southampton': [50.9097, -1.4044], 'Plymouth': [50.3755, -4.1427]
  
-                                 < d i v   s t y l e = " p o s i t i o n : a b s o l u t e ; t o p : - 8 p x ; r i g h t : - 8 p x ; b a c k g r o u n d : # e f 4 4 4 4 ; c o l o r : w h i t e ; f o n t - s i z e : 1 0 p x ; p a d d i n g : 2 p x   5 p x ; b o r d e r - r a d i u s : 1 0 p x ; f o n t - w e i g h t : b o l d ; " > 
- 
-                                         $ { t r a c k i n g N u m . s l i c e ( - 4 ) } 
- 
-                                 < / d i v > 
- 
-                         < / d i v > ` , 
- 
-                         i c o n S i z e :   [ 3 6 ,   3 6 ] , 
- 
-                         i c o n A n c h o r :   [ 1 8 ,   1 8 ] 
- 
-                 } ) ; 
- 
-         } 
+         };
  
          
  
-         / /   A d d   m a r k e r s   f o r   e a c h   a c t i v e   p a c k a g e 
+         // Initialize dashboard map
  
-         v a r   b o u n d s   =   [ ] ; 
+         var dashMap = L.map('dashboard-map').setView([54.0, -2.0], 6);
  
-         { %   f o r   p a c k a g e   i n   a c t i v e _ p a c k a g e s   % } 
+         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
  
-         ( f u n c t i o n ( )   { 
+                 attribution: '© OpenStreetMap'
  
-                 v a r   c i t y   =   ' { {   p a c k a g e . r e c e i v e r _ c i t y   } } ' ; 
- 
-                 v a r   c o o r d s   =   u k C i t i e s [ c i t y ] ; 
- 
-                 i f   ( ! c o o r d s )   { 
- 
-                         / /   T r y   t o   f i n d   p a r t i a l   m a t c h 
- 
-                         f o r   ( v a r   c   i n   u k C i t i e s )   { 
- 
-                                 i f   ( c i t y . t o L o w e r C a s e ( ) . i n c l u d e s ( c . t o L o w e r C a s e ( ) )   | |   c . t o L o w e r C a s e ( ) . i n c l u d e s ( c i t y . t o L o w e r C a s e ( ) ) )   { 
- 
-                                         c o o r d s   =   u k C i t i e s [ c ] ; 
- 
-                                         b r e a k ; 
- 
-                                 } 
- 
-                         } 
- 
-                 } 
- 
-                 i f   ( ! c o o r d s )   c o o r d s   =   [ 5 1 . 5   +   ( M a t h . r a n d o m ( ) - 0 . 5 ) * 2 ,   - 1 . 5   +   ( M a t h . r a n d o m ( ) - 0 . 5 ) * 2 ] ;   / /   R a n d o m   N o r w a y   l o c a t i o n 
- 
- 
- 
-                 v a r   i c o n   =   c r e a t e P a c k a g e I c o n ( ' { {   p a c k a g e . s t a t u s   } } ' ,   ' { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } ' ) ; 
- 
-                 v a r   m a r k e r   =   L . m a r k e r ( c o o r d s ,   { i c o n :   i c o n } ) . a d d T o ( d a s h M a p ) ; 
- 
-                 m a r k e r . b i n d P o p u p ( ` 
- 
-                         < d i v   s t y l e = " m i n - w i d t h : 2 0 0 p x ; " > 
- 
-                                 < s t r o n g   s t y l e = " f o n t - s i z e : 1 4 p x ; " > � �   { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } < / s t r o n g > < b r > 
- 
-                                 < s p a n   s t y l e = " c o l o r : # 6 6 6 ; " > T o :   { {   p a c k a g e . r e c e i v e r _ n a m e   } } < / s p a n > < b r > 
- 
-                                 < s p a n   s t y l e = " c o l o r : # 6 6 6 ; " > { {   p a c k a g e . r e c e i v e r _ c i t y   } } < / s p a n > < b r > 
- 
-                                 < s p a n   s t y l e = " d i s p l a y : i n l i n e - b l o c k ; m a r g i n - t o p : 5 p x ; p a d d i n g : 3 p x   8 p x ; b o r d e r - r a d i u s : 1 0 p x ; f o n t - s i z e : 1 1 p x ; b a c k g r o u n d : $ { s t a t u s C o l o r s [ ' { {   p a c k a g e . s t a t u s   } } ' ] } ; c o l o r : w h i t e ; " > 
- 
-                                         { {   p a c k a g e . s t a t u s | t i t l e   } } 
- 
-                                 < / s p a n > < b r > 
- 
-                                 < a   h r e f = " { %   u r l   ' t r a c k '   % } ? q = { {   p a c k a g e . t r a c k i n g _ n u m b e r   } } "   s t y l e = " c o l o r : # 4 f 4 6 e 5 ; f o n t - s i z e : 1 2 p x ; " > V i e w   D e t a i l s   → < / a > 
- 
-                         < / d i v > 
- 
-                 ` ) ; 
- 
-                 b o u n d s . p u s h ( c o o r d s ) ; 
- 
-         } ) ( ) ; 
- 
-         { %   e n d f o r   % } 
- 
- 
- 
-         / /   F i t   m a p   t o   s h o w   a l l   m a r k e r s 
- 
-         i f   ( b o u n d s . l e n g t h   >   0 )   { 
- 
-                 d a s h M a p . f i t B o u n d s ( b o u n d s ,   { p a d d i n g :   [ 3 0 ,   3 0 ] ,   m a x Z o o m :   1 0 } ) ; 
- 
-         } 
+         }).addTo(dashMap);
  
          
  
-         }   / /   e n d   i n i t D a s h b o a r d M a p 
+         // Status colors
+ 
+         var statusColors = {
+ 
+                 'pending': '#eab308',
+ 
+                 'processing': '#8b5cf6',
+ 
+                 'in_transit': '#3b82f6',
+ 
+                 'out_for_delivery': '#f97316',
+ 
+                 'delivered': '#22c55e',
+ 
+                 'cancelled': '#ef4444'
+ 
+         };
  
          
  
-         / /   S t a r t   m a p   i n i t i a l i z a t i o n   w h e n   D O M   i s   r e a d y 
+         // Package icon creator
  
-         i f   ( d o c u m e n t . r e a d y S t a t e   = = =   ' l o a d i n g ' )   { 
+         function createPackageIcon(status, trackingNum) {
  
-                 d o c u m e n t . a d d E v e n t L i s t e n e r ( ' D O M C o n t e n t L o a d e d ' ,   i n i t D a s h b o a r d M a p ) ; 
+                 var color = statusColors[status] || '#6b7280';
  
-         }   e l s e   { 
+                 return L.divIcon({
  
-                 i n i t D a s h b o a r d M a p ( ) ; 
+                         className: 'package-marker',
  
-         } 
+                         html: `<div style="position:relative;">
  
- < / s c r i p t > 
+                                 <div style="background:${color};width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.3);">
  
- { %   e n d b l o c k   % } 
+                                         <span style="font-size:18px;">��</span>
+ 
+                                 </div>
+ 
+                                 <div style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:white;font-size:10px;padding:2px 5px;border-radius:10px;font-weight:bold;">
+ 
+                                         ${trackingNum.slice(-4)}
+ 
+                                 </div>
+ 
+                         </div>`,
+ 
+                         iconSize: [36, 36],
+ 
+                         iconAnchor: [18, 18]
+ 
+                 });
+ 
+         }
+ 
+         
+ 
+         // Add markers for each active package
+ 
+         var bounds = [];
+ 
+         {% for package in active_packages %}
+ 
+         (function() {
+ 
+                 var city = '{{ package.receiver_city }}';
+ 
+                 var coords = ukCities[city];
+ 
+                 if (!coords) {
+ 
+                         // Try to find partial match
+ 
+                         for (var c in ukCities) {
+ 
+                                 if (city.toLowerCase().includes(c.toLowerCase()) || c.toLowerCase().includes(city.toLowerCase())) {
+ 
+                                         coords = ukCities[c];
+ 
+                                         break;
+ 
+                                 }
+ 
+                         }
+ 
+                 }
+ 
+                 if (!coords) coords = [51.5 + (Math.random()-0.5)*2, -1.5 + (Math.random()-0.5)*2]; // Random Norway location
+ 
+ 
+ 
+                 var icon = createPackageIcon('{{ package.status }}', '{{ package.tracking_number }}');
+ 
+                 var marker = L.marker(coords, {icon: icon}).addTo(dashMap);
+ 
+                 marker.bindPopup(`
+ 
+                         <div style="min-width:200px;">
+ 
+                                 <strong style="font-size:14px;">�� {{ package.tracking_number }}</strong><br>
+ 
+                                 <span style="color:#666;">To: {{ package.receiver_name }}</span><br>
+ 
+                                 <span style="color:#666;">{{ package.receiver_city }}</span><br>
+ 
+                                 <span style="display:inline-block;margin-top:5px;padding:3px 8px;border-radius:10px;font-size:11px;background:${statusColors['{{ package.status }}']};color:white;">
+ 
+                                         {{ package.status|title }}
+ 
+                                 </span><br>
+ 
+                                 <a href="{% url 'track' %}?q={{ package.tracking_number }}" style="color:#4f46e5;font-size:12px;">View Details →</a>
+ 
+                         </div>
+ 
+                 `);
+ 
+                 bounds.push(coords);
+ 
+         })();
+ 
+         {% endfor %}
+ 
+ 
+ 
+         // Fit map to show all markers
+ 
+         if (bounds.length > 0) {
+ 
+                 dashMap.fitBounds(bounds, {padding: [30, 30], maxZoom: 10});
+ 
+         }
+ 
+         
+ 
+         } // end initDashboardMap
+ 
+         
+ 
+         // Start map initialization when DOM is ready
+ 
+         if (document.readyState === 'loading') {
+ 
+                 document.addEventListener('DOMContentLoaded', initDashboardMap);
+ 
+         } else {
+ 
+                 initDashboardMap();
+ 
+         }
+ 
+ </script>
+ 
+ {% endblock %}
  
  
