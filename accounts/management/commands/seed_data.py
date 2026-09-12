@@ -164,6 +164,52 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f'✅ Added tracking history and route waypoints'))
         
         # ============================================
+        # CREATE THAILAND → PAKISTAN LIVE SHIPMENT
+        # ============================================
+        dmci5ley, created = Package.objects.get_or_create(
+            tracking_number='DFX-DMCI5LEY',
+            defaults={
+                'sender': user,
+                'sender_name': 'DailyFX Sender',
+                'sender_address': 'Bangkok Distribution Centre',
+                'sender_phone': '+66 2 000 0000',
+                'sender_city': 'Bangkok',
+                'sender_country': 'Thailand',
+                'sender_postcode': '10110',
+                'receiver_name': 'Lahore Recipient',
+                'receiver_address': 'Lahore Distribution Centre',
+                'receiver_phone': '+92 300 0000000',
+                'receiver_city': 'Lahore',
+                'receiver_country': 'Pakistan',
+                'receiver_postcode': '54000',
+                'weight': 2.5,
+                'description': 'International shipment from Thailand to Pakistan',
+                'status': 'in_transit',
+                'estimated_delivery': timezone.now().date() + timedelta(days=5),
+            },
+        )
+
+        if dmci5ley.status == 'pending':
+            dmci5ley.status = 'in_transit'
+            dmci5ley.save(update_fields=['status', 'updated_at'])
+
+        tracking, _ = TrackingHistory.objects.get_or_create(
+            package=dmci5ley,
+            location='Bangkok, Thailand',
+            defaults={
+                'status': 'In Transit',
+                'notes': 'Shipment departed origin and is in transit to Lahore, Pakistan',
+                'latitude': 13.7563,
+                'longitude': 100.5018,
+            },
+        )
+        if tracking.latitude is None or tracking.longitude is None:
+            tracking.latitude = 13.7563
+            tracking.longitude = 100.5018
+            tracking.save(update_fields=['latitude', 'longitude'])
+        self.stdout.write(self.style.SUCCESS('✅ Thailand → Pakistan shipment ready: DFX-DMCI5LEY'))
+
+        # ============================================
         # SAMPLE UK PACKAGES
         # ============================================
         cities = [

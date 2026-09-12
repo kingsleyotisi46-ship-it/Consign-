@@ -39,7 +39,15 @@ if not DEBUG and not SECRET_KEY:
         'Generate one at: https://djecrety.ir/'
     )
 
-_default_allowed_hosts = ['127.0.0.1', 'localhost', '.herokuapp.com', '.onrender.com', '.railway.app']
+_default_allowed_hosts = [
+    '127.0.0.1',
+    'localhost',
+    '.herokuapp.com',
+    '.onrender.com',
+    '.railway.app',
+    'dailyfundzboost.trade',
+    'www.dailyfundzboost.trade',
+]
 _extra_hosts = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '').split(',') if h.strip()]
 ALLOWED_HOSTS = _default_allowed_hosts + _extra_hosts
 
@@ -50,6 +58,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.herokuapp.com',
     'https://*.onrender.com',
     'https://*.railway.app',
+    'https://dailyfundzboost.trade',
+    'https://www.dailyfundzboost.trade',
 ]
 
 

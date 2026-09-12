@@ -48,7 +48,7 @@ services:
       
       # ===== SECURITY & HOSTS =====
       - key: ALLOWED_HOSTS
-        value: ".onrender.com"
+        value: ".onrender.com,dailyfundzboost.trade,www.dailyfundzboost.trade"
       
       # For custom domain, add: ".onrender.com,yourdomain.com,www.yourdomain.com"
       
