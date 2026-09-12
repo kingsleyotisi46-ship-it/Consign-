@@ -6,4 +6,4 @@ Disallow: /profile/
 Disallow: /dashboard/
 Disallow: /packages/
 
-Sitemap: https://consignment-website.onrender.com/sitemap.xml
+Sitemap: https://dailyfx-delivery-qk2j.onrender.com/sitemap.xml
