@@ -13,7 +13,7 @@ services:
   - type: web
     name: dailyfx-delivery
     runtime: python
-    plan: free  # Free tier or paid (starter/standard/pro)
+    plan: starter  # $7/month paid plan
     region: oregon  # Choose: oregon, frankfurt, singapore, ohio
     buildCommand: "chmod +x build.sh && ./build.sh"
     startCommand: "gunicorn consignment.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120 --access-logfile - --error-logfile -"
