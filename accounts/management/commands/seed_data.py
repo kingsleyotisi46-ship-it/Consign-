@@ -221,6 +221,47 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('✅ Thailand → Pakistan shipment ready: DFX-DMCI5LEY'))
 
         # ============================================
+        # CREATE ROME → LAHORE LIVE SHIPMENT
+        # ============================================
+        Package.objects.get_or_create(
+            tracking_number='DFX-ROME2LAHORE',
+            defaults={
+                'sender': user,
+                'sender_name': 'Angel Navaro',
+                'sender_address': 'Rome Distribution Centre',
+                'sender_phone': 'Not provided',
+                'sender_city': 'Rome',
+                'sender_country': 'Italy',
+                'sender_postcode': '00100',
+                'receiver_name': 'Naveed Rasheed',
+                'receiver_address': 'Dullu khurd metro station, satellite town near butt sweat bakery, Lahore, Pakistan',
+                'receiver_phone': '03106015727',
+                'receiver_city': 'Lahore',
+                'receiver_country': 'Pakistan',
+                'receiver_postcode': '54000',
+                'weight': 1.0,
+                'description': 'International shipment from Rome, Italy to Lahore, Pakistan',
+                'status': 'in_transit',
+                'estimated_delivery': timezone.now().date() + timedelta(days=7),
+            },
+        )
+        rome_package = Package.objects.get(tracking_number='DFX-ROME2LAHORE')
+        if rome_package.status == 'pending':
+            rome_package.status = 'in_transit'
+            rome_package.save(update_fields=['status', 'updated_at'])
+        TrackingHistory.objects.get_or_create(
+            package=rome_package,
+            location='Rome, Italy',
+            defaults={
+                'status': 'In Transit',
+                'notes': 'Package is active and currently at Rome, Italy, en route to Lahore, Pakistan',
+                'latitude': 41.9028,
+                'longitude': 12.4964,
+            },
+        )
+        self.stdout.write(self.style.SUCCESS('✅ Rome → Lahore shipment ready: DFX-ROME2LAHORE'))
+
+        # ============================================
         # SAMPLE UK PACKAGES
         # ============================================
         cities = [
