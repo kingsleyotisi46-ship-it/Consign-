@@ -715,7 +715,7 @@
             color: '#fff',
             weight: 2,
             fillOpacity: mapSettings.markerOpacity * 0.9
-        }).addTo(map).bindPopup('<div style="font-size:11px;"><strong>' + remainingCities[i-1] + '</strong><br>Upcoming stop</div>');
+        }).addTo(map);
     }
     
     // ===== UPGRADED: Enhanced Current Location Marker with Address Lookup =====
@@ -751,7 +751,7 @@
         </div>
     `;
     
-    packageMarker.bindPopup(popupContent).openPopup();
+    packageMarker.bindPopup(popupContent);
     
     // Reverse geocoding - Get address from coordinates
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${currentLat}&lon=${currentLng}&zoom=18&addressdetails=1`)
@@ -857,7 +857,7 @@
                         color: '#fff',
                         weight: 1,
                         fillOpacity: 0.7
-                    }).addTo(map).bindPopup(`<div style="font-size:11px;"><strong>${icon} ${name}</strong><br>${element.tags?.name || 'Nearby facility'}</div>`);
+                    }).addTo(map);
                 });
                 
                 // Update infrastructure info panel
