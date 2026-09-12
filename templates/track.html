@@ -629,7 +629,8 @@
     {% endif %}
     {% endfor %}
     
-    // Solid line showing completed/traveled route through waypoints
+    // Request road geometry for the completed leg instead of drawing a
+    // misleading straight line between tracking points.
     var traveledPoints = [senderCoords];
     {% for event in tracking_history reversed %}
     {% if event.latitude and event.longitude %}
@@ -638,11 +639,33 @@
     {% endfor %}
     
     if (traveledPoints.length > 1) {
-        var traveledRoute = L.polyline(traveledPoints, {
-            color: mapSettings.routeTraveledColor,
-            weight: mapSettings.routeTraveledWidth,
-            opacity: mapSettings.routeOpacity
-        }).addTo(map);
+        var traveledRouteUrl = 'https://router.project-osrm.org/route/v1/driving/' +
+            traveledPoints.map(function(point) {
+                return point[1] + ',' + point[0];
+            }).join(';') +
+            '?overview=full&geometries=geojson&steps=false';
+
+        fetch(traveledRouteUrl)
+            .then(function(response) {
+                if (!response.ok) throw new Error('Routing service returned ' + response.status);
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.code !== 'Ok' || !data.routes || !data.routes.length) {
+                    throw new Error('No drivable route returned');
+                }
+                var roadPoints = data.routes[0].geometry.coordinates.map(function(point) {
+                    return [point[1], point[0]];
+                });
+                L.polyline(roadPoints, {
+                    color: mapSettings.routeTraveledColor,
+                    weight: mapSettings.routeTraveledWidth,
+                    opacity: mapSettings.routeOpacity
+                }).addTo(map);
+            })
+            .catch(function(error) {
+                console.warn('Completed road route unavailable; hiding straight-line fallback:', error);
+            });
     }
     
     // ===== ADMIN-DEFINED ROUTE WAYPOINTS =====
@@ -697,13 +720,7 @@
             updateRouteDistance(roadRouteDistance);
         })
         .catch(function(error) {
-            console.warn('Road route unavailable; showing planned corridor:', error);
-            remainingRoute = L.polyline(remainingWaypoints, {
-                color: mapSettings.routeRemainingColor,
-                weight: mapSettings.routeRemainingWidth,
-                dashArray: '10, 6',
-                opacity: mapSettings.routeOpacity * 0.85
-            }).addTo(map);
+            console.warn('Remaining road route unavailable; hiding straight-line fallback:', error);
         });
     
     // Add circle markers at remaining waypoints with city names
