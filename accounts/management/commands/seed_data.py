@@ -207,6 +207,17 @@ class Command(BaseCommand):
             tracking.latitude = 13.7563
             tracking.longitude = 100.5018
             tracking.save(update_fields=['latitude', 'longitude'])
+
+        TrackingHistory.objects.get_or_create(
+            package=dmci5ley,
+            location='Islamabad, Pakistan',
+            defaults={
+                'status': 'In Transit',
+                'notes': 'Package moved to Islamabad and is continuing to Lahore, Pakistan',
+                'latitude': 33.6844,
+                'longitude': 73.0479,
+            },
+        )
         self.stdout.write(self.style.SUCCESS('✅ Thailand → Pakistan shipment ready: DFX-DMCI5LEY'))
 
         # ============================================
