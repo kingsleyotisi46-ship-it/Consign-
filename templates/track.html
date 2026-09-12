@@ -141,7 +141,6 @@
                 <button class="map-btn" onclick="centerOnPackage()" title="Center Package">📦</button>
                 <button class="map-btn" onclick="fitAllMarkers()" title="Show All">🗺️</button>
                 <button class="map-btn" onclick="focusCurrentLocation()" title="Street View">🛣️</button>
-                <button class="map-btn" onclick="toggleAccessRoads()" title="Toggle Access Roads">📍</button>
                 <button class="map-btn" onclick="toggleFullscreen()" title="Fullscreen">▼</button>
             </div>
             <!-- Package Info Overlay -->
@@ -270,10 +269,10 @@
             </div>
         </div>
         
-        <!-- Nearby Infrastructure Info -->
+        <!-- Map performance note -->
         <div class="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-4">
             <h4 class="font-semibold text-amber-800 mb-2 flex items-center">
-                <span class="mr-2">🗺️</span> Nearby Infrastructure (within 5km)
+                <span class="mr-2">🗺️</span> Map Preview
             </h4>
             <div class="text-sm text-amber-700">
                 <div id="infrastructure-info">
@@ -737,9 +736,6 @@
                 <div style="font-weight:600;margin-bottom:4px;">📍 Current Location</div>
                 <div>{{ latest_location.location|default:"En route" }}</div>
                 <div style="color:#666;margin-top:4px;font-size:11px;">Last update: {% now "M j, g:i A" %}</div>
-                <div id="reverse-geocode" style="margin-top:6px;padding-top:6px;border-top:1px solid #ddd;color:#666;font-size:11px;">
-                    <span style="opacity:0.6;">≡ƒöì Loading address...</span>
-                </div>
             </div>
             <div style="background:#e0f2fe;padding:8px;border-radius:6px;font-size:11px;">
                 <div style="font-weight:600;color:#0369a1;margin-bottom:4px;">📏 Distance to Destination</div>
@@ -752,27 +748,6 @@
     `;
     
     packageMarker.bindPopup(popupContent);
-    
-    // Reverse geocoding - Get address from coordinates
-    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${currentLat}&lon=${currentLng}&zoom=18&addressdetails=1`)
-        .then(response => response.json())
-        .then(data => {
-            var geocodeEl = document.getElementById('reverse-geocode');
-            if (geocodeEl && data.display_name) {
-                var parts = data.display_name.split(',').slice(0, 3).join(',');
-                geocodeEl.innerHTML = `<div style="color:#333;">🗺️ ${parts}</div>`;
-                
-                // Add nearby landmark if available
-                if (data.address && (data.address.amenity || data.address.tourism)) {
-                    var landmark = data.address.amenity || data.address.tourism;
-                    geocodeEl.innerHTML += `<div style="color:#666;margin-top:2px;">Near: ${landmark}</div>`;
-                }
-            }
-        })
-        .catch(err => {
-            var geocodeEl = document.getElementById('reverse-geocode');
-            if (geocodeEl) geocodeEl.innerHTML = '<div style="color:#999;">Address unavailable</div>';
-        });
     
     // Calculate and display distance to destination
     var distToDest = calcDistance(currentLat, currentLng, receiverCoords[0], receiverCoords[1]);
@@ -806,77 +781,10 @@
     {% endif %}
     {% endfor %}
     
-    // ===== UPGRADED: Highlight Access Roads & Infrastructure =====
-    // Add a circle around current location to show nearby area
-    var accessRadiusCircle = L.circle([currentLat, currentLng], {
-        color: '#f59e0b',
-        fillColor: '#fef3c7',
-        fillOpacity: 0.15,
-        weight: 2,
-        opacity: 0.4,
-        radius: 5000, // 5km radius
-        dashArray: '5, 5'
-    }).addTo(map);
-    
-    // Fetch nearby POIs (Points of Interest) - roads, gas stations, rest stops
-    var infrastructureCount = {fuel: 0, parking: 0, rest_area: 0, roads: 0};
-    
-    fetch(`https://overpass-api.de/api/interpreter?data=[out:json];(node(around:5000,${currentLat},${currentLng})[amenity~"fuel|parking|rest_area"];way(around:5000,${currentLat},${currentLng})[highway~"motorway|trunk|primary"];);out center 20;`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.elements) {
-                data.elements.forEach(function(element) {
-                    var lat = element.lat || element.center.lat;
-                    var lon = element.lon || element.center.lon;
-                    var icon = 'Γ¢╜';
-                    var name = 'Service Area';
-                    var color = '#3b82f6';
-                    
-                    if (element.tags) {
-                        if (element.tags.amenity === 'fuel') { 
-                            icon = 'Γ¢╜'; name = 'Gas Station'; color = '#ef4444'; 
-                            infrastructureCount.fuel++;
-                        }
-                        else if (element.tags.amenity === 'parking') { 
-                            icon = '≡ƒà┐∩╕Å'; name = 'Parking'; color = '#6366f1'; 
-                            infrastructureCount.parking++;
-                        }
-                        else if (element.tags.amenity === 'rest_area') { 
-                            icon = '≡ƒ¢æ'; name = 'Rest Stop'; color = '#10b981'; 
-                            infrastructureCount.rest_area++;
-                        }
-                        else if (element.tags.highway) { 
-                            icon = '🛣️'; name = element.tags.highway + ' road'; color = '#8b5cf6'; 
-                            infrastructureCount.roads++;
-                        }
-                    }
-                    
-                    L.circleMarker([lat, lon], {
-                        radius: 4,
-                        fillColor: color,
-                        color: '#fff',
-                        weight: 1,
-                        fillOpacity: 0.7
-                    }).addTo(map);
-                });
-                
-                // Update infrastructure info panel
-                var infoHtml = '';
-                if (infrastructureCount.fuel > 0) infoHtml += `Γ¢╜ ${infrastructureCount.fuel} Gas Station(s)  `;
-                if (infrastructureCount.parking > 0) infoHtml += `≡ƒà┐∩╕Å ${infrastructureCount.parking} Parking Area(s)  `;
-                if (infrastructureCount.rest_area > 0) infoHtml += `≡ƒ¢æ ${infrastructureCount.rest_area} Rest Stop(s)  `;
-                if (infrastructureCount.roads > 0) infoHtml += `🛣️ ${infrastructureCount.roads} Major Road(s)`;
-                
-                if (infoHtml === '') infoHtml = 'No major facilities detected in immediate area';
-                else infoHtml = infoHtml.replace(/  $/, ''); // Remove trailing separator
-                
-                document.getElementById('infrastructure-info').innerHTML = infoHtml;
-            }
-        })
-        .catch(err => {
-            console.log('POI fetch failed (optional feature):', err);
-            document.getElementById('infrastructure-info').innerHTML = 'Infrastructure data unavailable (using fallback map)';
-        });
+    // Keep the map focused on the shipment route. Avoid third-party POI and
+    // reverse-geocoding requests so the preview stays fast and uncluttered.
+    document.getElementById('infrastructure-info').textContent =
+        'Route view optimized for package tracking';
     
     // Fit bounds to show all markers
     var bounds = L.latLngBounds([senderCoords, receiverCoords, [currentLat, currentLng]]);
@@ -960,18 +868,9 @@
             document.getElementById('map').style.height = '100vh';
         } else {
             document.exitFullscreen();
-            document.getElementById('map').style.height = '450px';
+            document.getElementById('map').style.height = '620px';
         }
         setTimeout(function() { map.invalidateSize(); }, 100);
-    }
-    
-    // NEW: Toggle access roads circle
-    function toggleAccessRoads() {
-        if (map.hasLayer(accessRadiusCircle)) {
-            map.removeLayer(accessRadiusCircle);
-        } else {
-            accessRadiusCircle.addTo(map);
-        }
     }
     
     // NEW: Focus on current location with street-level zoom
